@@ -1,0 +1,45 @@
+//Stock
+try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ExamplesViews/StockAdminView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("GESRES 1.0");
+            //nao permitir maximizar tela
+            stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//faturas
+ try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ExamplesViews/FaturasAdminView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("GESRES 1.0");
+            //nao permitir maximizar tela
+            stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//Receitas
+try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ExamplesViews/ReceitaAdminView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("GESRES 1.0");
+            //nao permitir maximizar tela
+            stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }

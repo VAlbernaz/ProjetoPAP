@@ -59,8 +59,8 @@ public class MainController {
                 //stage.resizableProperty().setValue(Boolean.FALSE);
 
                 //fecha vista de login ao entrar
-                //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
-                //stage1.close();
+                Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
+                stage1.close();
 
                 stage.initModality(Modality.WINDOW_MODAL);
                 stage.setScene(scene);
@@ -69,7 +69,7 @@ public class MainController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else if(this.cbUser.getValue().equals("Funcionario") &&this.pfPassword.getText().equals("Funcionario123"))
+        }else if(this.cbUser.getValue().equals("Funcionario") &&this.pfPassword.getText().equals("123"))
         {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewMesas.fxml"));
@@ -77,11 +77,11 @@ public class MainController {
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
                 stage.setTitle("GESRES 1.0");
-                //stage.resizableProperty().setValue(Boolean.FALSE);
+                stage.resizableProperty().setValue(Boolean.FALSE);
 
                 //fecha vista de login ao entrar
-                //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
-                //stage1.close();
+                Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
+                stage1.close();
 
                 stage.initModality(Modality.WINDOW_MODAL);
                 stage.setScene(scene);

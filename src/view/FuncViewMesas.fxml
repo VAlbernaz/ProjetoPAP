@@ -79,7 +79,7 @@
             <Font size="49.0" />
          </font>
       </Button>
-      <Button layoutX="242.0" layoutY="807.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Pedido de Balão" textFill="#cbd2da">
+      <Button fx:id="btnBalcao" layoutX="242.0" layoutY="807.0" mnemonicParsing="false" onAction="#balcao" prefHeight="80.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Pedido de Balão" textFill="#cbd2da">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

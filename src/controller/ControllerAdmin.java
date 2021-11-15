@@ -81,7 +81,7 @@ public class ControllerAdmin {
     @FXML
     void showFaturasMensal(ActionEvent event) {
         try {
-            root =FXMLLoader.load(getClass().getResource("/ExamplesViews/FaturasAdminView.fxml"));
+            root =FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ExamplesViews/FaturasAdminView.fxml")));
             stage=(Stage) ((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

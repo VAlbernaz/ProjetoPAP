@@ -23,7 +23,7 @@
                   <Font name="System Bold" size="41.0" />
                </font>
             </Label>
-            <Label layoutX="599.0" layoutY="99.0" prefHeight="31.0" prefWidth="325.0" text="Mesa:" textFill="#cbd2da">
+            <Label fx:id="lbMesa" layoutX="599.0" layoutY="99.0" prefHeight="31.0" prefWidth="325.0" text="Mesa:" textFill="#cbd2da">
                <font>
                   <Font size="21.0" />
                </font>
@@ -38,17 +38,22 @@
          </columns>
       </TableView>
       <Label layoutX="828.0" layoutY="605.0" prefHeight="17.0" prefWidth="96.0" text="Pedido:" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="0.0" />
-      <Button layoutX="566.0" layoutY="523.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Editar Pedido" textFill="#cbd2da">
+      <Button fx:id="btnEditPedido" layoutX="566.0" layoutY="523.0" mnemonicParsing="false" onAction="#editPedido" prefHeight="80.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Editar Pedido" textFill="#cbd2da">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="566.0" layoutY="342.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Despachar Mesa" textFill="#cbd2da">
+      <Button fx:id="btnClearMesa" layoutX="566.0" layoutY="287.0" mnemonicParsing="false" onAction="#ClearMesa" prefHeight="80.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Despachar Mesa" textFill="#cbd2da">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="566.0" layoutY="174.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Novo Pedido" textFill="#cbd2da">
+      <Button fx:id="btnNovoPedido" layoutX="566.0" layoutY="174.0" mnemonicParsing="false" onAction="#novoPedido" prefHeight="80.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Novo Pedido" textFill="#cbd2da">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnPagar" layoutX="566.0" layoutY="402.0" mnemonicParsing="false" onAction="#pagamento" prefHeight="80.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Pagamento" textFill="#cbd2da">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

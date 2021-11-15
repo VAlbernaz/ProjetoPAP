@@ -7,10 +7,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
+
+import static javafx.scene.paint.Color.RED;
 
 public class ControllerFuncMesas {
 
@@ -47,21 +52,28 @@ public class ControllerFuncMesas {
     @FXML
     private Button btnMUm;
 
+    @FXML
+    private Button btnBalcao;
+
 
     @FXML
     void mesaUM(ActionEvent event) {
         int numMesa = 1;
+        // true= verde   false = vermelho
+        boolean corButao=true;
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewDetMesas.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
-            //stage.resizableProperty().setValue(Boolean.FALSE);
 
-            //fecha vista de login ao entrar
-            //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
-            //stage1.close();
+            stage.resizableProperty().setValue(Boolean.FALSE);
+
+            ControllerFuncDetMesas controller = loader.getController();
+            controller.getNmMesa(numMesa);
+
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
@@ -81,11 +93,10 @@ public class ControllerFuncMesas {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
-            //stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.resizableProperty().setValue(Boolean.FALSE);
 
-            //fecha vista de login ao entrar
-            //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
-            //stage1.close();
+            ControllerFuncDetMesas controller = loader.getController();
+            controller.getNmMesa(numMesa);
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
@@ -105,11 +116,10 @@ public class ControllerFuncMesas {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
-            //stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.resizableProperty().setValue(Boolean.FALSE);
 
-            //fecha vista de login ao entrar
-            //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
-            //stage1.close();
+            ControllerFuncDetMesas controller = loader.getController();
+            controller.getNmMesa(numMesa);
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
@@ -129,11 +139,10 @@ public class ControllerFuncMesas {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
-            //stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.resizableProperty().setValue(Boolean.FALSE);
 
-            //fecha vista de login ao entrar
-            //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
-            //stage1.close();
+            ControllerFuncDetMesas controller = loader.getController();
+            controller.getNmMesa(numMesa);
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
@@ -153,11 +162,10 @@ public class ControllerFuncMesas {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
-            //stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.resizableProperty().setValue(Boolean.FALSE);
 
-            //fecha vista de login ao entrar
-            //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
-            //stage1.close();
+            ControllerFuncDetMesas controller = loader.getController();
+            controller.getNmMesa(numMesa);
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
@@ -177,11 +185,10 @@ public class ControllerFuncMesas {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
-            //stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.resizableProperty().setValue(Boolean.FALSE);
 
-            //fecha vista de login ao entrar
-            //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
-            //stage1.close();
+            ControllerFuncDetMesas controller = loader.getController();
+            controller.getNmMesa(numMesa);
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
@@ -200,11 +207,10 @@ public class ControllerFuncMesas {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
-            //stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.resizableProperty().setValue(Boolean.FALSE);
 
-            //fecha vista de login ao entrar
-            //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
-            //stage1.close();
+            ControllerFuncDetMesas controller = loader.getController();
+            controller.getNmMesa(numMesa);
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
@@ -224,11 +230,10 @@ public class ControllerFuncMesas {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
-            //stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.resizableProperty().setValue(Boolean.FALSE);
 
-            //fecha vista de login ao entrar
-            //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
-            //stage1.close();
+            ControllerFuncDetMesas controller = loader.getController();
+            controller.getNmMesa(numMesa);
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
@@ -248,11 +253,10 @@ public class ControllerFuncMesas {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
-            //stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.resizableProperty().setValue(Boolean.FALSE);
 
-            //fecha vista de login ao entrar
-            //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
-            //stage1.close();
+            ControllerFuncDetMesas controller = loader.getController();
+            controller.getNmMesa(numMesa);
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
@@ -272,7 +276,28 @@ public class ControllerFuncMesas {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
-            //stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.resizableProperty().setValue(Boolean.FALSE);
+
+            ControllerFuncDetMesas controller = loader.getController();
+            controller.getNmMesa(numMesa);
+
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void balcao(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("GESRES 1.0");
+            stage.setMaximized(Boolean.TRUE);
 
             //fecha vista de login ao entrar
             //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();

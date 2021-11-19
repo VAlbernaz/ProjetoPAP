@@ -57,7 +57,7 @@
          <menus>
             <Menu mnemonicParsing="false" text="STOCK">
                <items>
-                  <MenuItem fx:id="MItemStock" mnemonicParsing="false" onAction="#showStock" text="Consultar Stock" />
+                  <MenuItem fx:id="MItemStock" mnemonicParsing="false"  text="Consultar Stock"/>
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="RECEITAS">

@@ -45,21 +45,18 @@ public class ControllerAdmin {
     void showStock(ActionEvent event){
 
         try {
-            System.out.println("1");
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("ExamplesViews/StockAdminView")));
-            System.out.println("2");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ExamplesViews/StockAdminView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
             Stage stage = new Stage();
-            System.out.println("3");
             stage.setTitle("GESRES 1.0");
-            System.out.println("4");
-            stage.setScene(new Scene(root));
-            System.out.println("5");
-            stage.show();
-            System.out.println("6");
-            ((Node)(event.getSource())).getScene().getWindow().hide();
+            //nao permitir maximizar tela
+            stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-
         }
 
     }
@@ -67,11 +64,16 @@ public class ControllerAdmin {
     void showFaturasDiarias(ActionEvent event){
 
         try {
-            root =FXMLLoader.load(getClass().getResource("/ExamplesViews/FaturasAdminView.fxml"));
-            stage=(Stage) ((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ExamplesViews/FaturasAdminView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("GESRES 1.0");
+            //nao permitir maximizar tela
+            stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
-            stage.show();
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -81,11 +83,16 @@ public class ControllerAdmin {
     @FXML
     void showFaturasMensal(ActionEvent event) {
         try {
-            root =FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ExamplesViews/FaturasAdminView.fxml")));
-            stage=(Stage) ((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ExamplesViews/FaturasAdminView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("GESRES 1.0");
+            //nao permitir maximizar tela
+            stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
-            stage.show();
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -94,11 +101,16 @@ public class ControllerAdmin {
     @FXML
     void showFaturasSemanal(ActionEvent event) {
         try {
-            root =FXMLLoader.load(getClass().getResource("/ExamplesViews/FaturasAdminView.fxml"));
-            stage=(Stage) ((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ExamplesViews/FaturasAdminView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("GESRES 1.0");
+            //nao permitir maximizar tela
+            stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
-            stage.show();
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -107,11 +119,16 @@ public class ControllerAdmin {
     @FXML
     void showReceitas(ActionEvent event) {
         try {
-            root =FXMLLoader.load(getClass().getResource("/ExamplesViews/ReceitaAdminView.fxml"));
-            stage=(Stage) ((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ExamplesViews/ReceitaAdminView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("GESRES 1.0");
+            //nao permitir maximizar tela
+            stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
-            stage.show();
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }

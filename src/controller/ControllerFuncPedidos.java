@@ -31,24 +31,6 @@ public class ControllerFuncPedidos {
     private Button btnNovoPedido;
 
     @FXML
-    private ComboBox<String> cbAlcool;
-
-    @FXML
-    private ComboBox<String> cbCafes;
-
-    @FXML
-    private ComboBox<String> cbCozinha;
-
-    @FXML
-    private ComboBox<String> cbDoces;
-
-    @FXML
-    private ComboBox<String> cbSnacks;
-
-    @FXML
-    private ComboBox<String> cbSumos;
-
-    @FXML
     private TableColumn<Pedidos, String> colProduto;
 
     @FXML
@@ -65,8 +47,7 @@ public class ControllerFuncPedidos {
 
     public void initialize()
     {
-        String str = "Coca-Cola"+"%20s"+"1.20€";
-        cbSumos.getItems().addAll(str);
+
     }
     @FXML
     void addRetalho(ActionEvent event) {

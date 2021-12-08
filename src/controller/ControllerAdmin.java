@@ -3,7 +3,6 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
@@ -13,7 +12,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class ControllerAdmin {
     private Stage stage;
@@ -45,7 +43,7 @@ public class ControllerAdmin {
     void showStock(ActionEvent event){
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ExamplesViews/StockAdminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/StockAdminView.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -64,7 +62,7 @@ public class ControllerAdmin {
     void showFaturasDiarias(ActionEvent event){
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ExamplesViews/FaturasAdminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/FaturasAdminView.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -83,7 +81,7 @@ public class ControllerAdmin {
     @FXML
     void showFaturasMensal(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ExamplesViews/FaturasAdminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/FaturasAdminView.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -101,7 +99,7 @@ public class ControllerAdmin {
     @FXML
     void showFaturasSemanal(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ExamplesViews/FaturasAdminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/FaturasAdminView.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -119,7 +117,7 @@ public class ControllerAdmin {
     @FXML
     void showReceitas(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../ExamplesViews/ReceitaAdminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/ReceitaAdminView.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();

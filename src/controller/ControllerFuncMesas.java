@@ -294,10 +294,11 @@ public class ControllerFuncMesas {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root,1381 , 863);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
-            stage.setMaximized(Boolean.TRUE);
+            //stage.setMaximized(Boolean.TRUE);
+            stage.resizableProperty().setValue(Boolean.FALSE);
 
             //fecha vista de login ao entrar
             //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();

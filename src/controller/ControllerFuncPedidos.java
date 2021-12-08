@@ -16,10 +16,22 @@ public class ControllerFuncPedidos {
     private ImageView IVLogo;
 
     @FXML
-    private Button btnAddRetalho;
+    private Button btnAdd;
+
+    @FXML
+    private Button btnBebidasAlcool;
+
+    @FXML
+    private Button btnCafes;
+
+    @FXML
+    private Button btnCozinha;
 
     @FXML
     private Button btnDelete;
+
+    @FXML
+    private Button btnDoces;
 
     @FXML
     private Button btnEdit;
@@ -31,16 +43,36 @@ public class ControllerFuncPedidos {
     private Button btnNovoPedido;
 
     @FXML
-    private TableColumn<Pedidos, String> colProduto;
+    private Button btnSnacks;
 
     @FXML
-    private TableColumn<Pedidos, String> colQTD;
+    private Button btnSumos;
 
     @FXML
-    private TableColumn<Pedidos, String> colValor;
+    private ComboBox<?> cbQTD;
+
+    //tabela pedidos
+    @FXML
+    private TableColumn<?,?> colProduto;
 
     @FXML
-    private TableView<Pedidos> tblPedido;
+    private TableColumn<?,?> colQTD;
+
+    @FXML
+    private TableColumn<?,?> colValor;
+
+    @FXML
+    private TableView<?> tblPedido;
+
+    //tabela produtos
+    @FXML
+    private TableView<?> tblProdutos;
+
+    @FXML
+    private TableColumn<?, ?> colProdutos;
+
+    @FXML
+    private TableColumn<?, ?> colValorProduto;
 
     @FXML
     private TextField tfRetalho;
@@ -50,7 +82,7 @@ public class ControllerFuncPedidos {
 
     }
     @FXML
-    void addRetalho(ActionEvent event) {
+    void add(ActionEvent event) {
         String valor = this.tfRetalho.getText();
     }
 
@@ -71,6 +103,41 @@ public class ControllerFuncPedidos {
 
     @FXML
     void novoPedido(ActionEvent event) {
+
+    }
+
+    @FXML
+    void preencheBebidasAlcool(ActionEvent event) {
+
+    }
+
+    @FXML
+    void preencheCafes(ActionEvent event) {
+
+    }
+
+    @FXML
+    void preencheCozinha(ActionEvent event) {
+
+    }
+
+    @FXML
+    void preencheDoces(ActionEvent event) {
+
+    }
+
+    @FXML
+    void preencheSnacks(ActionEvent event) {
+
+    }
+
+    @FXML
+    void preencheSumos(ActionEvent event) {
+
+    }
+
+    @FXML
+    void qtd(ActionEvent event) {
 
     }
 

@@ -54,7 +54,22 @@ public class ControllerFuncDetMesas {
 
     @FXML
     void editPedido(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root,1381 , 863);
+            Stage stage = new Stage();
+            stage.setTitle("GESRES 1.0");
+            //stage.setMaximized(Boolean.TRUE);
+            stage.resizableProperty().setValue(Boolean.FALSE);
 
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -62,10 +77,11 @@ public class ControllerFuncDetMesas {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root,1381 , 863);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
-            stage.setMaximized(Boolean.TRUE);
+            //stage.setMaximized(Boolean.TRUE);
+            stage.resizableProperty().setValue(Boolean.FALSE);
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);

@@ -64,11 +64,11 @@
          </children>
       </AnchorPane>
       <TableView fx:id="tblPedido" layoutX="548.0" layoutY="163.0" prefHeight="479.0" prefWidth="476.0" AnchorPane.bottomAnchor="94.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="163.0">
-        <columns>
-          <TableColumn fx:id="colProduto" prefWidth="333.0" text="Produto" />
-          <TableColumn fx:id="colQTD" minWidth="0.0" prefWidth="69.0" text="QTD" />
+         <columns>
+            <TableColumn fx:id="colProduto" prefWidth="333.0" text="Produto" />
+            <TableColumn fx:id="colQTD" minWidth="0.0" prefWidth="69.0" text="QTD" />
             <TableColumn fx:id="colValor" prefWidth="73.0" text="Valor" />
-        </columns>
+         </columns>
       </TableView>
       <Label layoutX="812.0" layoutY="887.0" prefHeight="17.0" prefWidth="96.0" text="Pedido:" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="16.0" />
       <Button fx:id="btnNovoPedido" layoutX="62.0" layoutY="797.0" mnemonicParsing="false" onAction="#novoPedido" prefHeight="80.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Novo pedido" textFill="#cbd2da" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="590.0">

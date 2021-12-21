@@ -294,7 +294,7 @@ public class ControllerFuncMesas {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root,1381 , 863);
+            Scene scene = new Scene(root,1400,900);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
             //stage.setMaximized(Boolean.TRUE);

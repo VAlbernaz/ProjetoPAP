@@ -74,7 +74,7 @@ public class MainController {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewMesas.fxml"));
                 Parent root = loader.load();
-                Scene scene = new Scene(root);
+                Scene scene = new Scene(root,750, 900);
                 Stage stage = new Stage();
                 stage.setTitle("GESRES 1.0");
                 stage.resizableProperty().setValue(Boolean.FALSE);

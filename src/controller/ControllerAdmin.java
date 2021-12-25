@@ -10,6 +10,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.MySQlConnection;
+
 
 import java.io.IOException;
 
@@ -17,6 +19,8 @@ public class ControllerAdmin {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    private MySQlConnection connection;
 
     @FXML
     private AnchorPane panePrincipal;
@@ -39,6 +43,30 @@ public class ControllerAdmin {
     @FXML
     private ImageView IVLogo;
 
+
+    public void initialize()
+    {
+        connection = new MySQlConnection();
+    }
+
+    public void tableFunc()
+    {
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//menubar
     @FXML
     void showStock(ActionEvent event){
 

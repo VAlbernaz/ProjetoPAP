@@ -46,7 +46,7 @@ public class MainController {
     @FXML
     void login(ActionEvent event) {
         //Mudar password e ve de acordo com a bd
-        if(this.cbUser.getValue().equals("Admin") &&this.pfPassword.getText().equals("Admin123"))
+        if(this.cbUser.getValue().equals("Admin") &&this.pfPassword.getText().equals("123"))
         {
             //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
             // stage1.close();

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="panePrincipal" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="919.0" style="-fx-background-color: #cbd2da;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerAdmin">
+<AnchorPane fx:id="panePrincipal" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="734.0" prefWidth="966.0" style="-fx-background-color: #cbd2da;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerAdmin">
    <children>
       <MenuBar layoutY="128.0" prefHeight="25.0" prefWidth="919.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="128.0">
         <menus>
@@ -23,9 +24,9 @@
                   <MenuItem fx:id="MItemStock" mnemonicParsing="false" onAction="#showStock" text="Consultar Stock" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="RECEITAS">
+          <Menu mnemonicParsing="false" text="FICHA TÉCNICA">
             <items>
-                  <MenuItem fx:id="MItemReceitas" mnemonicParsing="false" onAction="#showReceitas" text="Consultar Receitas" />
+                  <MenuItem fx:id="MItemReceitas" mnemonicParsing="false" onAction="#showReceitas" text="Receitas" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="FATURAS">
@@ -47,34 +48,34 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <TextField layoutX="15.0" layoutY="271.0" prefHeight="25.0" prefWidth="320.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="584.0" />
+      <TextField fx:id="tfPrimNome" layoutX="15.0" layoutY="271.0" prefHeight="25.0" prefWidth="320.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="584.0" />
       <Label layoutX="16.0" layoutY="301.0" text="Último Nome:">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <TextField layoutX="16.0" layoutY="333.0" prefHeight="25.0" prefWidth="320.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="584.0" />
-      <Label layoutX="15.0" layoutY="355.0" text="Idade:">
+      <TextField fx:id="tfUltiNome" layoutX="16.0" layoutY="333.0" prefHeight="25.0" prefWidth="320.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="584.0" />
+      <Label layoutX="15.0" layoutY="355.0" text="Data de Nascimento:">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <TextField layoutX="15.0" layoutY="386.0" prefHeight="25.0" prefWidth="320.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="584.0" />
       <Label layoutX="14.0" layoutY="411.0" text="Sexo:">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <ComboBox layoutX="15.0" layoutY="443.0" prefHeight="25.0" prefWidth="320.0" style="-fx-background-color: #035d86;" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="584.0" />
-      <Button layoutX="18.0" layoutY="570.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="201.0" style="-fx-background-color: #035d86;" text="Adicionar" textFill="#cbd2da">
+      <ComboBox fx:id="cbSexo" layoutX="15.0" layoutY="443.0" prefHeight="25.0" prefWidth="320.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="584.0" />
+      <Button fx:id="btnAdd" layoutX="18.0" layoutY="570.0" mnemonicParsing="false" onAction="#AddFunc" prefHeight="55.0" prefWidth="201.0" style="-fx-background-color: #035d86;" text="Adicionar" textFill="#cbd2da">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></Button>
-      <TableView layoutX="496.0" layoutY="200.0" prefHeight="397.0" prefWidth="544.0" AnchorPane.bottomAnchor="103.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="200.0">
+      <TableView fx:id="tvFunc" layoutX="408.0" layoutY="191.0" prefHeight="397.0" prefWidth="544.0" AnchorPane.bottomAnchor="112.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="191.0">
         <columns>
-          <TableColumn prefWidth="192.0" style="-fx-background-color: #035d86;" text="Funcionário" />
-          <TableColumn prefWidth="191.0" style="-fx-background-color: #035d86;" text="Atividade" />
-            <TableColumn prefWidth="160.0" style="-fx-background-color: #035d86;" text="Numero de Funcionário" />
+          <TableColumn fx:id="tcFunc" prefWidth="181.0" style="-fx-font-size: 15px;" text="Funcionário" />
+          <TableColumn fx:id="tcAtividade" prefWidth="142.0" style="-fx-font-size: 15px;" text="Atividade" />
+            <TableColumn fx:id="tcNumFunc" prefWidth="220.0" style="-fx-font-size: 15px;" text="Número de Funcionário" />
+            <TableColumn fx:id="tcFunc1" prefWidth="192.0" text="Funcionário" />
         </columns>
       </TableView>
       <AnchorPane prefHeight="128.0" prefWidth="919.0" style="-fx-background-color: #033249;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -96,6 +97,18 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <TextField layoutX="18.0" layoutY="500.0" prefHeight="25.0" prefWidth="320.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="581.0" />
+      <TextField fx:id="tfNumFunc" layoutX="18.0" layoutY="500.0" prefHeight="25.0" prefWidth="320.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="581.0" />
+      <DatePicker fx:id="dpDataNascimento" layoutX="14.0" layoutY="386.0" prefHeight="25.0" prefWidth="367.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="585.0" />
+      <ComboBox fx:id="cbAtividade" layoutX="408.0" layoutY="666.0" prefHeight="38.0" prefWidth="235.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="323.0" />
+      <Button fx:id="btnAtualizar" layoutX="751.0" layoutY="658.0" mnemonicParsing="false" onAction="#atualizar" prefHeight="55.0" prefWidth="201.0" style="-fx-background-color: #035d86;" text="Atualizar" textFill="#cbd2da" AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="14.0">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnRefresh" layoutX="408.0" layoutY="622.0" mnemonicParsing="false" onAction="#refresh" prefHeight="27.0" prefWidth="73.0" style="-fx-background-color: #035d86;" text="Refresh" textFill="#cbd2da" AnchorPane.bottomAnchor="85.0" AnchorPane.rightAnchor="485.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

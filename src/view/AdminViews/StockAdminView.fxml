@@ -43,11 +43,9 @@
                   <MenuItem mnemonicParsing="false" text="Adicionar Stock" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="RECEITAS">
+            <Menu mnemonicParsing="false" text="Ficha Técnica">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Consultar Receita" />
-                  <MenuItem mnemonicParsing="false" text="Adicionar Receita" />
-                  <MenuItem mnemonicParsing="false" text="Remover Receita" />
+                  <MenuItem fx:id="MItemReceitas" mnemonicParsing="false" text="Receitas" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="FATURAS">

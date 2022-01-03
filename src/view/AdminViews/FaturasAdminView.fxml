@@ -92,9 +92,9 @@
                   <MenuItem fx:id="MItemStock" mnemonicParsing="false"  text="Consultar Stock" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="RECEITAS">
+            <Menu mnemonicParsing="false" text="FICHA TÉCNICA">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Consultar Receitas" />
+                  <MenuItem fx:id="MItemReceitas" mnemonicParsing="false" text="Receitas" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="FATURAS">

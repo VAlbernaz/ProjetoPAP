@@ -43,7 +43,7 @@ public class MySQlConnection {
         return result;
     }
 
-    public void editarPessoa(funcionarios f) {
+    public boolean editarPessoa(funcionarios f) {
         ResultSet result = null;
         try {
             String sql = "UPDATE funcionario SET funcionario.atividade = (?) WHERE funcionario.idfuncionario = " + f.getID();
@@ -51,12 +51,15 @@ public class MySQlConnection {
             statement.setString(1, f.getAtividadeEdit());
 
             int linhas = statement.executeUpdate();
-            if(linhas == 1){
-                System.out.println("Linha altrada com sucesso!");
-            }
+            if (linhas == 1) {
+                return true;
+            } else return false;
+
+
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return false;
         }
 
     }
@@ -75,6 +78,7 @@ public class MySQlConnection {
             int linhas = statement.executeUpdate();
             if (linhas == 1) {
                 return true;
+
             } else return false;
 
         } catch (SQLException e) {

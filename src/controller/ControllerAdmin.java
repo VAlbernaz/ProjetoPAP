@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class ControllerAdmin {
 
@@ -142,10 +141,14 @@ public class ControllerAdmin {
             int ID=linhaFuncionario.getID();
 
             funcionarios f = new funcionarios(ID,atividade);
-            connection.editarPessoa(f);
-            alert(Alert.AlertType.CONFIRMATION,"SUCESSO","Editado com sucesso!");
-            this.tvFunc.getItems().clear();
-            tabela();
+            if(connection.editarPessoa(f)){
+                alert(Alert.AlertType.CONFIRMATION,"SUCESSO","Editado com sucesso!");
+                this.tvFunc.getItems().clear();
+                tabela();
+            }else{
+                alert(Alert.AlertType.ERROR,"ATENÇÃO","Ocorreu um problema!");
+            }
+
         }
     }
 
@@ -156,8 +159,6 @@ public class ControllerAdmin {
 
     @FXML
     void AddFunc(ActionEvent event) {
-
-
         if(!this.tfPrimNome.getText().isEmpty()||this.tfUltiNome.getText().isEmpty()||!(this.cbSexo.getValue()==null)||!(this.dpDataNascimento.getValue()==null)||!this.tfNumFunc.getText().isEmpty())
         {
             String primNome = this.tfPrimNome.getText();
@@ -176,7 +177,7 @@ public class ControllerAdmin {
                 alert(Alert.AlertType.ERROR,"ATENÇÃO","Ocorreu um problema!");
             }
         }else {
-            alert(Alert.AlertType.WARNING,"AENÇÃO","Preencha todos os campos");
+            alert(Alert.AlertType.WARNING,"ATENÇÃO","Preencha todos os campos");
         }
 
     }
@@ -276,6 +277,23 @@ public class ControllerAdmin {
 
     }
 
+    public void addProduto(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/AddProdutoAdminView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("GESRES 1.0");
+            //nao permitir maximizar tela
+            stage.resizableProperty().setValue(Boolean.FALSE);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void alert(Alert.AlertType type, String tit, String texto)
     {
         Alert alerta=new Alert(type);
@@ -284,4 +302,6 @@ public class ControllerAdmin {
         alerta.setContentText(texto);
         alerta.showAndWait();
     }
+
+
 }

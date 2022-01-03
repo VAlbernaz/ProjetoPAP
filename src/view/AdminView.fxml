@@ -22,6 +22,7 @@
           <Menu mnemonicParsing="false" text="STOCK">
             <items>
                   <MenuItem fx:id="MItemStock" mnemonicParsing="false" onAction="#showStock" text="Consultar Stock" />
+                <MenuItem fx:id="MItemAddProduto" mnemonicParsing="false" onAction="#addProduto" text="Adicionar Produto" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="FICHA TÉCNICA">

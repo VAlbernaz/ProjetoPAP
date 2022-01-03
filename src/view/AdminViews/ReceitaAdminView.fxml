@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paneStock" prefHeight="700.0" prefWidth="919.0" style="-fx-background-color: #cbd2da;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="paneStock" prefHeight="700.0" prefWidth="919.0" style="-fx-background-color: #cbd2da;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.adminControllers.ControllerReceitas">
    <children>
       <TableView layoutX="56.0" layoutY="195.0" prefHeight="458.0" prefWidth="287.0" AnchorPane.bottomAnchor="47.0" AnchorPane.topAnchor="195.0">
         <columns>
@@ -53,23 +53,24 @@
             </Button>
          </children>
       </AnchorPane>
-      <MenuBar layoutY="128.0" prefHeight="25.0" prefWidth="919.0">
+      <MenuBar layoutY="128.0" prefHeight="25.0" prefWidth="919.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="128.0">
          <menus>
             <Menu mnemonicParsing="false" text="STOCK">
                <items>
-                  <MenuItem fx:id="MItemStock" mnemonicParsing="false"  text="Consultar Stock"/>
+                  <MenuItem fx:id="MItemStock" mnemonicParsing="false" onAction="#showStock" text="Consultar Stock" />
+                  <MenuItem fx:id="MItemAddProduto" mnemonicParsing="false" onAction="#addProduto" text="Adicionar Produto" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="FICHA TÉCNICA">
                <items>
-                  <MenuItem fx:id="MItemReceitas" mnemonicParsing="false" text="Receitas" />
+                  <MenuItem fx:id="MItemReceitas" mnemonicParsing="false" onAction="#showReceitas" text="Receitas" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="FATURAS">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Diárias" />
-                  <MenuItem mnemonicParsing="false" text="Semanais" />
-                  <MenuItem mnemonicParsing="false" text="Mensais" />
+                  <MenuItem fx:id="MItemFaturasDiarias" mnemonicParsing="false" onAction="#showFaturasDiarias" text="Diárias" />
+                  <MenuItem fx:id="MItemFaturasSemanal" mnemonicParsing="false" onAction="#showFaturasSemanal" text="Semanais" />
+                  <MenuItem fx:id="MItemFaturasMensal" mnemonicParsing="false" onAction="#showFaturasMensal" text="Mensais" />
                </items>
             </Menu>
          </menus>

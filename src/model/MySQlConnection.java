@@ -43,6 +43,20 @@ public class MySQlConnection {
         return result;
     }
 
+    public ResultSet getProduto(int id){
+        ResultSet result = null;
+        String sql = "SELECT produto,preco\n" +
+                "FROM produto\n" +
+                "WHERE idtipo="+id+";";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+
     public boolean editarPessoa(funcionarios f) {
         ResultSet result = null;
         try {

@@ -83,7 +83,7 @@
             <TableColumn fx:id="colValorProduto" prefWidth="84.0" text="Valor" />
          </columns>
       </TableView>
-      <ComboBox fx:id="cbQTD" layoutX="623.0" layoutY="288.0" onAction="#qtd" prefHeight="47.0" prefWidth="119.0" AnchorPane.leftAnchor="623.0" />
+      <ComboBox fx:id="cbQTD" layoutX="623.0" layoutY="288.0" prefHeight="47.0" prefWidth="119.0" AnchorPane.leftAnchor="623.0" />
       <Button fx:id="btnCafes" layoutX="20.0" layoutY="163.0" mnemonicParsing="false" onAction="#preencheCafes" prefHeight="59.0" prefWidth="125.0" style="-fx-background-color: #035d86;" text="Cafés" textFill="#cbd2da">
          <font>
             <Font name="System Bold" size="18.0" />

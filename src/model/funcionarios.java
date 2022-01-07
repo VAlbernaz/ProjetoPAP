@@ -12,7 +12,6 @@ public class funcionarios {
     private String sexo;
     private int numFunc;
     private String atividade;
-
     private String atividadeEdit;
 
     public funcionarios(String primNome, String ultiNome, Date dataNascimento, String sexo, int numFunc) {

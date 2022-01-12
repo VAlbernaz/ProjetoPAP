@@ -114,5 +114,18 @@ public class MySQlConnection {
         }
         return result;
     }
+    public ResultSet nomeFunc(String numFunc){
+        ResultSet result = null;
+        String sql = "SELECT CONCAT(primNome, \" \",ultiNome)\n" +
+                "FROM funcionario\n" +
+                "WHERE numFunc ="+ Integer.parseInt(numFunc)+";";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
 }
 

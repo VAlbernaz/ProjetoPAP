@@ -104,10 +104,15 @@ public class ControllerFuncPedidos {
         this.colValorProduto.setCellValueFactory(new PropertyValueFactory<produtos,String>("preco"));
         this.tblProdutos.setItems(listaProdutos);
     }
-    void setNumFunc(String numFunc)
-    {
+    void setNumFunc(String numFunc) throws SQLException {
+        connection = new MySQlConnection();
+        ResultSet result = connection.nomeFunc(numFunc);
+        String nomeFunc="";
+        while (result.next()) {
+            nomeFunc = result.getString(1);
+        }
         String str= this.lbNumFunc.getText();
-        this.lbNumFunc.setText(str+" "+numFunc);
+        this.lbNumFunc.setText(str+" "+nomeFunc);
     }
 
     public void tabelaProdutos(int tipos)
@@ -147,11 +152,6 @@ public class ControllerFuncPedidos {
 
     @FXML
     void finalizar(ActionEvent event) {
-
-    }
-
-    @FXML
-    void novoPedido(ActionEvent event) {
 
     }
 

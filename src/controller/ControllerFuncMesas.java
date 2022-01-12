@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
@@ -13,6 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
+import java.io.File;
 import java.io.IOException;
 
 import static javafx.scene.paint.Color.RED;
@@ -55,6 +57,12 @@ public class ControllerFuncMesas {
     @FXML
     private Button btnBalcao;
 
+    public void initialize()
+    {
+        File file = new File("logo.png");
+        Image image = new Image(file.toURI().toString());
+        IVLogo.setImage(image);
+    }
 
     @FXML
     void mesaUM(ActionEvent event) {
@@ -291,14 +299,47 @@ public class ControllerFuncMesas {
     }
     @FXML
     void balcao(ActionEvent event) {
+        String numFunc = "";
+        //abre a vista de pedir o numero de funcionario
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CodigoFuncView.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root,1400,900);
+            Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
             //stage.setMaximized(Boolean.TRUE);
             stage.resizableProperty().setValue(Boolean.FALSE);
+
+            
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+
+            ControllerCodigoFunc controller = loader.getController();
+            numFunc =controller.numFunc();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+        // se o codigo do funcionario existir na bd
+
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
+            Parent root = loader.load();
+
+
+            ControllerFuncPedidos controller = loader.getController();
+            controller.setNumFunc(numFunc);
+
+            Scene scene = new Scene(root,1400,900);
+            Stage stage = new Stage();
+            stage.setTitle("GESRES 1.0");
+            //stage.setMaximized(Boolean.TRUE);
+            //stage.resizableProperty().setValue(Boolean.FALSE);
 
             //fecha vista de login ao entrar
             //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
@@ -311,6 +352,7 @@ public class ControllerFuncMesas {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //se nao existar lança alerta
     }
 
 

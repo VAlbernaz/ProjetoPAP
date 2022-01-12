@@ -7,10 +7,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class ControllerFuncDetMesas {
@@ -37,7 +39,9 @@ public class ControllerFuncDetMesas {
 
     public void initialize()
     {
-
+        File file = new File("logo.png");
+        Image image = new Image(file.toURI().toString());
+        IVLogo.setImage(image);
     }
 
     void getNmMesa(int mesa){
@@ -45,6 +49,7 @@ public class ControllerFuncDetMesas {
         String str = lbMesa.getText();
         this.lbMesa.setText(str + String.valueOf(numesa));
     }
+
 
 
     @FXML
@@ -57,11 +62,11 @@ public class ControllerFuncDetMesas {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root,1400 , 900);
+            Scene scene = new Scene(root,1400 , 900); // abre para aproximadamente 15''
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
             //stage.setMaximized(Boolean.TRUE);
-            stage.resizableProperty().setValue(Boolean.FALSE);
+            //stage.resizableProperty().setValue(Boolean.FALSE);
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
@@ -74,6 +79,31 @@ public class ControllerFuncDetMesas {
 
     @FXML
     void novoPedido(ActionEvent event) {
+        String numFunc="";
+        //abre a vista de pedir o numero de funcionario
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CodigoFuncView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("GESRES 1.0");
+            //stage.setMaximized(Boolean.TRUE);
+            stage.resizableProperty().setValue(Boolean.FALSE);
+
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+
+            ControllerCodigoFunc controller = loader.getController();
+            numFunc =controller.numFunc();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+        // se o codigo do funcionario existir na bd
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
             Parent root = loader.load();
@@ -81,7 +111,10 @@ public class ControllerFuncDetMesas {
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
             //stage.setMaximized(Boolean.TRUE);
-            stage.resizableProperty().setValue(Boolean.FALSE);
+            //stage.resizableProperty().setValue(Boolean.FALSE);
+
+            ControllerFuncPedidos controller = loader.getController();
+            controller.setNumFunc(numFunc);
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
@@ -90,6 +123,7 @@ public class ControllerFuncDetMesas {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //se nao existar lança alerta
     }
 
     @FXML

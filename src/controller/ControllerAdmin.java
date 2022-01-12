@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -17,6 +18,7 @@ import model.MySQlConnection;
 import model.funcionarios;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -92,6 +94,10 @@ public class ControllerAdmin {
 
     public void initialize()
     {
+        File file = new File("logo.png");
+        Image image = new Image(file.toURI().toString());
+        IVLogo.setImage(image);
+
         this.cbAtividade.getItems().addAll("PRESENTE","AUSENTE");
         this.cbSexo.getItems().addAll("F","M");
         this.cbAtividade.setValue("AUSENTE");
@@ -103,6 +109,7 @@ public class ControllerAdmin {
         this.tcNumFunc.setCellValueFactory(new PropertyValueFactory<funcionarios,String>("numFunc"));
         this.tvFunc.setItems(listaFuncionarios);
 
+
         connection = new MySQlConnection();
         tabela();
 
@@ -111,6 +118,7 @@ public class ControllerAdmin {
 
     public void tabela()
     {
+
         ResultSet result = connection.getFunc();
         try {
 

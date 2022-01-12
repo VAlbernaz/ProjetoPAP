@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="385.0" prefWidth="396.0" style="-fx-background-color: #cbd2da;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerCodigoFunc">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="424.0" prefWidth="418.0" style="-fx-background-color: #cbd2da;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerCodigoFunc">
    <children>
-      <AnchorPane prefHeight="118.0" prefWidth="396.0" style="-fx-background-color: #033249;">
+      <AnchorPane prefHeight="125.0" prefWidth="418.0" style="-fx-background-color: #033249;">
          <children>
-            <Label alignment="CENTER" layoutX="105.0" layoutY="35.0" prefHeight="59.0" prefWidth="291.0" text="FUNCIONÁRIO" textFill="#cbd2da" AnchorPane.leftAnchor="105.0" AnchorPane.rightAnchor="0.0">
+            <Label alignment="CENTER" layoutX="105.0" layoutY="35.0" prefHeight="59.0" prefWidth="265.0" text="FUNCIONÁRIO" textFill="#cbd2da" AnchorPane.leftAnchor="105.0" AnchorPane.rightAnchor="26.0">
                <font>
                   <Font name="System Bold" size="26.0" />
                </font>
@@ -24,14 +24,14 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <TextField layoutX="48.0" layoutY="218.0" prefHeight="59.0" prefWidth="300.0" />
-      <Label layoutX="300.0" layoutY="363.0" prefHeight="17.0" prefWidth="96.0" text="Pedido:" />
-      <Label layoutX="31.0" layoutY="169.0" prefHeight="47.0" prefWidth="335.0" text="Código do funcionário:">
+      <TextField fx:id="tfCodigoFunc" layoutX="59.0" layoutY="232.0" prefHeight="59.0" prefWidth="300.0" />
+      <Label fx:id="lbNumPedido" layoutX="309.0" layoutY="393.0" prefHeight="17.0" prefWidth="96.0" text="Pedido:" />
+      <Label layoutX="31.0" layoutY="169.0" prefHeight="47.0" prefWidth="374.0" text="Código do funcionário:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <Button layoutX="63.0" layoutY="285.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Concluir" textFill="#cbd2da">
+      <Button fx:id="btnConcluir" layoutX="73.0" layoutY="315.0" mnemonicParsing="false" onAction="#concluir" prefHeight="59.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Concluir" textFill="#cbd2da">
          <font>
             <Font name="System Bold" size="26.0" />
          </font>

@@ -14,6 +14,10 @@ public class funcionarios {
     private String atividade;
     private String atividadeEdit;
 
+    public funcionarios(int numFunc) {
+        this.numFunc = numFunc;
+    }
+
     public funcionarios(String primNome, String ultiNome, Date dataNascimento, String sexo, int numFunc) {
         this.primNome = primNome;
         this.ultiNome = ultiNome;

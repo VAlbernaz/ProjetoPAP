@@ -5,15 +5,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.MySQlConnection;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Objects;
 
 public class ControllerFuncDetMesas {
 
@@ -36,6 +41,8 @@ public class ControllerFuncDetMesas {
     private Label lbMesa;
 
     private int numesa;
+
+    private MySQlConnection connection;
 
     public void initialize()
     {
@@ -78,8 +85,8 @@ public class ControllerFuncDetMesas {
     }
 
     @FXML
-    void novoPedido(ActionEvent event) {
-        String numFunc="";
+    void novoPedido(ActionEvent event) throws SQLException {
+        String numFunc = "";
         //abre a vista de pedir o numero de funcionario
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/CodigoFuncView.fxml"));
@@ -90,40 +97,50 @@ public class ControllerFuncDetMesas {
             //stage.setMaximized(Boolean.TRUE);
             stage.resizableProperty().setValue(Boolean.FALSE);
 
+
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
             stage.showAndWait();
 
             ControllerCodigoFunc controller = loader.getController();
-            numFunc =controller.numFunc();
-
+            numFunc = controller.numFunc();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        //procura na base de dados um numero de funcionario igual ao numero introduzido
+        connection = new MySQlConnection();
+        ResultSet result = connection.verificaNumFunc(numFunc);
+        int numeros = 0;
+        while (result.next()) {
+            try {
+                numeros = result.getInt(1);
 
-
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         // se o codigo do funcionario existir na bd
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root,1400,900);
-            Stage stage = new Stage();
-            stage.setTitle("GESRES 1.0");
-            //stage.setMaximized(Boolean.TRUE);
-            //stage.resizableProperty().setValue(Boolean.FALSE);
-
-            ControllerFuncPedidos controller = loader.getController();
-            controller.setNumFunc(numFunc);
-
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (Objects.equals(numFunc, String.valueOf(numeros))) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
+                Parent root = loader.load();
+                ControllerFuncPedidos controller = loader.getController();
+                controller.setNumFunc(numFunc);
+                Scene scene = new Scene(root, 1400, 900);
+                Stage stage = new Stage();
+                stage.setTitle("GESRES 1.0");
+                //stage.setMaximized(Boolean.TRUE);
+                //stage.resizableProperty().setValue(Boolean.FALSE);
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {  //se nao existar lança alerta
+            alert(Alert.AlertType.ERROR,"Código inválido!","O código introduzido não está disponivel.");
         }
-        //se nao existar lança alerta
     }
 
     @FXML
@@ -145,5 +162,13 @@ public class ControllerFuncDetMesas {
         }
     }
 
+    public void alert(Alert.AlertType type, String tit, String texto)
+    {
+        Alert alerta=new Alert(type);
+        alerta.setTitle(tit);
+        alerta.setHeaderText(null);
+        alerta.setContentText(texto);
+        alerta.showAndWait();
+    }
 }
 

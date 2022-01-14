@@ -127,5 +127,56 @@ public class MySQlConnection {
         }
         return result;
     }
+
+    public ResultSet getFornecedor(){
+        ResultSet result = null;
+        String sql = "SELECT idfornecedor,fornecedor " +
+                "FROM fornecedor;";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+
+    public ResultSet getTipo(){
+        ResultSet result = null;
+        String sql = "SELECT idtipo,tipo \n" +
+                "FROM tipo;";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+
+    public ResultSet getIdFornecedor(String fornecedor){
+        ResultSet result = null;
+        String sql = "SELECT idfornecedor FROM fornecedor\n" +
+                "WHERE fornecedor= \"Insulac\";";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+    public ResultSet getIdTipo(String tipo){
+        ResultSet result = null;
+        String sql = "SELECT idtipo FROM tipo\n" +
+                "WHERE tipo= "+tipo +";";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
 }
 

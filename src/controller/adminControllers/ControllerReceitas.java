@@ -3,8 +3,11 @@ package controller.adminControllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+
+import java.io.File;
 
 public class ControllerReceitas {
 
@@ -32,21 +35,12 @@ public class ControllerReceitas {
     @FXML
     private AnchorPane paneStock;
 
-    public void showStock(ActionEvent actionEvent) {
-    }
+    public void initialize()
+    {
+        File file = new File("logo.png");
+        Image image = new Image(file.toURI().toString());
+        IVLogo.setImage(image);
 
-    public void addProduto(ActionEvent actionEvent) {
-    }
 
-    public void showReceitas(ActionEvent actionEvent) {
-    }
-
-    public void showFaturasDiarias(ActionEvent actionEvent) {
-    }
-
-    public void showFaturasSemanal(ActionEvent actionEvent) {
-    }
-
-    public void showFaturasMensal(ActionEvent actionEvent) {
     }
 }

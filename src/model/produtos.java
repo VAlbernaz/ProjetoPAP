@@ -6,12 +6,37 @@ public class produtos {
     private double preco;
 
     private String fornecedor;
+    private int nFornecedor;
     private String tipo;
+    private int nTipo;
 
+
+    public produtos(String produto, double preco, int nFornecedor, int nTipo) {
+        this.produto = produto;
+        this.preco = preco;
+        this.nFornecedor = nFornecedor;
+        this.nTipo = nTipo;
+    }
 
     public produtos(String produto, double preco) {
         this.produto = produto;
         this.preco = preco;
+    }
+
+    public int getnFornecedor() {
+        return nFornecedor;
+    }
+
+    public void setnFornecedor(int nFornecedor) {
+        this.nFornecedor = nFornecedor;
+    }
+
+    public int getnTipo() {
+        return nTipo;
+    }
+
+    public void setnTipo(int nTipo) {
+        this.nTipo = nTipo;
     }
 
     public int getID() {

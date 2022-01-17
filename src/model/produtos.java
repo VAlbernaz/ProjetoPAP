@@ -10,6 +10,22 @@ public class produtos {
     private String tipo;
     private int nTipo;
 
+    private int qtd;
+    private String obs;
+
+    public produtos(int ID, String produto, double preco, int qtd, String obs) {
+        this.ID = ID;
+        this.produto = produto;
+        this.preco = preco;
+        this.qtd = qtd;
+        this.obs = obs;
+    }
+
+    public produtos(int ID, String produto, int qtd) {
+        this.ID = ID;
+        this.produto = produto;
+        this.qtd = qtd;
+    }
 
     public produtos(String produto, double preco, int nFornecedor, int nTipo) {
         this.produto = produto;
@@ -21,6 +37,22 @@ public class produtos {
     public produtos(String produto, double preco) {
         this.produto = produto;
         this.preco = preco;
+    }
+
+    public int getQtd() {
+        return qtd;
+    }
+
+    public String getObs() {
+        return obs;
+    }
+
+    public void setObs(String obs) {
+        this.obs = obs;
+    }
+
+    public void setQtd(int qtd) {
+        this.qtd = qtd;
     }
 
     public int getnFornecedor() {

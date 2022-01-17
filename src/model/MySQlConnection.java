@@ -157,8 +157,8 @@ public class MySQlConnection {
     public ResultSet getIdFornecedor(String fornecedor){
         ResultSet result = null;
         String sql = "SELECT * \n" +
-                "FROM gesres.fornecedor\n" +
-                "WHERE fornecedor = \" " + fornecedor +"\";";
+                "FROM fornecedor\n" +
+                "WHERE fornecedor = \"" + fornecedor +"\";";
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);
@@ -170,7 +170,7 @@ public class MySQlConnection {
     public ResultSet getIdTipo(String tipo){
         ResultSet result = null;
         String sql = "SELECT * FROM tipo\n" +
-                "WHERE tipo.tipo= \" " + tipo +"\";";
+                "WHERE tipo= \"" + tipo +"\";";
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);
@@ -201,6 +201,38 @@ public class MySQlConnection {
             e.printStackTrace();
             return false;
         }
+    }
+    public ResultSet getProdutos()
+    {
+        ResultSet result = null;
+        String sql = "SELECT idproduto,produto,qtd FROM gesres.produto;";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return result;
+    }
+    public boolean esditQtd(produtos p) {
+        try {
+            String sql = "UPDATE produto SET produto.qtd = (?) WHERE produto.idproduto=" + p.getID();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, String.valueOf(p.getQtd()));
+
+            int linhas = statement.executeUpdate();
+            if (linhas == 1) {
+                return true;
+            } else return false;
+
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+
     }
 }
 

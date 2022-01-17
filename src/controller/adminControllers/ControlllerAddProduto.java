@@ -125,49 +125,25 @@ public class ControlllerAddProduto {
             String fornecedor = this.cbFornecedor.getValue();
             System.out.println(fornecedor);
             ResultSet result = connection.getIdFornecedor(fornecedor);
-            try {
-                while (result.next()) {
-                    try {
-                        nFornecedor = result.getInt(1);
-
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }catch (SQLException throwables)
-            {
-                throwables.printStackTrace();
-            }
+            nFornecedor(fornecedor);
 
             String tipo = this.cbTipo.getValue();
             System.out.println(tipo);
-            ResultSet result1 = connection.getIdTipo(tipo);
-            try {
-                while (result.next()) {
-                    try {
-                        nFornecedor = result1.getInt(1);
-
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }catch (SQLException throwables)
-            {
-                throwables.printStackTrace();
-            }
+            nTipo(tipo);
 
             produtos p = new produtos(produto,precoD,nFornecedor,nTipo);
 
 
             System.out.println(nFornecedor);
             System.out.println(nTipo);
+
             // adicionar na bd
-           /* if(connection.inserirProduto(p)) {
+           if(connection.inserirProduto(p)) {
                 alert(Alert.AlertType.INFORMATION,"SUCESSO","Produto adicionado com sucesso!");
 
             } else {
                 alert(Alert.AlertType.ERROR,"ATENÇÃO","Ocorreu um problema!");
-            }*/
+            }
         }else {
             alert(Alert.AlertType.WARNING,"ATENÇÃO","Preencha todos os campos");
         }
@@ -179,12 +155,7 @@ public class ControlllerAddProduto {
         ResultSet result = connection.getIdFornecedor(fornecedor);
         try {
             while (result.next()) {
-                try {
                     nFornecedor = result.getInt(1);
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
             }
         }catch (SQLException throwables)
         {
@@ -199,12 +170,7 @@ public class ControlllerAddProduto {
         ResultSet result = connection.getIdTipo(tipo);
         try {
             while (result.next()) {
-                try {
-                    nTipo = result.getInt(1);
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                nTipo = result.getInt(1);
             }
         }catch (SQLException throwables)
         {

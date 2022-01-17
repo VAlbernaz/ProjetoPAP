@@ -156,8 +156,9 @@ public class MySQlConnection {
 
     public ResultSet getIdFornecedor(String fornecedor){
         ResultSet result = null;
-        String sql = "SELECT idfornecedor FROM fornecedor\n" +
-                "WHERE fornecedor= \"Insulac\";";
+        String sql = "SELECT * \n" +
+                "FROM gesres.fornecedor\n" +
+                "WHERE fornecedor = \" " + fornecedor +"\";";
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);
@@ -168,8 +169,8 @@ public class MySQlConnection {
     }
     public ResultSet getIdTipo(String tipo){
         ResultSet result = null;
-        String sql = "SELECT idtipo FROM tipo\n" +
-                "WHERE tipo= "+tipo +";";
+        String sql = "SELECT * FROM tipo\n" +
+                "WHERE tipo.tipo= \" " + tipo +"\";";
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);
@@ -177,6 +178,29 @@ public class MySQlConnection {
             throwables.printStackTrace();
         }
         return result;
+    }
+
+    public boolean inserirProduto(produtos p)
+    {
+        try {
+            //preprar a inserção da nova linha
+            String sql = "INSERT INTO produto (produto,preco,idfornecedor,idtipo) VALUES (?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, p.getProduto());
+            statement.setDouble(2, p.getPreco());
+            statement.setInt(3, p.getnFornecedor());
+            statement.setInt(4, p.getnTipo());
+            //executar a inserção
+            int linhas = statement.executeUpdate();
+            if (linhas == 1) {
+                return true;
+
+            } else return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
 

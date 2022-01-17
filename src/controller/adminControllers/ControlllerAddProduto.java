@@ -49,11 +49,16 @@ public class ControlllerAddProduto {
     private ObservableList<tipos> listaTipos;
     private ObservableList<produtos> listaProdutos;
 
+    private int nFornecedor=0;
+    private int nTipo=0;
+
     public void initialize()
     {
         File file = new File("logo.png");
         Image image = new Image(file.toURI().toString());
         IVLogo.setImage(image);
+
+        connection = new MySQlConnection();
 
        listaFornecedores = FXCollections.observableArrayList();
        listaTipos = FXCollections.observableArrayList();
@@ -111,30 +116,66 @@ public class ControlllerAddProduto {
 
     @FXML
     void concluir(ActionEvent event) {
-        int nFornecedor =0;
-        int nTipo=0;
         if(!this.tfProduto.getText().isEmpty()||this.tfPreco.getText().isEmpty()||!(this.cbFornecedor.getValue()==null)||!(this.cbTipo.getValue()==null)) {
             String produto = this.tfProduto.getText();
+            System.out.println(produto);
             String preco = this.tfPreco.getText();
             double precoD = Double.parseDouble(preco);
+            System.out.println(precoD);
             String fornecedor = this.cbFornecedor.getValue();
-            nFornecedor = nFornecedor(fornecedor);
+            System.out.println(fornecedor);
+            ResultSet result = connection.getIdFornecedor(fornecedor);
+            try {
+                while (result.next()) {
+                    try {
+                        nFornecedor = result.getInt(1);
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }catch (SQLException throwables)
+            {
+                throwables.printStackTrace();
+            }
+
             String tipo = this.cbTipo.getValue();
-            nTipo= nTipo(tipo);
+            System.out.println(tipo);
+            ResultSet result1 = connection.getIdTipo(tipo);
+            try {
+                while (result.next()) {
+                    try {
+                        nFornecedor = result1.getInt(1);
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }catch (SQLException throwables)
+            {
+                throwables.printStackTrace();
+            }
 
             produtos p = new produtos(produto,precoD,nFornecedor,nTipo);
-            System.out.println(p);
-            //resolver erro
-            // adicionar na bd
 
+
+            System.out.println(nFornecedor);
+            System.out.println(nTipo);
+            // adicionar na bd
+           /* if(connection.inserirProduto(p)) {
+                alert(Alert.AlertType.INFORMATION,"SUCESSO","Produto adicionado com sucesso!");
+
+            } else {
+                alert(Alert.AlertType.ERROR,"ATENÇÃO","Ocorreu um problema!");
+            }*/
+        }else {
+            alert(Alert.AlertType.WARNING,"ATENÇÃO","Preencha todos os campos");
         }
 
 
     }
 
-    public  int nFornecedor(String fornecedor) {
-        int nFornecedor= 0;
-        connection = new MySQlConnection();
+    public  void nFornecedor(String fornecedor) {
         ResultSet result = connection.getIdFornecedor(fornecedor);
         try {
             while (result.next()) {
@@ -149,11 +190,11 @@ public class ControlllerAddProduto {
         {
             throwables.printStackTrace();
         }
-        return  nFornecedor;
+
     }
 
-    public  int nTipo(String tipo) {
-        int nTipo= 0;
+    public  void nTipo(String tipo) {
+
         connection = new MySQlConnection();
         ResultSet result = connection.getIdTipo(tipo);
         try {
@@ -169,7 +210,6 @@ public class ControlllerAddProduto {
         {
             throwables.printStackTrace();
         }
-        return  nTipo;
     }
 
     public void alert(Alert.AlertType type, String tit, String texto)

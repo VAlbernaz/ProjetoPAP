@@ -4,15 +4,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.MySQlConnection;
 import model.pedidos;
 import model.produtos;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -54,6 +60,10 @@ public class ControllerFuncPedidos {
     @FXML
     private Button btnSumos;
 
+
+    @FXML
+    private TextArea taOBS;
+
     @FXML
     private ComboBox<Integer> cbQTD;
 
@@ -93,7 +103,9 @@ public class ControllerFuncPedidos {
     private MySQlConnection connection;
 
     private produtos linhaProduto;
+    private pedidos linhaPedido;
 
+    private int tipo;
     public void initialize()
     {
         File file = new File("logo.png");
@@ -151,21 +163,32 @@ public class ControllerFuncPedidos {
         linhaProduto=this.tblProdutos.getSelectionModel().getSelectedItem();
         String precoR=this.tfRetalho.getText();
         //fazer validaçao correta
-        if(precoR!=null)
+        if(precoR.equals(""))
         {
-            double precoRetalho = Double.parseDouble(precoR);
-            pedidos linhaPedido= new pedidos("Retalho",precoRetalho,1,"");
-            this.listaPedidos.add(linhaPedido);
+            if(linhaProduto == null || this.cbQTD.getValue() == null) {
+                alert(Alert.AlertType.ERROR,"ERRO!","Selecione todos os campos! (produto e quantidade)");
+            }else {
+                String produto = linhaProduto.getProduto();
+                double preco = linhaProduto.getPreco();
+                int qtd = this.cbQTD.getValue();
+                String obs = this.taOBS.getText();
+                pedidos pedido = new pedidos(produto, preco, qtd, obs,tipo);
+                this.listaPedidos.add(pedido);
+                System.out.println(tipo);
+                linhaProduto = null;
+                this.cbQTD.setValue(null);
+            }
         }else
         {
-
-            String produto = linhaProduto.getProduto();
-            double preco = linhaProduto.getPreco();
-            int qtd = this.cbQTD.getValue();
-            String obs = linhaProduto.getObs();
-            pedidos linhaPedidos = new pedidos(produto,preco,qtd,obs);
-            this.listaPedidos.add(linhaPedidos);
+            tipo=8;
+            double preco = Double.parseDouble(precoR);
+            pedidos linhaPedido= new pedidos("Retalho",preco,1,"",tipo);
+            this.listaPedidos.add(linhaPedido);
+            System.out.println(tipo);
+            this.tfRetalho.setText("");
         }
+
+
     }
     @FXML
     void add(ActionEvent event) {
@@ -173,8 +196,36 @@ public class ControllerFuncPedidos {
         this.tblPedido.setItems(listaPedidos);
     }
 
+
+
     @FXML
     void editar(ActionEvent event) {
+        linhaPedido = this.tblPedido.getSelectionModel().getSelectedItem();
+        if(linhaPedido==null)
+        {
+            alert(Alert.AlertType.ERROR,"ERRO!","Selecione uma linha do pedido!");
+        }else {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/EditProdutoPedidoView.fxml"));
+                Parent root = loader.load();
+
+                ControlllerEditProdutoPedido  controller = loader.getController();
+                controller.getProduto(linhaPedido);
+
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setTitle("GESRES 1.0");
+                //nao permitir maximizar tela
+                stage.resizableProperty().setValue(Boolean.FALSE);
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.setScene(scene);
+                stage.showAndWait();
+
+                this.tblPedido.setItems(listaPedidos);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -190,40 +241,57 @@ public class ControllerFuncPedidos {
 
     @FXML
     void preencheBebidasAlcool(ActionEvent event) {
+        tipo=3;
         this.tblProdutos.getItems().clear();
-        tabelaProdutos(3);
+        tabelaProdutos(tipo);
+
     }
 
     @FXML
     void preencheCafes(ActionEvent event) {
+        tipo=1;
         this.tblProdutos.getItems().clear();
-        tabelaProdutos(1);
+        tabelaProdutos(tipo);
+
     }
 
     @FXML
     void preencheCozinha(ActionEvent event) {
+        tipo=4;
         this.tblProdutos.getItems().clear();
-        tabelaProdutos(4);
+        tabelaProdutos(tipo);
+
     }
 
     @FXML
     void preencheDoces(ActionEvent event) {
+        tipo=6;
         this.tblProdutos.getItems().clear();
-        tabelaProdutos(6);
+        tabelaProdutos(tipo);
+
     }
 
     @FXML
     void preencheSnacks(ActionEvent event) {
+        tipo=5;
         this.tblProdutos.getItems().clear();
-        tabelaProdutos(5);
+        tabelaProdutos(tipo);
     }
 
     @FXML
     void preencheSumos(ActionEvent event) {
+        tipo=2;
         this.tblProdutos.getItems().clear();
-        tabelaProdutos(2);
+        tabelaProdutos(tipo);
     }
 
-
+    public void alert(Alert.AlertType type, String tit, String texto)
+    {
+        Alert alerta=new Alert(type);
+        alerta.setTitle(tit);
+        alerta.setHeaderText(null);
+        alerta.setContentText(texto);
+        alerta.showAndWait();
+    }
 }
 

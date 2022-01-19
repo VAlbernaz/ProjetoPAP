@@ -6,11 +6,22 @@ public class pedidos {
     private int qtd;
     private String obs;
 
-    public pedidos(String produto, double valor, int qtd, String obs) {
+    private int idTipo;
+
+    public pedidos(String produto, double valor, int qtd, String obs, int idTipo) {
         this.produto = produto;
         this.valor = valor;
         this.qtd = qtd;
         this.obs = obs;
+        this.idTipo = idTipo;
+    }
+
+    public int getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(int idTipo) {
+        this.idTipo = idTipo;
     }
 
     public String getProduto() {

@@ -220,7 +220,9 @@ public class ControllerFuncPedidos {
                 stage.initModality(Modality.WINDOW_MODAL);
                 stage.setScene(scene);
                 stage.showAndWait();
-
+                /**
+                *Preencher tabela com novos dados
+                 *  */
                 this.tblPedido.setItems(listaPedidos);
             } catch (IOException e) {
                 e.printStackTrace();

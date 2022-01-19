@@ -54,8 +54,7 @@ public class ControlllerEditProdutoPedido {
 
         if(!(this.cbEditQTD.getValue() == qtdPedido) || this.tfEditObs.getText().equals(obs))
         {
-            linhaPedidos.setQtd(this.cbEditQTD.getValue());
-            linhaPedidos.setObs(this.tfEditObs.getText());
+            linhaPedidos = new pedidos(linhaPedidos.getProduto(), linhaPedidos.getValor(),this.cbEditQTD.getValue(),this.tfEditObs.getText(), linhaPedidos.getIdTipo() );
             diferente = true;
 
         }else{

@@ -193,9 +193,14 @@ public class ControllerFuncPedidos {
     @FXML
     void add(ActionEvent event) {
         getlinha();
-        this.tblPedido.setItems(listaPedidos);
+        tblPedido.setItems(listaPedidos);
     }
 
+    public void refreshTabela()
+    {
+        this.tblPedido.getItems().clear();
+        this.tblPedido.setItems(listaPedidos);
+    }
 
 
     @FXML
@@ -223,7 +228,7 @@ public class ControllerFuncPedidos {
                 /**
                 *Preencher tabela com novos dados
                  *  */
-                this.tblPedido.setItems(listaPedidos);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -100,6 +100,8 @@ public class ControllerFuncPedidos {
 
     private ObservableList<pedidos> listaPedidos;
 
+    private ObservableList<pedidos> pedidoEditado;
+
     private MySQlConnection connection;
 
     private produtos linhaProduto;
@@ -116,6 +118,7 @@ public class ControllerFuncPedidos {
 
         listaProdutos = FXCollections.observableArrayList();
         listaPedidos = FXCollections.observableArrayList();
+        pedidoEditado = FXCollections.observableArrayList();
 
         this.colProdutos.setCellValueFactory(new PropertyValueFactory<produtos,String>("produto"));
         this.colValorProduto.setCellValueFactory(new PropertyValueFactory<produtos,String>("preco"));
@@ -176,7 +179,7 @@ public class ControllerFuncPedidos {
                 this.listaPedidos.add(pedido);
                 System.out.println(tipo);
                 linhaProduto = null;
-                this.cbQTD.setValue(null);
+
             }
         }else
         {
@@ -216,6 +219,7 @@ public class ControllerFuncPedidos {
 
                 ControlllerEditProdutoPedido  controller = loader.getController();
                 controller.getProduto(linhaPedido);
+                pedidos novoEditado = controller.setPedido();
 
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
@@ -225,14 +229,18 @@ public class ControllerFuncPedidos {
                 stage.initModality(Modality.WINDOW_MODAL);
                 stage.setScene(scene);
                 stage.showAndWait();
-                /**
-                *Preencher tabela com novos dados
-                 *  */
 
+                this.listaPedidos.remove(linhaPedido);
+                this.listaPedidos.add(novoEditado);
+                this.tblPedido.setItems(listaPedidos);
+                /**
+                 *Preencher tabela com novos dados
+                 *  */
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
 
     }
 

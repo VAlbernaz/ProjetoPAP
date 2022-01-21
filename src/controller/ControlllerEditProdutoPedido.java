@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.stage.Stage;
 import model.pedidos;
 
@@ -27,45 +28,56 @@ public class ControlllerEditProdutoPedido {
     @FXML
     private TextField tfEditProduto;
 
+    private pedidos p;
 
 
     boolean diferente = false;
 
+    int qtdEdit;
+    String obsEdit;
     public void initialize()
     {
         this.cbEditQTD.getItems().addAll(1,2,3,4,5,6,7,8,9);
         
     }
-    public void getProduto(pedidos linhaPedidos)
+
+
+    public pedidos getProduto(pedidos linhaPedidos)
     {
 
-
+        pedidos p = linhaPedidos;
         //recolhe valores iniciais do objeto e guarda em variaveis
-        String produto=linhaPedidos.getProduto();
-        int qtdPedido = linhaPedidos.getQtd();
-        String  obs= linhaPedidos.getObs();
+        String produto =p.getProduto();
+        int qtdPedido = p.getQtd();
+        String obs= p.getObs();
 
         //mostra os valores iniciais ao utilizador
         this.tfEditProduto.setText(produto);
-        this.cbEditQTD.setValue(qtdPedido);
-        this.tfEditObs.setText(obs);
 
 
 
-        if(!(this.cbEditQTD.getValue() == qtdPedido) || this.tfEditObs.getText().equals(obs))
+
+
+
+
+
+        if(qtdPedido != qtdEdit || !obsEdit.equals(obs))
         {
-            linhaPedidos = new pedidos(linhaPedidos.getProduto(), linhaPedidos.getValor(),this.cbEditQTD.getValue(),this.tfEditObs.getText(), linhaPedidos.getIdTipo() );
+            System.out.println(qtdEdit);
+            linhaPedidos.setQtd(qtdEdit);
+            linhaPedidos.setObs(obsEdit);
             diferente = true;
 
         }else{
 
             diferente = false;
         }
-
+        return linhaPedidos;
     }
-    
+
     @FXML
     public void continuar(ActionEvent actionEvent) {
+
         if(diferente)
         {
             alert(Alert.AlertType.CONFIRMATION,"Sucesso!","Editado com sucesso!");

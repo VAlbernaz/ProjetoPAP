@@ -218,8 +218,8 @@ public class ControllerFuncPedidos {
                 Parent root = loader.load();
 
                 ControlllerEditProdutoPedido  controller = loader.getController();
-                controller.getProduto(linhaPedido);
-                pedidos novoEditado = controller.setPedido();
+                pedidos novoEditado = controller.getProduto(linhaPedido);
+
 
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();

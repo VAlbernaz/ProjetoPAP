@@ -11,8 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.MySQlConnection;
-import model.funcionarios;
-import model.produtos;
+import model.Produtos;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -27,16 +26,16 @@ public class ControllerStock {
     private Button btnEdit;
 
     @FXML
-    private TableColumn<produtos, String> colProduto;
+    private TableColumn<Produtos, String> colProduto;
 
     @FXML
-    private TableColumn<produtos, String> colQtd;
+    private TableColumn<Produtos, String> colQtd;
 
     @FXML
     private AnchorPane paneStock;
 
     @FXML
-    private TableView<produtos> tblStock;
+    private TableView<Produtos> tblStock;
 
     @FXML
     private TextField tfEditProduto;
@@ -47,9 +46,9 @@ public class ControllerStock {
     private MySQlConnection connection;
 
 
-    private produtos linhaProduto;
+    private Produtos linhaProduto;
 
-    private ObservableList<produtos> listaProdutos;
+    private ObservableList<Produtos> listaProdutos;
 
     public void initialize()
     {
@@ -59,8 +58,8 @@ public class ControllerStock {
 
         connection = new MySQlConnection();
 
-        this.colProduto.setCellValueFactory(new PropertyValueFactory<produtos,String>("produto"));
-        this.colQtd.setCellValueFactory(new PropertyValueFactory<produtos,String>("qtd"));
+        this.colProduto.setCellValueFactory(new PropertyValueFactory<Produtos,String>("produto"));
+        this.colQtd.setCellValueFactory(new PropertyValueFactory<Produtos,String>("qtd"));
         this.tblStock.setItems(listaProdutos);
 
         listaProdutos = FXCollections.observableArrayList();
@@ -89,7 +88,7 @@ public class ControllerStock {
             int ID= this.linhaProduto.getID();
             int newQtd= Integer.parseInt(tfEditQtd.getText());
             String produto= this.tfEditProduto.getText();
-            produtos p = new produtos(ID,produto,newQtd);
+            Produtos p = new Produtos(ID,produto,newQtd);
             if(connection.esditQtd(p)){
                 alert(Alert.AlertType.CONFIRMATION,"SUCESSO","Editado com sucesso!");
                 this.tblStock.getItems().clear();
@@ -110,7 +109,7 @@ public class ControllerStock {
                 int ID = result.getInt(1);
                 String produto = result.getString(2);
                 int qtd = result.getInt(3);
-                produtos p = new produtos(ID,produto,qtd);
+                Produtos p = new Produtos(ID,produto,qtd);
                 this.listaProdutos.add(p);
             }
         }catch (SQLException throwables)

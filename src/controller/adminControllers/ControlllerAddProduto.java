@@ -15,9 +15,9 @@ import model.MySQlConnection;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.fornecedor;
-import model.produtos;
-import model.tipos;
+import model.Fornecedor;
+import model.Produtos;
+import model.Tipos;
 
 public class ControlllerAddProduto {
 
@@ -41,13 +41,13 @@ public class ControlllerAddProduto {
 
     private MySQlConnection connection;
 
-    private produtos p;
-    private fornecedor f;
-    private tipos t;
+    private Produtos p;
+    private Fornecedor f;
+    private Tipos t;
 
-    private ObservableList<fornecedor> listaFornecedores;
-    private ObservableList<tipos> listaTipos;
-    private ObservableList<produtos> listaProdutos;
+    private ObservableList<Fornecedor> listaFornecedores;
+    private ObservableList<Tipos> listaTipos;
+    private ObservableList<Produtos> listaProdutos;
 
     private int nFornecedor=0;
     private int nTipo=0;
@@ -78,7 +78,7 @@ public class ControlllerAddProduto {
             while (resultF.next()) {
                 int ID = resultF.getInt(1);
                 String nome = resultF.getString(2);
-                fornecedor f = new fornecedor(ID,nome);
+                Fornecedor f = new Fornecedor(ID,nome);
                 this.listaFornecedores.add(f);
 
             }
@@ -86,7 +86,7 @@ public class ControlllerAddProduto {
         {
             throwables.printStackTrace();
         }
-        for(fornecedor f : listaFornecedores)
+        for(Fornecedor f : listaFornecedores)
         {
             this.cbFornecedor.getItems().add(f.getNome());
         }
@@ -97,7 +97,7 @@ public class ControlllerAddProduto {
             while (resultT.next()) {
                 int ID = resultT.getInt(1);
                 String tipo = resultT.getString(2);
-                tipos t = new tipos(ID,tipo);
+                Tipos t = new Tipos(ID,tipo);
                 this.listaTipos.add(t);
 
             }
@@ -105,7 +105,7 @@ public class ControlllerAddProduto {
         {
             throwables.printStackTrace();
         }
-        for(tipos t: listaTipos)
+        for(Tipos t: listaTipos)
         {
             this.cbTipo.getItems().add(t.getTipo());
         }
@@ -131,7 +131,7 @@ public class ControlllerAddProduto {
             System.out.println(tipo);
             nTipo(tipo);
 
-            produtos p = new produtos(produto,precoD,nFornecedor,nTipo);
+            Produtos p = new Produtos(produto,precoD,nFornecedor,nTipo);
 
 
             System.out.println(nFornecedor);

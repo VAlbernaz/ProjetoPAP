@@ -15,7 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.MySQlConnection;
-import model.funcionarios;
+import model.Funcionarios;
 
 
 import java.io.File;
@@ -56,13 +56,13 @@ public class ControllerAdmin {
     private AnchorPane panePrincipal;
 
     @FXML
-    private TableColumn<funcionarios,String> tcAtividade;
+    private TableColumn<Funcionarios,String> tcAtividade;
 
     @FXML
-    private TableColumn<funcionarios,String> tcFunc;
+    private TableColumn<Funcionarios,String> tcFunc;
 
     @FXML
-    private TableColumn<funcionarios,String> tcNumFunc;
+    private TableColumn<Funcionarios,String> tcNumFunc;
 
     @FXML
     private DatePicker dpDataNascimento;
@@ -77,7 +77,7 @@ public class ControllerAdmin {
     private TextField tfUltiNome;
 
     @FXML
-    private TableView<funcionarios> tvFunc;
+    private TableView<Funcionarios> tvFunc;
 
     @FXML
     private Button btnAtualizar;
@@ -88,9 +88,9 @@ public class ControllerAdmin {
     @FXML
     private ComboBox<String> cbAtividade;
 
-    private ObservableList<funcionarios> listaFuncionarios;
+    private ObservableList<Funcionarios> listaFuncionarios;
 
-    private funcionarios linhaFuncionario;
+    private Funcionarios linhaFuncionario;
 
     public void initialize()
     {
@@ -104,9 +104,9 @@ public class ControllerAdmin {
 
         listaFuncionarios = FXCollections.observableArrayList();
 
-        this.tcFunc.setCellValueFactory(new PropertyValueFactory<funcionarios,String>("nome"));
-        this.tcAtividade.setCellValueFactory(new PropertyValueFactory<funcionarios,String>("atividade"));
-        this.tcNumFunc.setCellValueFactory(new PropertyValueFactory<funcionarios,String>("numFunc"));
+        this.tcFunc.setCellValueFactory(new PropertyValueFactory<Funcionarios,String>("nome"));
+        this.tcAtividade.setCellValueFactory(new PropertyValueFactory<Funcionarios,String>("atividade"));
+        this.tcNumFunc.setCellValueFactory(new PropertyValueFactory<Funcionarios,String>("numFunc"));
         this.tvFunc.setItems(listaFuncionarios);
 
 
@@ -127,7 +127,7 @@ public class ControllerAdmin {
                 String nome = result.getString(2);
                 String atividade = result.getString(3);
                 int numFunc = result.getInt(4);
-                funcionarios f= new funcionarios( ID,nome,atividade, numFunc);
+                Funcionarios f= new Funcionarios( ID,nome,atividade, numFunc);
                 this.listaFuncionarios.add(f);
             }
         }catch (SQLException throwables)
@@ -148,7 +148,7 @@ public class ControllerAdmin {
             String atividade = this.cbAtividade.getValue();
             int ID=linhaFuncionario.getID();
 
-            funcionarios f = new funcionarios(ID,atividade);
+            Funcionarios f = new Funcionarios(ID,atividade);
             if(connection.editarPessoa(f)){
                 alert(Alert.AlertType.CONFIRMATION,"SUCESSO","Editado com sucesso!");
                 this.tvFunc.getItems().clear();
@@ -175,7 +175,7 @@ public class ControllerAdmin {
             String sexo = this.cbSexo.getValue();
             int numFunc = Integer.parseInt(this.tfNumFunc.getText());
 
-            funcionarios f = new funcionarios(primNome,ultiNome,dataNascimento,sexo,numFunc);
+            Funcionarios f = new Funcionarios(primNome,ultiNome,dataNascimento,sexo,numFunc);
 
             if(connection.inserirFuncionario(f)) {
                 alert(Alert.AlertType.INFORMATION,"SUCESSO","Funcionário adicionada com sucesso!");

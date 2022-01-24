@@ -57,7 +57,7 @@ public class MySQlConnection {
         return result;
     }
 
-    public boolean editarPessoa(funcionarios f) {
+    public boolean editarPessoa(Funcionarios f) {
         ResultSet result = null;
         try {
             String sql = "UPDATE funcionario SET funcionario.atividade = (?) WHERE funcionario.idfuncionario = " + f.getID();
@@ -78,7 +78,7 @@ public class MySQlConnection {
 
     }
 
-    public boolean inserirFuncionario(funcionarios f) {
+    public boolean inserirFuncionario(Funcionarios f) {
         try {
             //preprar a inserção da nova linha
             String sql = "INSERT INTO funcionario (primNome,ultiNome,dataNascimento,sexo,numFunc) VALUES (?,?,?,?,?)";
@@ -180,7 +180,7 @@ public class MySQlConnection {
         return result;
     }
 
-    public boolean inserirProduto(produtos p)
+    public boolean inserirProduto(Produtos p)
     {
         try {
             //preprar a inserção da nova linha
@@ -215,7 +215,7 @@ public class MySQlConnection {
 
         return result;
     }
-    public boolean esditQtd(produtos p) {
+    public boolean esditQtd(Produtos p) {
         try {
             String sql = "UPDATE produto SET produto.qtd = (?) WHERE produto.idproduto=" + p.getID();
             PreparedStatement statement = connection.prepareStatement(sql);

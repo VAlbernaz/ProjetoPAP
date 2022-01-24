@@ -1,6 +1,6 @@
 package model;
 
-public class pedidos {
+public class Pedidos {
     private String produto;
     private double valor;
     private int qtd;
@@ -8,7 +8,7 @@ public class pedidos {
 
     private int idTipo;
 
-    public pedidos(String produto, double valor, int qtd, String obs, int idTipo) {
+    public Pedidos(String produto, double valor, int qtd, String obs, int idTipo) {
         this.produto = produto;
         this.valor = valor;
         this.qtd = qtd;

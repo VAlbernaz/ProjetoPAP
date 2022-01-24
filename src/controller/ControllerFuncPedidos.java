@@ -4,21 +4,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.MySQlConnection;
-import model.pedidos;
-import model.produtos;
+import model.Pedidos;
+import model.Produtos;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -69,26 +64,26 @@ public class ControllerFuncPedidos {
 
     //tabela pedidos
     @FXML
-    private TableColumn<pedidos, String> colProduto;
+    private TableColumn<Pedidos, String> colProduto;
 
     @FXML
-    private TableColumn<pedidos, String> colQTD;
+    private TableColumn<Pedidos, String> colQTD;
 
     @FXML
-    private TableColumn<pedidos, String> colValor;
+    private TableColumn<Pedidos, String> colValor;
 
     @FXML
-    private TableView<pedidos> tblPedido;
+    private TableView<Pedidos> tblPedido;
 
     //tabela produtos
     @FXML
-    private TableView<produtos> tblProdutos;
+    private TableView<Produtos> tblProdutos;
 
     @FXML
-    private TableColumn<produtos, String> colProdutos;
+    private TableColumn<Produtos, String> colProdutos;
 
     @FXML
-    private TableColumn<produtos, String> colValorProduto;
+    private TableColumn<Produtos, String> colValorProduto;
 
     @FXML
     private TextField tfRetalho;
@@ -96,16 +91,16 @@ public class ControllerFuncPedidos {
     @FXML
     private Label lbNumFunc;
 
-    private ObservableList<produtos> listaProdutos;
+    private ObservableList<Produtos> listaProdutos;
 
-    private ObservableList<pedidos> listaPedidos;
+    private ObservableList<Pedidos> listaPedidos;
 
-    private ObservableList<pedidos> pedidoEditado;
+    private ObservableList<Pedidos> pedidoEditado;
 
     private MySQlConnection connection;
 
-    private produtos linhaProduto;
-    private pedidos linhaPedido;
+    private Produtos linhaProduto;
+    private Pedidos linhaPedido;
 
     private int tipo;
     public void initialize()
@@ -120,13 +115,13 @@ public class ControllerFuncPedidos {
         listaPedidos = FXCollections.observableArrayList();
         pedidoEditado = FXCollections.observableArrayList();
 
-        this.colProdutos.setCellValueFactory(new PropertyValueFactory<produtos,String>("produto"));
-        this.colValorProduto.setCellValueFactory(new PropertyValueFactory<produtos,String>("preco"));
+        this.colProdutos.setCellValueFactory(new PropertyValueFactory<Produtos,String>("produto"));
+        this.colValorProduto.setCellValueFactory(new PropertyValueFactory<Produtos,String>("preco"));
         this.tblProdutos.setItems(listaProdutos);
 
-        this.colProduto.setCellValueFactory(new PropertyValueFactory<pedidos,String>("produto"));
-        this.colQTD.setCellValueFactory(new PropertyValueFactory<pedidos,String>("qtd"));
-        this.colValor.setCellValueFactory(new PropertyValueFactory<pedidos,String>("valor"));
+        this.colProduto.setCellValueFactory(new PropertyValueFactory<Pedidos,String>("produto"));
+        this.colQTD.setCellValueFactory(new PropertyValueFactory<Pedidos,String>("qtd"));
+        this.colValor.setCellValueFactory(new PropertyValueFactory<Pedidos,String>("valor"));
 
 
 
@@ -150,7 +145,7 @@ public class ControllerFuncPedidos {
             while (result.next()) {
                 String produto = result.getString(1);
                 double preco = result.getDouble(2);
-                produtos p = new produtos(produto, preco);
+                Produtos p = new Produtos(produto, preco);
                 this.listaProdutos.add(p);
             }
         }catch (SQLException throwables)
@@ -175,7 +170,7 @@ public class ControllerFuncPedidos {
                 double preco = linhaProduto.getPreco();
                 int qtd = this.cbQTD.getValue();
                 String obs = this.taOBS.getText();
-                pedidos pedido = new pedidos(produto, preco, qtd, obs,tipo);
+                Pedidos pedido = new Pedidos(produto, preco, qtd, obs,tipo);
                 this.listaPedidos.add(pedido);
                 System.out.println(tipo);
                 linhaProduto = null;
@@ -185,7 +180,7 @@ public class ControllerFuncPedidos {
         {
             tipo=8;
             double preco = Double.parseDouble(precoR);
-            pedidos linhaPedido= new pedidos("Retalho",preco,1,"",tipo);
+            Pedidos linhaPedido= new Pedidos("Retalho",preco,1,"",tipo);
             this.listaPedidos.add(linhaPedido);
             System.out.println(tipo);
             this.tfRetalho.setText("");
@@ -246,7 +241,7 @@ public class ControllerFuncPedidos {
 
     @FXML
     void eliminar(ActionEvent event) {
-        pedidos linhaDelete = this.tblPedido.getSelectionModel().getSelectedItem();
+        Pedidos linhaDelete = this.tblPedido.getSelectionModel().getSelectedItem();
         this.listaPedidos.remove(linhaDelete);
     }
 

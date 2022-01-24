@@ -2,7 +2,7 @@ package model;
 
 import java.util.Date;
 
-public class funcionarios {
+public class Funcionarios {
     private int ID;
     private  String nome;
 
@@ -14,11 +14,11 @@ public class funcionarios {
     private String atividade;
     private String atividadeEdit;
 
-    public funcionarios(int numFunc) {
+    public Funcionarios(int numFunc) {
         this.numFunc = numFunc;
     }
 
-    public funcionarios(String primNome, String ultiNome, Date dataNascimento, String sexo, int numFunc) {
+    public Funcionarios(String primNome, String ultiNome, Date dataNascimento, String sexo, int numFunc) {
         this.primNome = primNome;
         this.ultiNome = ultiNome;
         this.dataNascimento = dataNascimento;
@@ -26,12 +26,12 @@ public class funcionarios {
         this.numFunc = numFunc;
     }
 
-    public funcionarios(int ID, String atividadeEdit) {
+    public Funcionarios(int ID, String atividadeEdit) {
         this.ID = ID;
         this.atividadeEdit = atividadeEdit;
     }
 
-    public funcionarios(int ID, String nome, String atividade, int numFunc) {
+    public Funcionarios(int ID, String nome, String atividade, int numFunc) {
         this.ID = ID;
         this.nome = nome;
         this.atividade = atividade;

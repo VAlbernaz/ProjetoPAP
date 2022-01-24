@@ -1,10 +1,10 @@
 package model;
 
-public class tipos {
+public class Tipos {
     private int ID;
     private String tipo;
 
-    public tipos(int ID, String tipo) {
+    public Tipos(int ID, String tipo) {
         this.ID = ID;
         this.tipo = tipo;
     }

@@ -64,6 +64,17 @@ public class ControllerFuncMesas {
 
     private MySQlConnection connection;
 
+    boolean corBotao1=true;
+    boolean corBotao2=true;
+    boolean corBotao3=true;
+    boolean corBotao4=true;
+    boolean corBotao5=true;
+    boolean corBotao6=true;
+    boolean corBotao7=true;
+    boolean corBotao8=true;
+    boolean corBotao9=true;
+    boolean corBotao10=true;
+
     public void initialize()
     {
         File file = new File("logo.png");
@@ -73,11 +84,14 @@ public class ControllerFuncMesas {
 
     }
 
+
+
     @FXML
     void mesaUM(ActionEvent event) {
+        this.btnMUm.setStyle("-fx-background-color: #FE2E2E; ");
         int numMesa = 1;
         // true= verde   false = vermelho
-        boolean corButao=true;
+
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewDetMesas.fxml"));
@@ -100,9 +114,15 @@ public class ControllerFuncMesas {
             e.printStackTrace();
         }
     }
+    public void alteraMum(){
+        this.btnMUm.setStyle("-fx-background-color:  #70eb80; ");
+    }
 
     @FXML
     void mesaDois(ActionEvent event) {
+
+
+
         int numMesa = 2;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewDetMesas.fxml"));

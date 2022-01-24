@@ -206,7 +206,7 @@ public class ControllerFuncPedidos {
     }
 
 
-    @FXML
+   /* @FXML
     void editar(ActionEvent event) {
         linhaPedido = this.tblPedido.getSelectionModel().getSelectedItem();
         if(linhaPedido==null)
@@ -214,10 +214,10 @@ public class ControllerFuncPedidos {
             alert(Alert.AlertType.ERROR,"ERRO!","Selecione uma linha do pedido!");
         }else {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/EditProdutoPedidoView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../../vistas e controllers nao usados/EditProdutoPedidoView.fxml"));
                 Parent root = loader.load();
 
-                ControlllerEditProdutoPedido  controller = loader.getController();
+                ControlllerEditProdutoPedido controller = loader.getController();
                 pedidos novoEditado = controller.getProduto(linhaPedido);
 
 
@@ -236,22 +236,24 @@ public class ControllerFuncPedidos {
                 /**
                  *Preencher tabela com novos dados
                  *  */
-            } catch (IOException e) {
+            /*} catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
 
-    }
+    }*/
 
     @FXML
     void eliminar(ActionEvent event) {
-
+        pedidos linhaDelete = this.tblPedido.getSelectionModel().getSelectedItem();
+        this.listaPedidos.remove(linhaDelete);
     }
 
     @FXML
     void finalizar(ActionEvent event) {
-
+        Stage stage = (Stage) this.btnFinalizar.getScene().getWindow();
+        stage.close();
     }
 
     @FXML

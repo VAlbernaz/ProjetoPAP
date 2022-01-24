@@ -61,6 +61,11 @@ public class ControllerFuncDetMesas {
 
     @FXML
     void ClearMesa(ActionEvent event) {
+        if(numesa==1)
+        {
+            ControllerFuncMesas controller = new ControllerFuncMesas();
+            controller.alteraMum();
+        }
 
     }
 
@@ -84,6 +89,9 @@ public class ControllerFuncDetMesas {
         }
     }
 
+
+
+
     @FXML
     void novoPedido(ActionEvent event) throws SQLException {
         String numFunc = "";
@@ -104,6 +112,8 @@ public class ControllerFuncDetMesas {
 
             ControllerCodigoFunc controller = loader.getController();
             numFunc = controller.numFunc();
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -134,7 +144,10 @@ public class ControllerFuncDetMesas {
                 //stage.resizableProperty().setValue(Boolean.FALSE);
                 stage.initModality(Modality.WINDOW_MODAL);
                 stage.setScene(scene);
-                stage.show();
+                stage.showAndWait();
+
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -91,6 +91,9 @@ public class ControllerFuncPedidos {
     @FXML
     private Label lbNumFunc;
 
+    @FXML
+    private Label lbPedido;
+
     private ObservableList<Produtos> listaProdutos;
 
     private ObservableList<Pedidos> listaPedidos;
@@ -102,7 +105,15 @@ public class ControllerFuncPedidos {
     private Produtos linhaProduto;
     private Pedidos linhaPedido;
 
+    private Pedidos pedido;
+
+    private Pedidos pedidoFinal;
+
     private int tipo;
+
+    private int numPdd=0;
+    private int numFuncio=0;
+
     public void initialize()
     {
         File file = new File("logo.png");
@@ -123,11 +134,32 @@ public class ControllerFuncPedidos {
         this.colQTD.setCellValueFactory(new PropertyValueFactory<Pedidos,String>("qtd"));
         this.colValor.setCellValueFactory(new PropertyValueFactory<Pedidos,String>("valor"));
 
+        numPedido();
 
 
     }
+
+    void numPedido()  {
+        connection = new MySQlConnection();
+        ResultSet result = connection.getNumPedido();
+
+        try {
+            while(result.next()) {
+
+
+                numPdd = result.getInt(1) + 1;
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+        String str = this.lbPedido.getText();
+        this.lbPedido.setText(str + String.valueOf(numPdd));
+    }
+
     void setNumFunc(String numFunc) throws SQLException {
         connection = new MySQlConnection();
+        numFuncio = Integer.parseInt(numFunc);
         ResultSet result = connection.nomeFunc(numFunc);
         String nomeFunc="";
         while (result.next()) {
@@ -170,7 +202,7 @@ public class ControllerFuncPedidos {
                 double preco = linhaProduto.getPreco();
                 int qtd = this.cbQTD.getValue();
                 String obs = this.taOBS.getText();
-                Pedidos pedido = new Pedidos(produto, preco, qtd, obs,tipo);
+                pedido = new Pedidos(produto, preco, qtd, obs,tipo);
                 this.listaPedidos.add(pedido);
                 System.out.println(tipo);
                 linhaProduto = null;
@@ -180,8 +212,8 @@ public class ControllerFuncPedidos {
         {
             tipo=8;
             double preco = Double.parseDouble(precoR);
-            Pedidos linhaPedido= new Pedidos("Retalho",preco,1,"",tipo);
-            this.listaPedidos.add(linhaPedido);
+            pedido= new Pedidos("Retalho",preco,1,"",tipo);
+            this.listaPedidos.add(pedido);
             System.out.println(tipo);
             this.tfRetalho.setText("");
         }
@@ -246,7 +278,34 @@ public class ControllerFuncPedidos {
     }
 
     @FXML
-    void finalizar(ActionEvent event) {
+    void finalizar(ActionEvent event) throws SQLException {
+
+        connection = new MySQlConnection();
+        int idProduto=0;
+        int idFunc=0;
+
+        for(Pedidos p : listaPedidos)
+        {
+            ResultSet result = connection.getIdProduto(pedido.getProduto());
+            while (result.next()){
+                idProduto= result.getInt(1);
+            }
+            ResultSet resultFunc = connection.getIdFunc(numFuncio);
+            while (resultFunc.next())
+            {
+                idFunc = resultFunc.getInt(1);
+            }
+
+            //tirar dados da observeblelist
+
+            pedidoFinal = new Pedidos(pedido.getQtd(),pedido.getObs(),numPdd,idFunc,pedido.getValor(), idProduto,0 );
+            if(connection.setPedido(pedidoFinal)) {
+                alert(Alert.AlertType.INFORMATION,"Obrigado!","Pedido Finalizado");
+
+            } else {
+                alert(Alert.AlertType.ERROR,"ATENÇÃO","Ocorreu um problema!");
+            }
+        }
         Stage stage = (Stage) this.btnFinalizar.getScene().getWindow();
         stage.close();
     }

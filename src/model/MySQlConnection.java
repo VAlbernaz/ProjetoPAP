@@ -234,5 +234,75 @@ public class MySQlConnection {
         }
 
     }
+
+    public ResultSet getNumPedido()
+    {
+        ResultSet result = null;
+        String sql = "SELECT MAX(numpedido)\n" +
+                "FROM pedidos;";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+
+    public ResultSet getIdProduto(String produto)
+    {
+        ResultSet result = null;
+        String sql = "SELECT idproduto\n" +
+                "FROM gesres.produto\n" +
+                "WHERE produto =\""+ produto +"\";";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+
+    public boolean setPedido(Pedidos p)
+    {
+        try {
+            //preprar a inserção da nova linha
+            String sql = "INSERT INTO pedidos(numpedido,qtd,idfuncionario,valorTotal,mesa,obs,idproduto)\n" +
+                    "VALUES(?,?,?,?,?,?,?);\n";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, p.getnumPedido());
+            statement.setInt(2, p.getQtd());
+            statement.setInt(3, p.getIdFunc());
+            statement.setDouble(4, p.getValor());
+            statement.setInt(5, p.getnMesa());
+            statement.setString(6, p.getObs());
+            statement.setInt(7, p.getIdProduto());
+
+            //executar a inserção
+            int linhas = statement.executeUpdate();
+            if (linhas == 1) {
+                return true;
+
+            } else return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public ResultSet getIdFunc(int numFunc){
+        ResultSet result = null;
+        String sql = "SELECT idfuncionario\n" +
+                "FROM funcionario\n" +
+                "WHERE numFunc ="+ numFunc+";";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
 }
 

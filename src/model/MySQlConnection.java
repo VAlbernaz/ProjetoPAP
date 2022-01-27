@@ -238,7 +238,7 @@ public class MySQlConnection {
     public ResultSet getNumPedido()
     {
         ResultSet result = null;
-        String sql = "SELECT MAX(idpedido)\n" +
+        String sql = "SELECT MAX(numpedido)\n" +
                 "FROM pedidos;";
         try {
             Statement s = connection.createStatement();

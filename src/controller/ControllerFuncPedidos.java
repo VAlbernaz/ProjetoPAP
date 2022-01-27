@@ -298,13 +298,14 @@ public class ControllerFuncPedidos {
 
             //tirar dados da observeblelist
 
-            pedidoFinal = new Pedidos(pedido.getQtd(),pedido.getObs(),numPdd,idFunc,pedido.getValor(), idProduto,0 );
-            if(connection.setPedido(pedidoFinal)) {
-                alert(Alert.AlertType.INFORMATION,"Obrigado!","Pedido Finalizado");
+            pedidoFinal = new Pedidos(p.getQtd(),p.getObs(),numPdd,idFunc,p.getValor(), idProduto,0 );
+            connection.setPedido(pedidoFinal);
+        }
+        if(connection.setPedido(pedidoFinal)) {
+            alert(Alert.AlertType.INFORMATION,"Obrigado!","Pedido Finalizado");
 
-            } else {
-                alert(Alert.AlertType.ERROR,"ATENÇÃO","Ocorreu um problema!");
-            }
+        } else {
+            alert(Alert.AlertType.ERROR,"ATENÇÃO","Ocorreu um problema!");
         }
         Stage stage = (Stage) this.btnFinalizar.getScene().getWindow();
         stage.close();

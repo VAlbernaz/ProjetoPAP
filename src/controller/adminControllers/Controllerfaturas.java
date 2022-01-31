@@ -2,19 +2,12 @@ package controller.adminControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 
 public class Controllerfaturas {
 
@@ -22,25 +15,55 @@ public class Controllerfaturas {
     private ImageView IVLogo1;
 
     @FXML
-    private MenuItem MItemAddProduto;
+    private Button btnConsultar;
 
     @FXML
-    private MenuItem MItemFaturasDiarias;
+    private Button btnvoltar;
 
     @FXML
-    private MenuItem MItemFaturasMensal;
+    private TableColumn<?, ?> colData;
 
     @FXML
-    private MenuItem MItemFaturasSemanal;
+    private TableColumn<?, ?> colIdPedido;
 
     @FXML
-    private MenuItem MItemReceitas;
+    private TableColumn<?, ?> colProduto;
 
     @FXML
-    private MenuItem MItemStock;
+    private TableColumn<?, ?> colQtd;
+
+    @FXML
+    private TableColumn<?, ?> colValorPPedido;
+
+    @FXML
+    private TableColumn<?, ?> colvalor;
 
     @FXML
     private AnchorPane paneStock;
+
+    @FXML
+    private TableView<?> tblDetalhes;
+
+    @FXML
+    private TableView<?> tblPedidos;
+
+    @FXML
+    private TextField tfContribuinte;
+
+    @FXML
+    private TextField tfNumFunc;
+
+    @FXML
+    void consultar(ActionEvent event) {
+
+    }
+
+    @FXML
+    void voltar(ActionEvent event) {
+
+    }
+
+
 
     public void initialize()
     {

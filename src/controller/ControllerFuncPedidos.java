@@ -114,6 +114,8 @@ public class ControllerFuncPedidos {
     private int numPdd=0;
     private int numFuncio=0;
 
+    private int numMesa=0;
+
     public void initialize()
     {
         File file = new File("logo.png");
@@ -175,9 +177,10 @@ public class ControllerFuncPedidos {
         ResultSet result = connection.getProduto(tipos);
         try {
             while (result.next()) {
-                String produto = result.getString(1);
-                double preco = result.getDouble(2);
-                Produtos p = new Produtos(produto, preco);
+                int id = result.getInt(1);
+                String produto = result.getString(2);
+                double preco = result.getDouble(3);
+                Produtos p = new Produtos(id,produto, preco);
                 this.listaProdutos.add(p);
             }
         }catch (SQLException throwables)
@@ -198,11 +201,12 @@ public class ControllerFuncPedidos {
             if(linhaProduto == null || this.cbQTD.getValue() == null) {
                 alert(Alert.AlertType.ERROR,"ERRO!","Selecione todos os campos! (produto e quantidade)");
             }else {
+                int idProduto = linhaProduto.getID();
                 String produto = linhaProduto.getProduto();
                 double preco = linhaProduto.getPreco();
                 int qtd = this.cbQTD.getValue();
                 String obs = this.taOBS.getText();
-                pedido = new Pedidos(produto, preco, qtd, obs,tipo);
+                pedido = new Pedidos(idProduto,produto, preco, qtd, obs,tipo);
                 this.listaPedidos.add(pedido);
                 System.out.println(tipo);
                 linhaProduto = null;
@@ -210,9 +214,9 @@ public class ControllerFuncPedidos {
             }
         }else
         {
-            tipo=8;
+            tipo=7;
             double preco = Double.parseDouble(precoR);
-            pedido= new Pedidos("Retalho",preco,1,"",tipo);
+            pedido= new Pedidos(7,preco,1,"",tipo);
             this.listaPedidos.add(pedido);
             System.out.println(tipo);
             this.tfRetalho.setText("");
@@ -260,10 +264,8 @@ public class ControllerFuncPedidos {
                 this.listaPedidos.remove(linhaPedido);
                 this.listaPedidos.add(novoEditado);
                 this.tblPedido.setItems(listaPedidos);
-                /**
-                 *Preencher tabela com novos dados
-                 *  */
-            /*} catch (IOException e) {
+
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -279,34 +281,43 @@ public class ControllerFuncPedidos {
 
     @FXML
     void finalizar(ActionEvent event) throws SQLException {
-
-        connection = new MySQlConnection();
-        int idProduto=0;
+        //recolhe id do funcionario
         int idFunc=0;
+        ResultSet resultFunc = connection.getIdFunc(numFuncio);
+        while (resultFunc.next())
+        {
+            idFunc = resultFunc.getInt(1);
+        }
+        //criar pedido
+        connection.createPedido(numMesa,idFunc);
 
+        //pega id do pedido
+        int idPedido=0;
+
+        ResultSet result = connection.getNumPedido();
+
+        try {
+            while(result.next()) {
+
+
+                idPedido= result.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        //adicionar na tabela de detalhes de pedido
         for(Pedidos p : listaPedidos)
         {
-            ResultSet result = connection.getIdProduto(pedido.getProduto());
-            while (result.next()){
-                idProduto= result.getInt(1);
-            }
-            ResultSet resultFunc = connection.getIdFunc(numFuncio);
-            while (resultFunc.next())
-            {
-                idFunc = resultFunc.getInt(1);
-            }
-
             //tirar dados da observeblelist
-
-            pedidoFinal = new Pedidos(p.getQtd(),p.getObs(),numPdd,idFunc,p.getValor(), idProduto,0 );
-            connection.setPedido(pedidoFinal);
+            pedidoFinal = new Pedidos(idPedido,p.getIdProduto(),p.getQtd(),p.getObs());
+            connection.setPedidoDetalhes(pedidoFinal);
         }
-        if(connection.setPedido(pedidoFinal)) {
-            alert(Alert.AlertType.INFORMATION,"Obrigado!","Pedido Finalizado");
 
-        } else {
-            alert(Alert.AlertType.ERROR,"ATENÇÃO","Ocorreu um problema!");
-        }
+        alert(Alert.AlertType.INFORMATION,"Obrigado!","Pedido Finalizado");
+
+
         Stage stage = (Stage) this.btnFinalizar.getScene().getWindow();
         stage.close();
     }

@@ -1,6 +1,7 @@
 package model;
 
 public class Pedidos {
+    private  int id;
     private String produto;
     private double valor;
     private int qtd;
@@ -14,18 +15,24 @@ public class Pedidos {
     private int nMesa;
 
 
-    public Pedidos(int qtd, String obs, int numPedido, int idFunc, double valor, int idProduto, int nMesa) {
+    public Pedidos( int idProduto,String produto, double valor, int qtd, String obs, int idTipo) {
+        this.produto = produto;
+        this.valor = valor;
         this.qtd = qtd;
         this.obs = obs;
-        this.numPedido = numPedido;
-        this.idFunc = idFunc;
-        this.valor = valor;
+        this.idTipo = idTipo;
         this.idProduto = idProduto;
-        this.nMesa = nMesa;
     }
 
-    public Pedidos(String produto, double valor, int qtd, String obs, int idTipo) {
-        this.produto = produto;
+    public Pedidos(int id, int idProduto, int qtd, String obs) {
+        this.qtd = qtd;
+        this.obs = obs;
+        this.idProduto = idProduto;
+        this.id = id;
+    }
+
+    public Pedidos(int id, double valor, int qtd, String obs, int idTipo) {
+        this.id = id;
         this.valor = valor;
         this.qtd = qtd;
         this.obs = obs;
@@ -48,7 +55,13 @@ public class Pedidos {
         this.idFunc = idFunc;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getIdProduto() {
         return idProduto;

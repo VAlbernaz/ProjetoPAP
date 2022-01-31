@@ -21,6 +21,12 @@ public class Produtos {
         this.obs = obs;
     }
 
+    public Produtos(int ID, String produto, double preco) {
+        this.ID = ID;
+        this.produto = produto;
+        this.preco = preco;
+    }
+
     public Produtos(int ID, String produto, int qtd) {
         this.ID = ID;
         this.produto = produto;

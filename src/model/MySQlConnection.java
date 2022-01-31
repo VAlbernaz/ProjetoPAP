@@ -45,7 +45,7 @@ public class MySQlConnection {
 
     public ResultSet getProduto(int id){
         ResultSet result = null;
-        String sql = "SELECT produto,preco\n" +
+        String sql = "SELECT idproduto,produto,preco\n" +
                 "FROM produto\n" +
                 "WHERE idtipo="+id+";";
         try {
@@ -238,7 +238,7 @@ public class MySQlConnection {
     public ResultSet getNumPedido()
     {
         ResultSet result = null;
-        String sql = "SELECT MAX(numpedido)\n" +
+        String sql = "SELECT MAX(idpedidos)\n" +
                 "FROM pedidos;";
         try {
             Statement s = connection.createStatement();
@@ -264,20 +264,40 @@ public class MySQlConnection {
         return result;
     }
 
-    public boolean setPedido(Pedidos p)
+    public boolean createPedido(int mesa, int func)
     {
         try {
             //preprar a inserção da nova linha
-            String sql = "INSERT INTO pedidos(numpedido,qtd,idfuncionario,valorTotal,mesa,obs,idproduto)\n" +
-                    "VALUES(?,?,?,?,?,?,?);\n";
+            String sql = "INSERT INTO pedidos(mesa,dataHora,idfuncionario)\n" +
+                    "VALUES(?,CURRENT_TIMESTAMP,?);\n";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, p.getnumPedido());
-            statement.setInt(2, p.getQtd());
-            statement.setInt(3, p.getIdFunc());
-            statement.setDouble(4, p.getValor());
-            statement.setInt(5, p.getnMesa());
-            statement.setString(6, p.getObs());
-            statement.setInt(7, p.getIdProduto());
+            statement.setInt(1, mesa);
+            statement.setInt(2, func);
+
+            //executar a inserção
+            int linhas = statement.executeUpdate();
+            if (linhas == 1) {
+                return true;
+
+            } else return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean setPedidoDetalhes(Pedidos p)
+    {
+        try {
+            //preprar a inserção da nova linha
+            String sql = "INSERT INTO detalhespedidos(idpedidos,idproduto,qtd,obs)\n" +
+                    "VALUES(?,?,?,?);\n";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, p.getId());
+            statement.setInt(2, p.getIdProduto());
+            statement.setInt(3, p.getQtd());
+            statement.setString(4, p.getObs());
 
             //executar a inserção
             int linhas = statement.executeUpdate();

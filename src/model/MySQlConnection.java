@@ -324,5 +324,57 @@ public class MySQlConnection {
         }
         return result;
     }
+
+    public ResultSet getNumPedidoMesa(int nMesa) {
+        ResultSet result=null;
+        String sql = "SELECT MAX(idPedidos)\n" +
+                "FROM pedidos\n" +
+                "WHERE mesa =" + nMesa+ ";";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return  result;
+    }
+
+    public Boolean trocaEstadoMesa(int numMesa, String estado) {
+        ResultSet result = null;
+        try{
+        String sql = "UPDATE mesas SET mesas.disponibilidade = (\""+estado+"\") WHERE mesas.idmesas ="+numMesa+";";
+
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+
+
+            int linhas = statement.executeUpdate();
+            if (linhas == 1) {
+                return true;
+
+            } else return false;
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+
+        /*String sql = "SELECT disponibilidade\n" +
+                "FROM mesas\n" +
+                "WHERE idmesas = " + numMesa+ ";";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }*/
+
+
+    }
+
+
+
+
 }
 

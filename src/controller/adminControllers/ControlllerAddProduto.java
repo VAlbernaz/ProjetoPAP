@@ -112,8 +112,6 @@ public class ControlllerAddProduto {
 
     }
 
-
-
     @FXML
     void concluir(ActionEvent event) {
         if(!this.tfProduto.getText().isEmpty()||this.tfPreco.getText().isEmpty()||!(this.cbFornecedor.getValue()==null)||!(this.cbTipo.getValue()==null)) {

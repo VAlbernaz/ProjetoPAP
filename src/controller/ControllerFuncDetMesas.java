@@ -41,8 +41,11 @@ public class ControllerFuncDetMesas {
     private Label lbMesa;
 
     private int numesa;
+    int numPedido;
 
     private MySQlConnection connection;
+
+
 
     public void initialize()
     {
@@ -51,6 +54,8 @@ public class ControllerFuncDetMesas {
         IVLogo.setImage(image);
     }
 
+
+
     void getNmMesa(int mesa){
         numesa=mesa;
         String str = lbMesa.getText();
@@ -58,14 +63,17 @@ public class ControllerFuncDetMesas {
     }
 
 
+    void getPedidoMesa() throws SQLException {
 
+        ResultSet result =  connection.getNumPedidoMesa(numesa);
+        while (result.next())
+        {
+            numPedido = result.getInt(1);
+        }
+    }
     @FXML
     void ClearMesa(ActionEvent event) {
-        if(numesa==1)
-        {
-            ControllerFuncMesas controller = new ControllerFuncMesas();
-            controller.alteraMum();
-        }
+        connection.trocaEstadoMesa(numesa,"True");
 
     }
 
@@ -137,6 +145,7 @@ public class ControllerFuncDetMesas {
                 Parent root = loader.load();
                 ControllerFuncPedidos controller = loader.getController();
                 controller.setNumFunc(numFunc);
+                controller.getNmMesa(numesa);
                 Scene scene = new Scene(root, 1400, 900);
                 Stage stage = new Stage();
                 stage.setTitle("GESRES 1.0");

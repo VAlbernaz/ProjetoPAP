@@ -140,6 +140,9 @@ public class ControllerFuncPedidos {
 
 
     }
+    public void getNmMesa(int num) {
+        numMesa= num;
+    }
 
     void numPedido()  {
         connection = new MySQlConnection();
@@ -288,38 +291,67 @@ public class ControllerFuncPedidos {
         {
             idFunc = resultFunc.getInt(1);
         }
-        //criar pedido
-        connection.createPedido(numMesa,idFunc);
 
-        //pega id do pedido
-        int idPedido=0;
+        if(this.listaPedidos.size() != 0) {
+            //criar pedido
+            connection.createPedido(numMesa, idFunc);
 
-        ResultSet result = connection.getNumPedido();
+            //pega id do pedido
+            int idPedido = 0;
 
-        try {
-            while(result.next()) {
+            ResultSet result = connection.getNumPedido();
+
+            try {
+                while (result.next()) {
 
 
-                idPedido= result.getInt(1);
+                    idPedido = result.getInt(1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+
+            //adicionar na tabela de detalhes de pedido
+            for (Pedidos p : listaPedidos) {
+                //tirar dados da observeblelist
+                pedidoFinal = new Pedidos(idPedido, p.getIdProduto(), p.getQtd(), p.getObs());
+                connection.setPedidoDetalhes(pedidoFinal);
+            }
+
+
+            alert(Alert.AlertType.INFORMATION, "Obrigado!", "Pedido Finalizado");
+
+            connection.trocaEstadoMesa(numMesa,"False");
+
+
+
+            //mudar cor do butao da mesa
+            /*String resultado="";
+            while (resultMesa.next())
+            {
+                resultado = resultMesa.getString(1);
+            }
+            if(resultado.equals("False"))
+            {
+                //mudar cor do botao
+                /*
+                * usar num da mesa
+                * */
+            //}
+
+
+        }else {
+            alert(Alert.AlertType.WARNING,"Nenhum Pedido!","Não fez nenhum pedido!");
         }
-
-
-        //adicionar na tabela de detalhes de pedido
-        for(Pedidos p : listaPedidos)
-        {
-            //tirar dados da observeblelist
-            pedidoFinal = new Pedidos(idPedido,p.getIdProduto(),p.getQtd(),p.getObs());
-            connection.setPedidoDetalhes(pedidoFinal);
-        }
-
-        alert(Alert.AlertType.INFORMATION,"Obrigado!","Pedido Finalizado");
-
 
         Stage stage = (Stage) this.btnFinalizar.getScene().getWindow();
         stage.close();
+    }
+
+    int getNlista()
+    {
+        return this.listaPedidos.size();
     }
 
     @FXML
@@ -376,5 +408,7 @@ public class ControllerFuncPedidos {
         alerta.setContentText(texto);
         alerta.showAndWait();
     }
+
+
 }
 

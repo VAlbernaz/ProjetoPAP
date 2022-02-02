@@ -23,7 +23,6 @@
             </Label>
          </children>
       </AnchorPane>
-      <Label layoutX="812.0" layoutY="887.0" prefHeight="17.0" prefWidth="96.0" text="Pedido:" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="16.0" />
       <Button fx:id="btnMUm" layoutX="113.0" layoutY="156.0" mnemonicParsing="false" onAction="#mesaUM" prefHeight="99.0" prefWidth="245.0" style="-fx-border-color: #01DF01; -fx-background-color: #70eb80;" text="1">
          <font>
             <Font size="49.0" />

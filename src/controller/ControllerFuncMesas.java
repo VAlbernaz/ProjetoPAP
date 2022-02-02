@@ -60,16 +60,6 @@ public class ControllerFuncMesas {
 
     private MySQlConnection connection;
 
-    boolean corBotao1=true;
-    boolean corBotao2=true;
-    boolean corBotao3=true;
-    boolean corBotao4=true;
-    boolean corBotao5=true;
-    boolean corBotao6=true;
-    boolean corBotao7=true;
-    boolean corBotao8=true;
-    boolean corBotao9=true;
-    boolean corBotao10=true;
 
     public void initialize()
     {
@@ -80,11 +70,9 @@ public class ControllerFuncMesas {
 
     }
 
-
-
     @FXML
     void mesaUM(ActionEvent event) {
-        this.btnMUm.setStyle("-fx-background-color: #FE2E2E; ");
+
         int numMesa = 1;
         // true= verde   false = vermelho
 
@@ -111,7 +99,8 @@ public class ControllerFuncMesas {
         }
     }
     public void alteraMum(){
-        this.btnMUm.setStyle("-fx-background-color:  #70eb80; ");
+        this.btnMUm.setStyle("-fx-background-color:  #70eb80; ");//verde
+        this.btnMUm.setStyle("-fx-background-color: #FE2E2E; ");//vermelho
     }
 
     @FXML
@@ -324,6 +313,7 @@ public class ControllerFuncMesas {
     }
     @FXML
     void balcao(ActionEvent event) throws SQLException {
+        int numMesa =0;
         String numFunc = "";
         //abre a vista de pedir o numero de funcionario
         try {
@@ -334,7 +324,6 @@ public class ControllerFuncMesas {
             stage.setTitle("GESRES 1.0");
             //stage.setMaximized(Boolean.TRUE);
             stage.resizableProperty().setValue(Boolean.FALSE);
-
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
@@ -366,6 +355,7 @@ public class ControllerFuncMesas {
 
                 ControllerFuncPedidos controller = loader.getController();
                 controller.setNumFunc(numFunc);
+                controller.getNmMesa(numMesa);
 
                 Scene scene = new Scene(root, 1400, 900);
                 Stage stage = new Stage();
@@ -375,7 +365,25 @@ public class ControllerFuncMesas {
 
                 stage.initModality(Modality.WINDOW_MODAL);
                 stage.setScene(scene);
-                stage.show();
+                stage.showAndWait();
+
+                int nLista = controller.getNlista();
+
+                if(nLista != 0)
+                {
+                    //abre Vista pagamento
+                    loader = new FXMLLoader(getClass().getResource("../view/ContribuinteView.fxml"));
+                    root = loader.load();
+                    scene = new Scene(root);
+                    stage = new Stage();
+                    stage.setTitle("GESRES 1.0");
+                    stage.resizableProperty().setValue(Boolean.FALSE);
+
+                    stage.initModality(Modality.WINDOW_MODAL);
+                    stage.setScene(scene);
+                    stage.show();
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

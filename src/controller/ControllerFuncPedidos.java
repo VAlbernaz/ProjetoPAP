@@ -231,6 +231,7 @@ public class ControllerFuncPedidos {
     void add(ActionEvent event) {
         getlinha();
         tblPedido.setItems(listaPedidos);
+        this.cbQTD.setValue(null);
     }
 
     public void refreshTabela()

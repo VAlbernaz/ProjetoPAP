@@ -1,3 +1,28 @@
 cor botões layOut antigo:  #035d86 
 green- #01DF01     #70eb80
 red- #FE2E2E
+
+
+
+
+No terceiro submenu “Receitas”, ao clicar lá é aberta outra vista composta por uma tabela, com o nome de cada receita recolhidos da base de dados e guardados num objeto da classe “Receita” e mal a vista é aberta, através do método “initialize()”, é mostrado na tabela o nome de todas as recitas existentes na base de dados. Também tem três botões: “Consultar” que abre uma vista com uma tabela, após escolher a receita, com todos os ingredientes e respetivas quantidades da receita selecionada. “Adicionar” que abre outra vista com três TextFields, uma para por o nome da receita, uma para colocar o ingrediente outra para colocar a quantidade, um botão “Adicionar”, uma tabela para ir mostrando todos os produtos adicionados a um objeto da classe “Receita”. Após clicar no botão “Finalizar” é adicionada a receita na base de dados utilizando outro objeto criado.
+
+// print vista Receitas
+
+
+
+
+
+
+
+
+//iniciar funcao de x em x tempo
+https://www.guj.com.br/t/executar-um-metodo-de-tempo-em-tempo-timertask/108037
+
+
+
+
+
+
+
+

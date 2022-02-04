@@ -25,13 +25,12 @@
          </children>
       </AnchorPane>
       <TextField fx:id="tfCodigoFunc" layoutX="59.0" layoutY="232.0" prefHeight="59.0" prefWidth="300.0" />
-      <Label fx:id="lbNumPedido" layoutX="309.0" layoutY="393.0" prefHeight="17.0" prefWidth="96.0" text="Pedido:" />
       <Label layoutX="31.0" layoutY="169.0" prefHeight="47.0" prefWidth="374.0" text="Código do funcionário:">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <Button fx:id="btnConcluir" layoutX="73.0" layoutY="315.0" mnemonicParsing="false" onAction="#concluir" prefHeight="59.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Concluir" textFill="#cbd2da">
+      <Button fx:id="btnConcluir" layoutX="73.0" layoutY="315.0" mnemonicParsing="false" onKeyPressed="#concluir" prefHeight="59.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Concluir" textFill="#cbd2da">
          <font>
             <Font name="System Bold" size="26.0" />
          </font>

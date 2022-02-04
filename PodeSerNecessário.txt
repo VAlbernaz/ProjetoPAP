@@ -21,8 +21,8 @@ https://www.guj.com.br/t/executar-um-metodo-de-tempo-em-tempo-timertask/108037
 
 
 
-
-
+//codigo sql para as datas 
+SELECT * FROM tabLogUsuario WHERE datCadastro BETWEEN '2011-01-10' AND '2011-01-12'
 
 
 

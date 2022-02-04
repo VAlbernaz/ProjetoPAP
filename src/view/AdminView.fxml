@@ -25,11 +25,6 @@
                 <MenuItem fx:id="MItemAddProduto" mnemonicParsing="false" onAction="#addProduto" text="Adicionar Produto" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="FICHA TÉCNICA">
-            <items>
-                  <MenuItem fx:id="MItemReceitas" mnemonicParsing="false" onAction="#showReceitas" text="Receitas" />
-            </items>
-          </Menu>
           <Menu mnemonicParsing="false" text="FATURAS">
             <items>
                   <MenuItem fx:id="MItemFaturasDiarias" mnemonicParsing="false" onAction="#showFaturasDiarias" text="Diárias" />

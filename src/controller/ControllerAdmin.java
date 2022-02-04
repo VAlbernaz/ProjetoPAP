@@ -266,7 +266,7 @@ public class ControllerAdmin {
         }
     }
 
-    @FXML
+    /*@FXML
     void showReceitas(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/ReceitaAdminView.fxml"));
@@ -283,7 +283,7 @@ public class ControllerAdmin {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
     public void addProduto(ActionEvent actionEvent) {
         try {

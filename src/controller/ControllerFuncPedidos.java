@@ -219,7 +219,7 @@ public class ControllerFuncPedidos {
         {
             tipo=7;
             double preco = Double.parseDouble(precoR);
-            pedido= new Pedidos(7,preco,1,"",tipo);
+            pedido= new Pedidos(7,"Retalho",preco,1,"",tipo);
             this.listaPedidos.add(pedido);
             System.out.println(tipo);
             this.tfRetalho.setText("");

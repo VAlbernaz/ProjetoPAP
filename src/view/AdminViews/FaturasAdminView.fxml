@@ -36,7 +36,7 @@
          <columns>
             <TableColumn fx:id="colData" prefWidth="110.0" text="Data" />
             <TableColumn fx:id="colIdPedido" minWidth="0.0" prefWidth="164.0" text="Número do Pedido" />
-            <TableColumn fx:id="colValorPPedido" prefWidth="183.0" text="Valor do pedido" />
+            <TableColumn fx:id="colValorTPedido" prefWidth="183.0" text="Valor do pedido" />
          </columns>
       </TableView>
       <Label layoutX="194.0" layoutY="154.0" text="Pedidos">

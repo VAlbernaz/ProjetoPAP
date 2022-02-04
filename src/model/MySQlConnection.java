@@ -291,13 +291,14 @@ public class MySQlConnection {
     {
         try {
             //preprar a inserção da nova linha
-            String sql = "INSERT INTO detalhespedidos(idpedidos,idproduto,qtd,obs)\n" +
-                    "VALUES(?,?,?,?);\n";
+            String sql = "INSERT INTO detalhespedidos(idpedidos,idproduto,qtd,obs,preco)\n" +
+                    "VALUES(?,?,?,?,?);\n";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, p.getId());
             statement.setInt(2, p.getIdProduto());
             statement.setInt(3, p.getQtd());
             statement.setString(4, p.getObs());
+            statement.setString(5, p.getObs());
 
             //executar a inserção
             int linhas = statement.executeUpdate();
@@ -360,19 +361,39 @@ public class MySQlConnection {
             return false;
         }
 
-        /*String sql = "SELECT disponibilidade\n" +
-                "FROM mesas\n" +
-                "WHERE idmesas = " + numMesa+ ";";
+    }
+    public ResultSet getFaturas()
+    {
+        ResultSet result = null;
+        String sql = "SELECT p.dataHora, p.idpedidos, SUM(dp.preco*dp.qtd)\n" +
+                "FROM pedidos p, detalhespedidos dp\n" +
+                "WHERE p.idpedidos = dp.idpedidos\n" +
+                "GROUP BY idpedidos;";
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }*/
-
-
+        }
+        return result;
     }
-
+    public ResultSet getDetPedidos(int idPedido)
+    {
+        ResultSet result = null;
+        String sql = "SELECT p.produto, dp.qtd, dp.preco, CONCAT(f.primNOme , ' ', f.ultiNome)\n" +
+                "FROM pedidos pd, detalhespedidos dp, produto p, funcionario f\n" +
+                "WHERE pd.idpedidos= dp.idpedidos\n" +
+                "AND p.idproduto = dp.idproduto\n" +
+                "AND f.idfuncionario = pd.idfuncionario\n" +
+                "AND pd.idpedidos =" + idPedido +";";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
 
 
 

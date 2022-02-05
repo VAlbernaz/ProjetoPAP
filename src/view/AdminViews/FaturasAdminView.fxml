@@ -70,7 +70,7 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <TextField fx:id="tfNumFunc" editable="false" layoutX="730.0" layoutY="784.0" prefHeight="25.0" prefWidth="449.0" />
+      <TextField fx:id="tfNomeFunc" editable="false" layoutX="730.0" layoutY="784.0" prefHeight="25.0" prefWidth="449.0" />
       <Label layoutX="731.0" layoutY="809.0" text="Contribuinte:">
          <font>
             <Font size="27.0" />

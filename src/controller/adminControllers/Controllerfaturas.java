@@ -11,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import model.Faturas;
 import model.MySQlConnection;
-import model.Produtos;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -35,22 +34,22 @@ public class Controllerfaturas {
     private TableColumn<Faturas, String> colIdPedido;
 
     @FXML
-    private TableColumn<?, ?> colProduto;
+    private TableColumn<Faturas, String> colProduto;
 
     @FXML
-    private TableColumn<?, ?> colQtd;
+    private TableColumn<Faturas, String> colQtd;
 
     @FXML
     private TableColumn<Faturas, String> colValorTPedido;
 
     @FXML
-    private TableColumn<?, ?> colvalor;
+    private TableColumn<Faturas, String> colvalor;
 
     @FXML
     private AnchorPane paneStock;
 
     @FXML
-    private TableView<?> tblDetalhes;
+    private TableView<Faturas> tblDetalhes;
 
     @FXML
     private TableView<Faturas> tblPedidos;
@@ -59,11 +58,13 @@ public class Controllerfaturas {
     private TextField tfContribuinte;
 
     @FXML
-    private TextField tfNumFunc;
+    private TextField tfNomeFunc;
 
     private MySQlConnection connection;
 
     private ObservableList<Faturas> listaFaturas;
+    private ObservableList<Faturas> listaDetalhes;
+    private Faturas linhaFaturas;
 
     public void initialize()
     {
@@ -72,11 +73,16 @@ public class Controllerfaturas {
         IVLogo1.setImage(image);
 
         listaFaturas = FXCollections.observableArrayList();
+        listaDetalhes = FXCollections.observableArrayList();
 
         this.colData.setCellValueFactory(new PropertyValueFactory<Faturas,String>("dataHora"));
         this.colIdPedido.setCellValueFactory(new PropertyValueFactory<Faturas,String>("numPedido"));
         this.colValorTPedido.setCellValueFactory(new PropertyValueFactory<Faturas,String>("valorPedido"));
         this.tblPedidos.setItems(listaFaturas);
+
+        this.colProduto.setCellValueFactory(new PropertyValueFactory<Faturas, String>("produto"));
+        this.colQtd.setCellValueFactory(new PropertyValueFactory<Faturas, String>("qtd"));
+        this.colvalor.setCellValueFactory(new PropertyValueFactory<Faturas, String>("preco"));
 
         getFaturas();
     }
@@ -102,7 +108,32 @@ public class Controllerfaturas {
     }
 
     @FXML
-    void consultar(ActionEvent event) {
+    void consultar(ActionEvent event) throws SQLException {
+        this.tblDetalhes.getItems().clear();
+        this.tfNomeFunc.setText("");
+        this.tfContribuinte.setText("");
+
+
+
+        linhaFaturas = this.tblPedidos.getSelectionModel().getSelectedItem();
+
+        ResultSet result = connection.getDetPedidos(this.linhaFaturas.getNumPedido());
+
+        while(result.next())
+        {
+            String produto = result.getString(1);
+            String qtd = result.getString(2);
+            String preco = result.getString(3);
+            String func= result.getString(4);
+            //String contribuinte = result.getString(5);
+
+            Faturas f = new Faturas(produto,qtd,preco,func);
+            this.listaDetalhes.add(f);
+            this.tblDetalhes.setItems(listaDetalhes);
+            this.tfNomeFunc.setText(func);
+            //this.tfContribuinte.setText(contribuinte);
+
+        }
 
     }
 

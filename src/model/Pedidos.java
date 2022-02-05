@@ -24,11 +24,12 @@ public class Pedidos {
         this.idProduto = idProduto;
     }
 
-    public Pedidos(int id, int idProduto, int qtd, String obs) {
+    public Pedidos(int id, int idProduto, int qtd, String obs, double valor) {
         this.qtd = qtd;
         this.obs = obs;
         this.idProduto = idProduto;
         this.id = id;
+        this.valor=valor;
     }
 
     public Pedidos(int id, double valor, int qtd, String obs, int idTipo) {

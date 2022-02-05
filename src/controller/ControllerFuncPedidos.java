@@ -316,7 +316,7 @@ public class ControllerFuncPedidos {
             //adicionar na tabela de detalhes de pedido
             for (Pedidos p : listaPedidos) {
                 //tirar dados da observeblelist
-                pedidoFinal = new Pedidos(idPedido, p.getIdProduto(), p.getQtd(), p.getObs());
+                pedidoFinal = new Pedidos(idPedido, p.getIdProduto(), p.getQtd(), p.getObs(),p.getValor());
                 connection.setPedidoDetalhes(pedidoFinal);
             }
 

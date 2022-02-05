@@ -30,7 +30,7 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Button fx:id="btnConcluir" layoutX="73.0" layoutY="315.0" mnemonicParsing="false" onKeyPressed="#concluir" prefHeight="59.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Concluir" textFill="#cbd2da">
+      <Button fx:id="btnConcluir" layoutX="73.0" layoutY="315.0" mnemonicParsing="false" onAction="#concluir" prefHeight="59.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Concluir" textFill="#cbd2da">
          <font>
             <Font name="System Bold" size="26.0" />
          </font>

@@ -298,7 +298,7 @@ public class MySQlConnection {
             statement.setInt(2, p.getIdProduto());
             statement.setInt(3, p.getQtd());
             statement.setString(4, p.getObs());
-            statement.setString(5, p.getObs());
+            statement.setDouble(5, p.getValor());
 
             //executar a inserção
             int linhas = statement.executeUpdate();

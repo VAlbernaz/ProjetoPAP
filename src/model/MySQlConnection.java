@@ -391,7 +391,32 @@ public class MySQlConnection {
         return result;
     }
 
-
+    public ResultSet getValorPedido(int numPedido)
+    {
+        ResultSet result = null;
+        String sql = "SELECT SUM(dp.preco*dp.qtd)\n" +
+                "FROM detalhespedidos dp\n" +
+                "WHERE dp.idpedidos ="+ numPedido +";";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+    public ResultSet getFormasPagamento()
+    {
+        ResultSet result = null;
+        String sql = "SELECT * FROM tipospagamento;";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
 
 }
 

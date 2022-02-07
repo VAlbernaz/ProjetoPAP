@@ -63,16 +63,19 @@ public class ControllerFuncDetMesas {
     }
 
 
-    void getPedidoMesa() throws SQLException {
+    int getPedidoMesa() throws SQLException {
+        connection = new MySQlConnection();
 
         ResultSet result =  connection.getNumPedidoMesa(numesa);
         while (result.next())
         {
             numPedido = result.getInt(1);
         }
+        return numPedido;
     }
     @FXML
     void ClearMesa(ActionEvent event) {
+        connection = new MySQlConnection();
         connection.trocaEstadoMesa(numesa,"True");
 
     }
@@ -155,11 +158,27 @@ public class ControllerFuncDetMesas {
                 stage.setScene(scene);
                 stage.showAndWait();
 
+                int nLista = controller.getNlista();
+                if(nLista != 0)
+                {
+                    //abre Vista pagamento
+                    loader = new FXMLLoader(getClass().getResource("../view/ContribuinteView.fxml"));
+                    root = loader.load();
+                    scene = new Scene(root);
+                    stage = new Stage();
+                    stage.setTitle("GESRES 1.0");
+                    stage.resizableProperty().setValue(Boolean.FALSE);
 
+                    stage.initModality(Modality.WINDOW_MODAL);
+                    stage.setScene(scene);
+                    stage.show();
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+
         } else {  //se nao existar lança alerta
             alert(Alert.AlertType.ERROR,"Código inválido!","O código introduzido não está disponivel.");
         }

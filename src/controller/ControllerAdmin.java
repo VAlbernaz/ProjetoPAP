@@ -1,5 +1,6 @@
 package controller;
 
+import controller.adminControllers.Controllerfaturas;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -216,6 +217,19 @@ public class ControllerAdmin {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/FaturasAdminView.fxml"));
             Parent root = loader.load();
+
+            /**
+            *chama as funçoes do controlador das faturas passando o querry sql que é pertendido executar
+             * na string sql na 4ª linha tem a limitação da data que se pretende mostrar, no caso no intervalo de 1 dia, ou seja, hoje
+             * */
+            Controllerfaturas controller = loader.getController();
+            controller.getStringSql("SELECT p.dataHora, p.idpedidos, SUM(dp.preco*dp.qtd)\n" +
+                    "FROM pedidos p, detalhespedidos dp\n" +
+                    "WHERE p.idpedidos = dp.idpedidos\n" +
+                    "AND dataHora  BETWEEN DATE_SUB(NOW(), INTERVAL 1 DAY) AND NOW()\n" +
+                    "GROUP BY idpedidos;");
+            controller.getFaturas();
+
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
@@ -235,6 +249,15 @@ public class ControllerAdmin {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/FaturasAdminView.fxml"));
             Parent root = loader.load();
+
+            Controllerfaturas controller = loader.getController();
+            controller.getStringSql("SELECT p.dataHora, p.idpedidos, SUM(dp.preco*dp.qtd)\n" +
+                    "FROM pedidos p, detalhespedidos dp\n" +
+                    "WHERE p.idpedidos = dp.idpedidos\n" +
+                    "AND dataHora  BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND NOW()\n" +
+                    "GROUP BY idpedidos;");
+            controller.getFaturas();
+
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
@@ -253,6 +276,15 @@ public class ControllerAdmin {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/FaturasAdminView.fxml"));
             Parent root = loader.load();
+
+            Controllerfaturas controller = loader.getController();
+            controller.getStringSql("SELECT p.dataHora, p.idpedidos, SUM(dp.preco*dp.qtd)\n" +
+                    "FROM pedidos p, detalhespedidos dp\n" +
+                    "WHERE p.idpedidos = dp.idpedidos\n" +
+                    "AND dataHora  BETWEEN DATE_SUB(NOW(), INTERVAL 7 DAY) AND NOW()\n" +
+                    "GROUP BY idpedidos;");
+            controller.getFaturas();
+
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");

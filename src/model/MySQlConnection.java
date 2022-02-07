@@ -362,13 +362,9 @@ public class MySQlConnection {
         }
 
     }
-    public ResultSet getFaturas()
+    public ResultSet getFaturas(String sql)
     {
         ResultSet result = null;
-        String sql = "SELECT p.dataHora, p.idpedidos, SUM(dp.preco*dp.qtd)\n" +
-                "FROM pedidos p, detalhespedidos dp\n" +
-                "WHERE p.idpedidos = dp.idpedidos\n" +
-                "GROUP BY idpedidos;";
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);

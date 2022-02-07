@@ -4,15 +4,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.Faturas;
 import model.MySQlConnection;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -66,6 +72,8 @@ public class Controllerfaturas {
     private ObservableList<Faturas> listaDetalhes;
     private Faturas linhaFaturas;
 
+    private String sql="";
+
     public void initialize()
     {
         File file = new File("logo.png");
@@ -84,13 +92,16 @@ public class Controllerfaturas {
         this.colQtd.setCellValueFactory(new PropertyValueFactory<Faturas, String>("qtd"));
         this.colvalor.setCellValueFactory(new PropertyValueFactory<Faturas, String>("preco"));
 
-        getFaturas();
-    }
 
+    }
+    public void getStringSql(String sqlDate)
+    {
+        sql=sqlDate;
+    }
     public void getFaturas()  {
         connection = new MySQlConnection();
 
-        ResultSet result = connection.getFaturas();
+        ResultSet result = connection.getFaturas(sql);
         try {
             while (result.next()){
                 String data = result.getString(1);
@@ -117,29 +128,33 @@ public class Controllerfaturas {
 
         linhaFaturas = this.tblPedidos.getSelectionModel().getSelectedItem();
 
-        ResultSet result = connection.getDetPedidos(this.linhaFaturas.getNumPedido());
+        if(linhaFaturas != null) {
+            ResultSet result = connection.getDetPedidos(this.linhaFaturas.getNumPedido());
 
-        while(result.next())
-        {
-            String produto = result.getString(1);
-            String qtd = result.getString(2);
-            String preco = result.getString(3);
-            String func= result.getString(4);
-            //String contribuinte = result.getString(5);
+            while (result.next()) {
+                String produto = result.getString(1);
+                String qtd = result.getString(2);
+                String preco = result.getString(3);
+                String func = result.getString(4);
+                //String contribuinte = result.getString(5);
 
-            Faturas f = new Faturas(produto,qtd,preco,func);
-            this.listaDetalhes.add(f);
-            this.tblDetalhes.setItems(listaDetalhes);
-            this.tfNomeFunc.setText(func);
-            //this.tfContribuinte.setText(contribuinte);
+                Faturas f = new Faturas(produto, qtd, preco, func);
+                this.listaDetalhes.add(f);
+                this.tblDetalhes.setItems(listaDetalhes);
+                this.tfNomeFunc.setText(func);
+                //this.tfContribuinte.setText(contribuinte);
 
+            }
+        }else{
+            alert(Alert.AlertType.ERROR,"ERRO!","Selecione uma linha da tabela");
         }
 
     }
 
     @FXML
     void voltar(ActionEvent event) {
-
+        Stage stage = (Stage) this.btnvoltar.getScene().getWindow();
+        stage.close();
     }
 
 

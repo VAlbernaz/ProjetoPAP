@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import model.MySQlConnection;
 import model.Produtos;
 
@@ -24,6 +25,9 @@ public class ControllerStock {
 
     @FXML
     private Button btnEdit;
+
+    @FXML
+    private Button btnVoltar;
 
     @FXML
     private TableColumn<Produtos, String> colProduto;
@@ -120,7 +124,11 @@ public class ControllerStock {
         this.tblStock.refresh();
     }
 
-
+    @FXML
+    void voltar(ActionEvent event) {
+        Stage stage = (Stage) this.btnVoltar.getScene().getWindow();
+        stage.close();
+    }
     public void alert(Alert.AlertType type, String tit, String texto)
     {
         Alert alerta=new Alert(type);

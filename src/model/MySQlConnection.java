@@ -328,9 +328,7 @@ public class MySQlConnection {
 
     public ResultSet getNumPedidoMesa(int nMesa) {
         ResultSet result=null;
-        String sql = "SELECT MAX(idPedidos)\n" +
-                "FROM pedidos\n" +
-                "WHERE mesa =" + nMesa+ ";";
+        String sql = "SELECT IF((SELECT mesas.disponibilidade FROM mesas WHERE idmesas="+nMesa+") = 'False', (SELECT MAX(idPedidos) FROM pedidos p WHERE p.mesa="+nMesa+"), (SELECT 0));";
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);
@@ -391,12 +389,12 @@ public class MySQlConnection {
         return result;
     }
 
-    public ResultSet getValorPedido(int numPedido)
+    public ResultSet getValorPedido(int numPedido,int numMesa)
     {
         ResultSet result = null;
-        String sql = "SELECT SUM(dp.preco*dp.qtd)\n" +
-                "FROM detalhespedidos dp\n" +
-                "WHERE dp.idpedidos ="+ numPedido +";";
+        String sql = "SELECT IF((SELECT mesas.disponibilidade FROM mesas WHERE idmesas="+numMesa+") = 'False', " +
+                "(SELECT SUM(dp.preco*dp.qtd) FROM detalhespedidos dp WHERE dp.idpedidos="+numPedido+"), " +
+                "(SELECT 0));";
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);

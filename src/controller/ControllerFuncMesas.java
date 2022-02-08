@@ -376,6 +376,10 @@ public class ControllerFuncMesas {
                     //abre Vista pagamento
                     loader = new FXMLLoader(getClass().getResource("../view/ContribuinteView.fxml"));
                     root = loader.load();
+
+                    ControlllerContribuinte controlller = loader.getController();
+                    controlller.getnMesa(0);
+
                     scene = new Scene(root);
                     stage = new Stage();
                     stage.setTitle("GESRES 1.0");

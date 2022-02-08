@@ -63,16 +63,6 @@ public class ControllerFuncDetMesas {
     }
 
 
-    int getPedidoMesa() throws SQLException {
-        connection = new MySQlConnection();
-
-        ResultSet result =  connection.getNumPedidoMesa(numesa);
-        while (result.next())
-        {
-            numPedido = result.getInt(1);
-        }
-        return numPedido;
-    }
     @FXML
     void ClearMesa(ActionEvent event) {
         connection = new MySQlConnection();
@@ -164,6 +154,10 @@ public class ControllerFuncDetMesas {
                     //abre Vista pagamento
                     loader = new FXMLLoader(getClass().getResource("../view/ContribuinteView.fxml"));
                     root = loader.load();
+
+                    ControlllerContribuinte controlller = loader.getController();
+                    controlller.getnMesa(numesa);
+
                     scene = new Scene(root);
                     stage = new Stage();
                     stage.setTitle("GESRES 1.0");
@@ -189,6 +183,10 @@ public class ControllerFuncDetMesas {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ContribuinteView.fxml"));
             Parent root = loader.load();
+
+            ControlllerContribuinte controlller = loader.getController();
+            controlller.getnMesa(numesa);
+
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");

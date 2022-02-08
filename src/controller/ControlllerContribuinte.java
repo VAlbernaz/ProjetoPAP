@@ -41,6 +41,10 @@ public class ControlllerContribuinte {
     private TextField tfTotal;
 
     private int  numPedido=0;
+    private int numMesa;
+
+
+
     public void initialize() throws SQLException {
         File file = new File("logo.png");
         Image image = new Image(file.toURI().toString());
@@ -49,25 +53,34 @@ public class ControlllerContribuinte {
 
         preencheCB();
 
-        //recolhe num do pedido para pagamento
-        ControllerFuncDetMesas controller = new ControllerFuncDetMesas();
-        numPedido= controller.getPedidoMesa();
+        connection = new MySQlConnection();
+        ResultSet result =  connection.getNumPedidoMesa(numMesa);
+        while (result.next())
+        {
+            numPedido = result.getInt(1);
+        }
+
+
         String str =this.lbPedido.getText();
         this.lbPedido.setText( str + numPedido);
 
 
-        connection = new MySQlConnection();
 
-        ResultSet result = connection.getValorPedido(numPedido);
+        ResultSet result1 = connection.getValorPedido(numPedido,numMesa);
         double valor = 0.0;
-        while (result.next())
+        while (result1.next())
         {
-            valor = result.getDouble(1);
+            valor = result1.getDouble(1);
         }
         this.tfTotal.setText(String.valueOf(valor));
 
 
 
+    }
+
+    public void getnMesa(int nmesa)
+    {
+        numMesa = nmesa;
     }
     public void preencheCB() throws SQLException {
         connection = new MySQlConnection();
@@ -85,6 +98,8 @@ public class ControlllerContribuinte {
         /**
          * buscar id do tipo
          * adicionar a tabela de faturas com os valores do id do pedido, contribuinte, id da forma de pagamento*/
+
+
 
         /**
          * ver melhor a questao dos nº de pedidos na pagina de pagamento*/

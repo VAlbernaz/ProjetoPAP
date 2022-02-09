@@ -315,7 +315,7 @@ public class ControllerFuncMesas {
     }
     @FXML
     void balcao(ActionEvent event) throws SQLException {
-        int numMesa =0;
+        int numMesa =11;
         String numFunc = "";
         //abre a vista de pedir o numero de funcionario
         try {
@@ -378,7 +378,7 @@ public class ControllerFuncMesas {
                     root = loader.load();
 
                     ControlllerContribuinte controlller = loader.getController();
-                    controlller.getnMesa(0);
+                    controlller.getnMesa(11);
 
                     scene = new Scene(root);
                     stage = new Stage();

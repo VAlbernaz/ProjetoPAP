@@ -2,15 +2,14 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import model.Faturas;
 import model.Formas;
 import model.MySQlConnection;
+import model.Pagamento;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -50,44 +49,36 @@ public class ControlllerContribuinte {
         Image image = new Image(file.toURI().toString());
         IVLogo.setImage(image);
 
-
         preencheCB();
+    }
+
+    public void getnMesa(int nmesa) throws SQLException {
+        numMesa = nmesa;
 
         connection = new MySQlConnection();
         ResultSet result =  connection.getNumPedidoMesa(numMesa);
         while (result.next())
         {
             numPedido = result.getInt(1);
-        }
 
+        }
 
         String str =this.lbPedido.getText();
         this.lbPedido.setText( str + numPedido);
 
-
-
         ResultSet result1 = connection.getValorPedido(numPedido,numMesa);
         double valor = 0.0;
-        while (result1.next())
-        {
+        while (result1.next()) {
             valor = result1.getDouble(1);
         }
         this.tfTotal.setText(String.valueOf(valor));
-
-
-
     }
 
-    public void getnMesa(int nmesa)
-    {
-        numMesa = nmesa;
-    }
     public void preencheCB() throws SQLException {
         connection = new MySQlConnection();
         ResultSet result = connection.getFormasPagamento();
 
-        while (result.next())
-        {
+        while (result.next()) {
             this.cbForma.getItems().addAll(result.getString(2));
         }
     }
@@ -97,14 +88,47 @@ public class ControlllerContribuinte {
 
         /**
          * buscar id do tipo
-         * adicionar a tabela de faturas com os valores do id do pedido, contribuinte, id da forma de pagamento*/
+         * adicionar a tabela de faturas com os valores do id do pedido, contribuinte, id da forma de pagamento
+         */
+        connection = new MySQlConnection();
+        //vai buscar id correspondente à forma de pagamento escolhida
+        ResultSet result= connection.getIdFormaPagamento(this.cbForma.getValue());
+        int idForma=0;
+        try {
+            while (result.next())
+            {
+                idForma = result.getInt(1);
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+        //guarda o valor do contribuinte
+        String contribuinte = this.tfContribuinte.getText();
 
+        if(!contribuinte.equals(""))
+        {
+            contribuinte=null;
+        }
+        //cria objeto com todos os valores necessarios para adicionar na bd
+        Pagamento p = new Pagamento(numPedido,contribuinte,idForma);
+        //se a inserçao correr bem lança alerta e muda o estado da mesa
+        if(connection.setFatura(p)){
+            alert(Alert.AlertType.INFORMATION, "Obrigado!", "Pedido pago com sucesso!");
+            connection.trocaEstadoMesa(numMesa,"True");
+        }else{
+            alert(Alert.AlertType.WARNING,"Ocorreu um erro","Tente outra vez");
+        }
 
-
-        /**
-         * ver melhor a questao dos nº de pedidos na pagina de pagamento*/
-
-
+        Stage stage = (Stage) this.btnConcluir.getScene().getWindow();
+        stage.close();
+    }
+    public void alert(Alert.AlertType type, String tit, String texto)
+    {
+        Alert alerta=new Alert(type);
+        alerta.setTitle(tit);
+        alerta.setHeaderText(null);
+        alerta.setContentText(texto);
+        alerta.showAndWait();
     }
 
 }

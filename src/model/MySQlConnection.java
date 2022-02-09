@@ -249,20 +249,6 @@ public class MySQlConnection {
         return result;
     }
 
-    public ResultSet getIdProduto(String produto)
-    {
-        ResultSet result = null;
-        String sql = "SELECT idproduto\n" +
-                "FROM gesres.produto\n" +
-                "WHERE produto =\""+ produto +"\";";
-        try {
-            Statement s = connection.createStatement();
-            result = s.executeQuery(sql);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return result;
-    }
 
     public boolean createPedido(int mesa, int func)
     {
@@ -328,7 +314,7 @@ public class MySQlConnection {
 
     public ResultSet getNumPedidoMesa(int nMesa) {
         ResultSet result=null;
-        String sql = "SELECT IF((SELECT mesas.disponibilidade FROM mesas WHERE idmesas="+nMesa+") = 'False', (SELECT MAX(idPedidos) FROM pedidos p WHERE p.mesa="+nMesa+"), (SELECT 0));";
+        String sql = "SELECT IF((SELECT mesas.disponibilidade FROM mesas WHERE idmesas="+nMesa+") = 'False', (SELECT MAX(idPedidos) FROM pedidos p WHERE p.mesa="+nMesa+"), (SELECT null));";
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);
@@ -394,7 +380,7 @@ public class MySQlConnection {
         ResultSet result = null;
         String sql = "SELECT IF((SELECT mesas.disponibilidade FROM mesas WHERE idmesas="+numMesa+") = 'False', " +
                 "(SELECT SUM(dp.preco*dp.qtd) FROM detalhespedidos dp WHERE dp.idpedidos="+numPedido+"), " +
-                "(SELECT 0));";
+                "(SELECT null));";
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);
@@ -414,6 +400,44 @@ public class MySQlConnection {
             throwables.printStackTrace();
         }
         return result;
+    }
+    public ResultSet getIdFormaPagamento(String tipo)
+    {
+        ResultSet result = null;
+        String sql = "\n" +
+                "SELECT idtipospagamento\n" +
+                "FROM tipospagamento\n" +
+                "WHERE tipopagamento =(\""+tipo+"\");";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+    public boolean setFatura(Pagamento p)
+    {
+        try {
+            //preprar a inserção da nova linha
+            String sql = "INSERT INTO faturas(idpedidos,idtipospagamento,contribuinte)\n" +
+                    "VALUES (?,?,?);";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, p.getIdPedido());
+            statement.setInt(2, p.getIdForma());
+            statement.setString(3, p.getContribuinte());
+
+            //executar a inserção
+            int linhas = statement.executeUpdate();
+            if (linhas == 1) {
+                return true;
+
+            } else return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

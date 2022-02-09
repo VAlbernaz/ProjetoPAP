@@ -196,7 +196,7 @@ public class ControllerFuncDetMesas {
             stage.setScene(scene);
             stage.show();
 
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
     }

@@ -320,6 +320,7 @@ public class ControllerFuncPedidos {
                 connection.setPedidoDetalhes(pedidoFinal);
             }
 
+            
 
             alert(Alert.AlertType.INFORMATION, "Obrigado!", "Pedido Finalizado");
 

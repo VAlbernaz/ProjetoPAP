@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import model.MySQlConnection;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Fornecedor;
@@ -114,36 +115,47 @@ public class ControlllerAddProduto {
 
     @FXML
     void concluir(ActionEvent event) {
-        if(!this.tfProduto.getText().isEmpty()||this.tfPreco.getText().isEmpty()||!(this.cbFornecedor.getValue()==null)||!(this.cbTipo.getValue()==null)) {
-            String produto = this.tfProduto.getText();
-            System.out.println(produto);
-            String preco = this.tfPreco.getText();
-            double precoD = Double.parseDouble(preco);
-            System.out.println(precoD);
-            String fornecedor = this.cbFornecedor.getValue();
-            System.out.println(fornecedor);
-            ResultSet result = connection.getIdFornecedor(fornecedor);
-            nFornecedor(fornecedor);
+        try {
+            if(!this.tfProduto.getText().isEmpty()||this.tfPreco.getText().isEmpty()||!(this.cbFornecedor.getValue()==null)||!(this.cbTipo.getValue()==null)) {
+                String produto = this.tfProduto.getText();
+                System.out.println(produto);
+                String preco = this.tfPreco.getText();
 
-            String tipo = this.cbTipo.getValue();
-            System.out.println(tipo);
-            nTipo(tipo);
+                    double precoD = Double.parseDouble(preco);
+                    System.out.println(precoD);
+                    String fornecedor = this.cbFornecedor.getValue();
+                    System.out.println(fornecedor);
+                    ResultSet result = connection.getIdFornecedor(fornecedor);
+                    nFornecedor(fornecedor);
 
-            Produtos p = new Produtos(produto,precoD,nFornecedor,nTipo);
+                    String tipo = this.cbTipo.getValue();
+                    System.out.println(tipo);
+                    nTipo(tipo);
+
+                    Produtos p = new Produtos(produto, precoD, nFornecedor, nTipo);
 
 
-            System.out.println(nFornecedor);
-            System.out.println(nTipo);
+                    System.out.println(nFornecedor);
+                    System.out.println(nTipo);
 
-            // adicionar na bd
-           if(connection.inserirProduto(p)) {
-                alert(Alert.AlertType.INFORMATION,"SUCESSO","Produto adicionado com sucesso!");
+                    // adicionar na bd
+                    if (connection.inserirProduto(p)) {
+                        alert(Alert.AlertType.INFORMATION, "SUCESSO", "Produto adicionado com sucesso!");
 
-            } else {
-                alert(Alert.AlertType.ERROR,"ATENÇÃO","Ocorreu um problema!");
+                        this.tfProduto.setText("");
+                        this.tfPreco.setText("");
+                        this.cbFornecedor.setValue("");
+                        this.cbTipo.setValue("");
+
+                    } else {
+                        alert(Alert.AlertType.ERROR, "ATENÇÃO", "Ocorreu um problema!");
+                    }
+
+            }else {
+                alert(Alert.AlertType.WARNING,"ATENÇÃO","Preencha todos os campos");
             }
-        }else {
-            alert(Alert.AlertType.WARNING,"ATENÇÃO","Preencha todos os campos");
+        } catch (Exception e) {
+            alert(Alert.AlertType.ERROR, "ATENÇÃO", "Verifique o preço!");
         }
 
 

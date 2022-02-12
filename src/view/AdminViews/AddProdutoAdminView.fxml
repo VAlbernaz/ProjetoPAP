@@ -54,5 +54,6 @@
          </font>
       </Label>
       <ComboBox fx:id="cbTipo" layoutX="14.0" layoutY="425.0" prefHeight="34.0" prefWidth="300.0" />
+      <Label layoutX="293.0" layoutY="263.0" prefHeight="34.0" prefWidth="21.0" text="€" />
    </children>
 </AnchorPane>

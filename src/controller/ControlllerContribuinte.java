@@ -87,7 +87,7 @@ public class ControlllerContribuinte {
     void concluir(ActionEvent event) {
 
         /**
-         * buscar id do tipo
+         * buscar id da forma de pagamento
          * adicionar a tabela de faturas com os valores do id do pedido, contribuinte, id da forma de pagamento
          */
         connection = new MySQlConnection();

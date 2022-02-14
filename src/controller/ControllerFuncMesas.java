@@ -96,7 +96,7 @@ public class ControllerFuncMesas {
         System.out.println(disponibilidade);
 
 
-           if (!disponibilidade.get(0).equals("True")) {
+           /*if (!disponibilidade.get(0).equals("True")) {
                 this.btnMUm.setStyle("-fx-background-color: #FE2E2E");
             } else {
                 this.btnMUm.setStyle("-fx-background-color: #70eb80");
@@ -146,7 +146,7 @@ public class ControllerFuncMesas {
                 this.btnMDez.setStyle("-fx-background-color: #FE2E2E");
             } else {
                 this.btnMDez.setStyle("-fx-background-color: #70eb80");
-            }
+            }*/
     }
 
     @FXML

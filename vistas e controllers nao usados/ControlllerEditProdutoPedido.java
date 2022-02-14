@@ -1,4 +1,4 @@
-package view.AdminViews;
+package view.adminViews;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

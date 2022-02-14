@@ -196,7 +196,7 @@ public class ControllerAdmin {
     void showStock(ActionEvent event){
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/StockAdminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/adminViews/StockAdminView.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -215,7 +215,7 @@ public class ControllerAdmin {
     void showFaturasDiarias(ActionEvent event){
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/FaturasAdminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/adminViews/FaturasAdminView.fxml"));
             Parent root = loader.load();
 
             /**
@@ -247,7 +247,7 @@ public class ControllerAdmin {
     @FXML
     void showFaturasMensal(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/FaturasAdminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/adminViews/FaturasAdminView.fxml"));
             Parent root = loader.load();
 
             Controllerfaturas controller = loader.getController();
@@ -274,7 +274,7 @@ public class ControllerAdmin {
     @FXML
     void showFaturasSemanal(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/FaturasAdminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/adminViews/FaturasAdminView.fxml"));
             Parent root = loader.load();
 
             Controllerfaturas controller = loader.getController();
@@ -319,7 +319,7 @@ public class ControllerAdmin {
 
     public void addProduto(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/AddProdutoAdminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/adminViews/AddProdutoAdminView.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();

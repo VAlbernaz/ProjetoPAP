@@ -1,6 +1,6 @@
 //Stock
 try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view.AdminViews/StockAdminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view.adminViews/StockAdminView.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -15,7 +15,7 @@ try {
         }
 //faturas
  try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view.AdminViews/FaturasAdminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view.adminViews/FaturasAdminView.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -30,7 +30,7 @@ try {
         }
 //Receitas
 try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view.AdminViews/ReceitaAdminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view.adminViews/ReceitaAdminView.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();

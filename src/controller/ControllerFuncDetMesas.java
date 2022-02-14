@@ -67,7 +67,8 @@ public class ControllerFuncDetMesas {
     void ClearMesa(ActionEvent event) {
         connection = new MySQlConnection();
         connection.trocaEstadoMesa(numesa,"True");
-
+        ControllerFuncMesas controller = new ControllerFuncMesas();
+        controller.alteraEstilo();
     }
 
     @FXML

@@ -119,6 +119,9 @@ public class ControlllerContribuinte {
             alert(Alert.AlertType.WARNING,"Ocorreu um erro","Tente outra vez");
         }
 
+        ControllerFuncMesas controller = new ControllerFuncMesas();
+        controller.alteraEstilo();
+
         Stage stage = (Stage) this.btnConcluir.getScene().getWindow();
         stage.close();
     }

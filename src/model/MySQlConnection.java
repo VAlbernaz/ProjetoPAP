@@ -440,5 +440,17 @@ public class MySQlConnection {
         }
     }
 
+    public ResultSet getDisponibilidade()
+    {
+        ResultSet result = null;
+        String sql = "SELECT disponibilidade FROM mesas;";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
 }
 

@@ -326,21 +326,9 @@ public class ControllerFuncPedidos {
 
             connection.trocaEstadoMesa(numMesa,"False");
 
+            ControllerFuncMesas controller = new ControllerFuncMesas();
+            controller.alteraEstilo();
 
-
-            //mudar cor do butao da mesa
-            /*String resultado="";
-            while (resultMesa.next())
-            {
-                resultado = resultMesa.getString(1);
-            }
-            if(resultado.equals("False"))
-            {
-                //mudar cor do botao
-                /*
-                * usar num da mesa
-                * */
-            //}
 
 
         }else {

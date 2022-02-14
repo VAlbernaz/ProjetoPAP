@@ -18,7 +18,10 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ControllerFuncMesas {
 
@@ -60,6 +63,7 @@ public class ControllerFuncMesas {
 
     private MySQlConnection connection;
 
+    private  ArrayList<String> disponibilidade = new ArrayList<String>();
 
     public void initialize()
     {
@@ -67,10 +71,83 @@ public class ControllerFuncMesas {
         Image image = new Image(file.toURI().toString());
         IVLogo.setImage(image);
 
+        alteraEstilo();
+
 
     }
 
 
+
+
+    public void alteraEstilo()
+    {
+        connection = new MySQlConnection();
+        ResultSet result = connection.getDisponibilidade();
+        try {
+            while (result.next()) {
+
+                disponibilidade.add(result.getString(1));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(disponibilidade);
+
+
+           if (!disponibilidade.get(0).equals("True")) {
+                this.btnMUm.setStyle("-fx-background-color: #FE2E2E");
+            } else {
+                this.btnMUm.setStyle("-fx-background-color: #70eb80");
+            }
+            if (!disponibilidade.get(1).equals("True")) {
+                this.btnMDois.setStyle("-fx-background-color: #FE2E2E");
+            } else {
+                this.btnMDois.setStyle("-fx-background-color: #70eb80");
+            }
+            if (!disponibilidade.get(2).equals("True")) {
+                this.btnMTres.setStyle("-fx-background-color: #FE2E2E");
+            } else {
+                this.btnMTres.setStyle("-fx-background-color: #70eb80");
+            }
+            if (!disponibilidade.get(3).equals("True")) {
+                this.btnMQuatro.setStyle("-fx-background-color: #FE2E2E");
+            } else {
+                this.btnMQuatro.setStyle("-fx-background-color: #70eb80");
+            }
+            if (!disponibilidade.get(4).equals("True")) {
+                this.btnMCinco.setStyle("-fx-background-color: #FE2E2E");
+            } else {
+                this.btnMCinco.setStyle("-fx-background-color: #70eb80");
+            }
+            if (!disponibilidade.get(5).equals("True")) {
+                this.btnMSeis.setStyle("-fx-background-color: #FE2E2E");
+            } else {
+                this.btnMSeis.setStyle("-fx-background-color: #70eb80");
+            }
+            if (!disponibilidade.get(6).equals("True")) {
+                this.btnMSete.setStyle("-fx-background-color: #FE2E2E");
+            } else {
+                this.btnMSete.setStyle("-fx-background-color: #70eb80");
+            }
+            if (!disponibilidade.get(7).equals("True")) {
+                this.btnMOito.setStyle("-fx-background-color: #FE2E2E");
+            } else {
+                this.btnMOito.setStyle("-fx-background-color: #70eb80");
+            }
+            if (!disponibilidade.get(8).equals("True")) {
+                this.btnMNove.setStyle("-fx-background-color: #FE2E2E");
+            } else {
+                this.btnMNove.setStyle("-fx-background-color: #70eb80");
+
+            }
+            if (!disponibilidade.get(9).equals("True")) {
+                this.btnMDez.setStyle("-fx-background-color: #FE2E2E");
+            } else {
+                this.btnMDez.setStyle("-fx-background-color: #70eb80");
+            }
+    }
 
     @FXML
     void mesaUM(ActionEvent event) {
@@ -100,10 +177,7 @@ public class ControllerFuncMesas {
             e.printStackTrace();
         }
     }
-    public void alteraMum(){
-        this.btnMUm.setStyle("-fx-background-color:  #70eb80; ");//verde
-        this.btnMUm.setStyle("-fx-background-color: #FE2E2E; ");//vermelho
-    }
+
 
     @FXML
     void mesaDois(ActionEvent event) {

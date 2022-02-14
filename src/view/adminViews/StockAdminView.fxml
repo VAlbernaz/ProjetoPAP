@@ -17,7 +17,7 @@
          <children>
             <ImageView fx:id="IVLogo1" fitHeight="128.0" fitWidth="203.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../logo.png" />
+                  <Image url="" />
                </image>
             </ImageView>
             <Label layoutX="299.0" layoutY="37.0" text="ADMINISTRADOR" textFill="#cbd2da">

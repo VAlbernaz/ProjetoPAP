@@ -254,7 +254,7 @@ public class MySQlConnection {
     {
         try {
             //preprar a inserção da nova linha
-            String sql = "INSERT INTO pedidos(mesa,dataHora,idfuncionario)\n" +
+            String sql = "INSERT INTO pedidos(mesa,dataHora,idfuncionario)\n" + //mudar para idmesas quando refizer a base de dados
                     "VALUES(?,CURRENT_TIMESTAMP,?);\n";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, mesa);
@@ -314,7 +314,7 @@ public class MySQlConnection {
 
     public ResultSet getNumPedidoMesa(int nMesa) {
         ResultSet result=null;
-        String sql = "SELECT IF((SELECT mesas.disponibilidade FROM mesas WHERE idmesas="+nMesa+") = 'False', (SELECT MAX(idPedidos) FROM pedidos p WHERE p.mesa="+nMesa+"), (SELECT null));";
+        String sql = "SELECT IF((SELECT mesas.disponibilidade FROM mesas WHERE idmesas="+nMesa+") = 'False', (SELECT MAX(idPedidos) FROM pedidos p WHERE p.mesa="+nMesa+"), (SELECT null));";//mudar para idmesas quando refizer a base de dados
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);
@@ -456,6 +456,37 @@ public class MySQlConnection {
     {
         ResultSet result = null;
         String sql = "SELECT disponibilidade FROM mesas WHERE idmesas ="+nMesa+";";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+
+    public ResultSet getNumUltimoPedidomesa(int numMesa)
+    {
+        ResultSet result = null;
+        String sql = "SELECT MAX(idpedidos)\n" +
+                "FROM pedidos" +
+                " WHERE mesa="+numMesa+";";//mudar para idmesas quando refizer a base de dados
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+
+    public ResultSet getPedidoAtivo(int idPedido)
+    {
+        ResultSet result = null;
+        String sql = "SELECT dp.idproduto, p.produto, dp.qtd, dp.preco, dp.obs\n" +
+                "FROM produto p, detalhespedidos dp\n" +
+                "WHERE p.idproduto = dp.idproduto\n" +
+                "AND dp.idpedidos = "+idPedido+";";
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);

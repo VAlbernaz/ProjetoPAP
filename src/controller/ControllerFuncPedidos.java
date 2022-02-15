@@ -116,6 +116,8 @@ public class ControllerFuncPedidos {
 
     private int numMesa=0;
 
+    String str = null;
+
     public void initialize()
     {
         File file = new File("logo.png");
@@ -140,6 +142,29 @@ public class ControllerFuncPedidos {
 
 
     }
+
+
+    public void getDetPedido(ObservableList<Pedidos> p, int numPedido)
+    {
+        numPdd = numPedido;
+        this.lbPedido.setText(str + String.valueOf(numPdd));
+
+
+        for(Pedidos pdd: p)
+        {
+            pedido = new Pedidos(pdd.getIdProduto(),pdd.getProduto(), pdd.getValor(), pdd.getQtd(),pdd.getObs());
+            listaPedidos.add(pedido);
+        }
+        this.tblPedido.getItems().clear();
+        this.tblPedido.setItems(listaPedidos);
+
+
+        /**
+         * eliminar pedido da base de dados e os detalhes do mesmo
+         * meter isso antes de criar caso o pedido exista*/
+    }
+
+
     public void getNmMesa(int num) {
         numMesa= num;
     }
@@ -158,7 +183,7 @@ public class ControllerFuncPedidos {
         e.printStackTrace();
     }
 
-        String str = this.lbPedido.getText();
+        str = this.lbPedido.getText();
         this.lbPedido.setText(str + String.valueOf(numPdd));
     }
 
@@ -209,7 +234,7 @@ public class ControllerFuncPedidos {
                 double preco = linhaProduto.getPreco();
                 int qtd = this.cbQTD.getValue();
                 String obs = this.taOBS.getText();
-                pedido = new Pedidos(idProduto,produto, preco, qtd, obs,tipo);
+                pedido = new Pedidos(idProduto,produto, preco, qtd, obs);
                 this.listaPedidos.add(pedido);
                 System.out.println(tipo);
                 linhaProduto = null;
@@ -219,7 +244,7 @@ public class ControllerFuncPedidos {
         {
             tipo=7;
             double preco = Double.parseDouble(precoR);
-            pedido= new Pedidos(7,"Retalho",preco,1,"",tipo);
+            pedido= new Pedidos(7,"Retalho",preco,1,"");
             this.listaPedidos.add(pedido);
             System.out.println(tipo);
             this.tfRetalho.setText("");

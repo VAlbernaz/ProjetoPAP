@@ -14,13 +14,17 @@ public class Pedidos {
     private int idProduto;
     private int nMesa;
 
+    public Pedidos(String produto, double valor, int qtd) {
+        this.produto = produto;
+        this.valor = valor;
+        this.qtd = qtd;
+    }
 
-    public Pedidos( int idProduto,String produto, double valor, int qtd, String obs, int idTipo) {
+    public Pedidos(int idProduto, String produto, double valor, int qtd, String obs) {
         this.produto = produto;
         this.valor = valor;
         this.qtd = qtd;
         this.obs = obs;
-        this.idTipo = idTipo;
         this.idProduto = idProduto;
     }
 

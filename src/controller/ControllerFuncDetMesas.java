@@ -1,18 +1,21 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.MySQlConnection;
+import model.Pedidos;
+import model.Produtos;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,28 +41,100 @@ public class ControllerFuncDetMesas {
     private Button btnPagar;
 
     @FXML
+    private TableColumn<Pedidos, String> colProduto;
+
+    @FXML
+    private TableColumn<Pedidos, String> colQtd;
+
+    @FXML
+    private TableColumn<Pedidos, String> colValor;
+
+    @FXML
     private Label lbMesa;
 
+    @FXML
+    private Label lbPedido;
+
+    @FXML
+    private TableView<Pedidos> tblDetPedido;
+
     private int numesa;
-    int numPedido;
+
+
 
     private MySQlConnection connection;
 
+    private ObservableList<Pedidos> detalhesPedido;
 
+    int nPedido = 0;
 
-    public void initialize()
-    {
+    public void initialize() throws SQLException {
         File file = new File("logo.png");
         Image image = new Image(file.toURI().toString());
         IVLogo.setImage(image);
+
+        detalhesPedido = FXCollections.observableArrayList();
+
+        this.colProduto.setCellValueFactory(new PropertyValueFactory<Pedidos,String>("produto"));
+        this.colQtd.setCellValueFactory(new PropertyValueFactory<Pedidos,String>("qtd"));
+        this.colValor.setCellValueFactory(new PropertyValueFactory<Pedidos,String>("valor"));
+
+
     }
-
-
 
     void getNmMesa(int mesa){
         numesa=mesa;
         String str = lbMesa.getText();
         this.lbMesa.setText(str + String.valueOf(numesa));
+
+
+        try {
+            //mostra na tabela o pedido caso esteja algum ativo na mesa
+            connection = new MySQlConnection();
+            ResultSet result = connection.getDisponibilidadeMesa(numesa);
+
+            String disponibilidade = null;
+
+            while (result.next()) {
+                disponibilidade = result.getString(1);
+            }
+
+            //se a mesa nao tiver disponivel recolhe o ultimo pedido da mesa e mostra o pedido na tabela
+            if (disponibilidade.equals("False")) {
+                //recolhe o numero do ultimo pedido que esta ativo na mesa
+                ResultSet resultNPedido= connection.getNumUltimoPedidomesa(numesa);
+
+                while (resultNPedido.next()) {
+                    nPedido = Integer.parseInt(resultNPedido.getString(1));
+                }
+                //mostra o numero do pedido na label
+                String str1 = this.lbPedido.getText();
+                this.lbPedido.setText(str1 + nPedido);
+
+                //recolhe os detalhes do pedido
+                ResultSet resultPedido = connection.getPedidoAtivo(nPedido);
+                while (resultPedido.next())
+                {
+                    int id = resultPedido.getInt(1);
+                    System.out.println(id);
+                    String produto = resultPedido.getString(2);
+                    int qtd = resultPedido.getInt(3);
+                    double valor = resultPedido.getDouble(4);
+                    String obs = resultPedido.getString(5);
+                    System.out.println(obs);
+
+                    Pedidos p = new Pedidos(id,produto,valor,qtd,obs);
+                    detalhesPedido.add(p);
+
+                }
+                //mostra o pedido na tabela
+                this.tblDetPedido.setItems(detalhesPedido);
+
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
 
@@ -79,8 +154,11 @@ public class ControllerFuncDetMesas {
             Scene scene = new Scene(root,1400 , 900); // abre para aproximadamente 15''
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
-            //stage.setMaximized(Boolean.TRUE);
-            //stage.resizableProperty().setValue(Boolean.FALSE);
+
+            ControllerFuncPedidos controller = loader.getController();
+            controller.getNmMesa(numesa);
+            controller.getDetPedido(detalhesPedido, nPedido);
+
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
@@ -128,6 +206,9 @@ public class ControllerFuncDetMesas {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            Stage stage1 = (Stage) this.btnNovoPedido.getScene().getWindow();
+            stage1.close();
 
             //procura na base de dados um numero de funcionario igual ao numero introduzido
             connection = new MySQlConnection();

@@ -67,6 +67,7 @@ public class ControllerFuncDetMesas {
     private ObservableList<Pedidos> detalhesPedido;
 
     int nPedido = 0;
+    int idfunc =0;
 
     public void initialize() throws SQLException {
         File file = new File("logo.png");
@@ -122,6 +123,8 @@ public class ControllerFuncDetMesas {
                     double valor = resultPedido.getDouble(4);
                     String obs = resultPedido.getString(5);
                     System.out.println(obs);
+                    idfunc = resultPedido.getInt(6);
+                    System.out.println("num func "+idfunc);
 
                     Pedidos p = new Pedidos(id,produto,valor,qtd,obs);
                     detalhesPedido.add(p);
@@ -148,6 +151,9 @@ public class ControllerFuncDetMesas {
 
     @FXML
     void editPedido(ActionEvent event) {
+        Stage stageFechar = (Stage) this.btnEditPedido.getScene().getWindow();
+        stageFechar.close();
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
             Parent root = loader.load();
@@ -157,14 +163,14 @@ public class ControllerFuncDetMesas {
 
             ControllerFuncPedidos controller = loader.getController();
             controller.getNmMesa(numesa);
-            controller.getDetPedido(detalhesPedido, nPedido);
+            controller.getDetPedido(detalhesPedido, nPedido,idfunc);
 
 
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
             stage.show();
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -177,6 +183,8 @@ public class ControllerFuncDetMesas {
         connection = new MySQlConnection();
         ResultSet result = connection.getDisponibilidadeMesa(numesa);
         String disponibilidade=null;
+
+
         while (result.next())
         {
             disponibilidade = result.getString(1);
@@ -228,7 +236,7 @@ public class ControllerFuncDetMesas {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
                     Parent root = loader.load();
                     ControllerFuncPedidos controller = loader.getController();
-                    controller.setNumFunc(numFunc);
+                    controller.setNumFunc(Integer.parseInt(numFunc));
                     controller.getNmMesa(numesa);
                     Scene scene = new Scene(root, 1400, 900);
                     Stage stage = new Stage();
@@ -273,6 +281,8 @@ public class ControllerFuncDetMesas {
 
     @FXML
     void pagamento(ActionEvent event) {
+        Stage stageFechar = (Stage) this.btnPagar.getScene().getWindow();
+        stageFechar.close();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ContribuinteView.fxml"));
             Parent root = loader.load();

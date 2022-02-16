@@ -144,7 +144,7 @@ public class ControllerFuncPedidos {
     }
 
 
-    public void getDetPedido(ObservableList<Pedidos> p, int numPedido)
+    public void getDetPedido(ObservableList<Pedidos> p, int numPedido, int idfunc)
     {
         numPdd = numPedido;
         this.lbPedido.setText(str + String.valueOf(numPdd));
@@ -158,6 +158,20 @@ public class ControllerFuncPedidos {
         this.tblPedido.getItems().clear();
         this.tblPedido.setItems(listaPedidos);
 
+        //vai recolher o numero do funcionario pelo id
+        connection = new MySQlConnection();
+
+        ResultSet result = connection.getNumFunc(idfunc);
+        try{
+            while(result.next()){
+                numFuncio= result.getInt(1);
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        setNumFunc(numFuncio);
+
 
         /**
          * eliminar pedido da base de dados e os detalhes do mesmo
@@ -168,6 +182,8 @@ public class ControllerFuncPedidos {
     public void getNmMesa(int num) {
         numMesa= num;
     }
+
+
 
     void numPedido()  {
         connection = new MySQlConnection();
@@ -181,19 +197,25 @@ public class ControllerFuncPedidos {
             }
         } catch (SQLException e) {
         e.printStackTrace();
-    }
+        }
 
         str = this.lbPedido.getText();
         this.lbPedido.setText(str + String.valueOf(numPdd));
     }
 
-    void setNumFunc(String numFunc) throws SQLException {
+    void setNumFunc(int numFunc) {
+        System.out.println(numFunc);
         connection = new MySQlConnection();
-        numFuncio = Integer.parseInt(numFunc);
+        numFuncio = numFunc;
         ResultSet result = connection.nomeFunc(numFunc);
         String nomeFunc="";
-        while (result.next()) {
-            nomeFunc = result.getString(1);
+        try {
+            while (result.next()) {
+                nomeFunc = result.getString(1);
+            }
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
         }
         String str= this.lbNumFunc.getText();
         this.lbNumFunc.setText(str+" "+nomeFunc);
@@ -319,7 +341,10 @@ public class ControllerFuncPedidos {
         }
 
         if(this.listaPedidos.size() != 0) {
-            //criar pedido
+            //por segurança elimina os pedidos da base de dados caso existem com o mesmo id que o numPdd
+            connection.deletePedidoEdetalhes(numPdd);
+            System.out.println(numPdd);
+            //e cria um novo pedido
             connection.createPedido(numMesa, idFunc);
 
             //pega id do pedido
@@ -336,7 +361,6 @@ public class ControllerFuncPedidos {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
 
             //adicionar na tabela de detalhes de pedido
             for (Pedidos p : listaPedidos) {
@@ -363,7 +387,6 @@ public class ControllerFuncPedidos {
         Stage stage = (Stage) this.btnFinalizar.getScene().getWindow();
         stage.close();
     }
-
     int getNlista()
     {
         return this.listaPedidos.size();

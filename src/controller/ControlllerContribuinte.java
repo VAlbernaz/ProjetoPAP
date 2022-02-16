@@ -124,6 +124,7 @@ public class ControlllerContribuinte {
 
         Stage stage = (Stage) this.btnConcluir.getScene().getWindow();
         stage.close();
+
     }
     public void alert(Alert.AlertType type, String tit, String texto)
     {

@@ -413,62 +413,69 @@ public class ControllerFuncMesas {
 
         //procura na base de dados um numero de funcionario igual ao numero introduzido
         connection = new MySQlConnection();
-        ResultSet result = connection.verificaNumFunc(numFunc);
-        int numeros = 0;
-        while (result.next()) {
-            try {
-                 numeros = result.getInt(1);
+        try {
+            ResultSet result = connection.verificaNumFunc(numFunc);
+            int numeros = 0;
+            while (result.next()) {
+                try {
+                    numeros = result.getInt(1);
 
-            } catch (SQLException e) {
-                e.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-        }
-        // se o codigo do funcionario existir na bd
-        if (Objects.equals(numFunc, String.valueOf(numeros))) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
-                Parent root = loader.load();
 
-                ControllerFuncPedidos controller = loader.getController();
-                controller.setNumFunc(numFunc);
-                controller.getNmMesa(numMesa);
+            // se o codigo do funcionario existir na bd
+            if (Objects.equals(numFunc, String.valueOf(numeros))) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
+                    Parent root = loader.load();
 
-                Scene scene = new Scene(root, 1400, 900);
-                Stage stage = new Stage();
-                stage.setTitle("GESRES 1.0");
-                //stage.setMaximized(Boolean.TRUE);
-                //stage.resizableProperty().setValue(Boolean.FALSE);
+                    ControllerFuncPedidos controller = loader.getController();
+                    controller.setNumFunc(Integer.parseInt(numFunc));
+                    controller.getNmMesa(numMesa);
 
-                stage.initModality(Modality.WINDOW_MODAL);
-                stage.setScene(scene);
-                stage.showAndWait();
-
-                int nLista = controller.getNlista();
-
-                if(nLista != 0)
-                {
-                    //abre Vista pagamento
-                    loader = new FXMLLoader(getClass().getResource("../view/ContribuinteView.fxml"));
-                    root = loader.load();
-
-                    ControlllerContribuinte controlller = loader.getController();
-                    controlller.getnMesa(11);
-
-                    scene = new Scene(root);
-                    stage = new Stage();
+                    Scene scene = new Scene(root, 1400, 900);
+                    Stage stage = new Stage();
                     stage.setTitle("GESRES 1.0");
-                    stage.resizableProperty().setValue(Boolean.FALSE);
+                    //stage.setMaximized(Boolean.TRUE);
+                    //stage.resizableProperty().setValue(Boolean.FALSE);
 
                     stage.initModality(Modality.WINDOW_MODAL);
                     stage.setScene(scene);
-                    stage.show();
+                    stage.showAndWait();
+
+                    int nLista = controller.getNlista();
+
+                    if(nLista != 0)
+                    {
+                        //abre Vista pagamento
+                        loader = new FXMLLoader(getClass().getResource("../view/ContribuinteView.fxml"));
+                        root = loader.load();
+
+                        ControlllerContribuinte controlller = loader.getController();
+                        controlller.getnMesa(11);
+
+                        scene = new Scene(root);
+                        stage = new Stage();
+                        stage.setTitle("GESRES 1.0");
+                        stage.resizableProperty().setValue(Boolean.FALSE);
+
+                        stage.initModality(Modality.WINDOW_MODAL);
+                        stage.setScene(scene);
+                        stage.show();
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
-            } catch (IOException e) {
-                e.printStackTrace();
+            } else {  //se nao existar lança alerta
+                alert(Alert.AlertType.ERROR,"Código inválido!","O código introduzido não está disponivel.");
             }
-        } else {  //se nao existar lança alerta
-            alert(Alert.AlertType.ERROR,"Código inválido!","O código introduzido não está disponivel.");
+        }catch (Exception e)
+        {
+
         }
     }
     public void alert(Alert.AlertType type, String tit, String texto)

@@ -114,11 +114,11 @@ public class MySQlConnection {
         }
         return result;
     }
-    public ResultSet nomeFunc(String numFunc){
+    public ResultSet nomeFunc(int numFunc){
         ResultSet result = null;
         String sql = "SELECT CONCAT(primNome, \" \",ultiNome)\n" +
                 "FROM funcionario\n" +
-                "WHERE numFunc ="+ Integer.parseInt(numFunc)+";";
+                "WHERE numFunc ="+ numFunc+";";
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);
@@ -127,7 +127,19 @@ public class MySQlConnection {
         }
         return result;
     }
-
+    public ResultSet getNumFunc(int idfunc){
+        ResultSet result = null;
+        String sql = "SELECT numFunc \n" +
+                "FROM funcionario \n" +
+                "WHERE idfuncionario ="+idfunc+";";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
     public ResultSet getFornecedor(){
         ResultSet result = null;
         String sql = "SELECT idfornecedor,fornecedor " +
@@ -483,10 +495,11 @@ public class MySQlConnection {
     public ResultSet getPedidoAtivo(int idPedido)
     {
         ResultSet result = null;
-        String sql = "SELECT dp.idproduto, p.produto, dp.qtd, dp.preco, dp.obs\n" +
-                "FROM produto p, detalhespedidos dp\n" +
+        String sql = "SELECT dp.idproduto, p.produto, dp.qtd, dp.preco, dp.obs, pdd.idfuncionario\n" +
+                "FROM produto p, detalhespedidos dp, pedidos pdd\n" +
                 "WHERE p.idproduto = dp.idproduto\n" +
-                "AND dp.idpedidos = "+idPedido+";";
+                "AND dp.idpedidos = pdd.idpedidos\n" +
+                "AND dp.idpedidos ="+idPedido+";";
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);
@@ -494,6 +507,22 @@ public class MySQlConnection {
             throwables.printStackTrace();
         }
         return result;
+    }
+
+    public void deletePedidoEdetalhes(int numPedido)
+    {
+        String sql = "SET FOREIGN_KEY_CHECKS=0;";
+        String sql1= "DELETE FROM detalhespedidos WHERE idpedidos ="+numPedido+";";
+        String sql2 = "DELETE FROM pedidos\n" +
+                "WHERE idpedidos ="+numPedido+";";
+        try {
+            Statement s = connection.createStatement();
+            s.executeUpdate(sql);
+            s.executeUpdate(sql1);
+            s.executeUpdate(sql2);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
 

@@ -256,6 +256,20 @@ public class ControllerFuncPedidos {
                 double preco = linhaProduto.getPreco();
                 int qtd = this.cbQTD.getValue();
                 String obs = this.taOBS.getText();
+
+/**
+ * ver melhor com o prof*/
+                for(Pedidos p: listaPedidos)
+                {
+                    if(p.getIdProduto() == idProduto)
+                    {
+                       alert(Alert.AlertType.WARNING,"Introduza apenas um produto de cada tipo","sdasda");
+
+                    }
+
+                    break;
+                }
+
                 pedido = new Pedidos(idProduto,produto, preco, qtd, obs);
                 this.listaPedidos.add(pedido);
                 System.out.println(tipo);

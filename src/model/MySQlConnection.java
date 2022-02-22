@@ -310,6 +310,31 @@ public class MySQlConnection {
             return false;
         }
     }
+    public boolean setPedidoCozinha(Pedidos p)
+    {
+        try {
+            //preprar a inserção da nova linha
+            String sql = "INSERT INTO pedidoscozinha(idpedidos,idproduto,qtd,obs,preco)\n" +
+                    "VALUES(?,?,?,?,?);";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, p.getId());
+            statement.setInt(2, p.getIdProduto());
+            statement.setInt(3, p.getQtd());
+            statement.setString(4, p.getObs());
+            statement.setDouble(5, p.getValor());
+
+            //executar a inserção
+            int linhas = statement.executeUpdate();
+            if (linhas == 1) {
+                return true;
+
+            } else return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     public ResultSet getIdFunc(int numFunc){
         ResultSet result = null;
         String sql = "SELECT idfuncionario\n" +
@@ -495,9 +520,10 @@ public class MySQlConnection {
     public ResultSet getPedidoAtivo(int idPedido)
     {
         ResultSet result = null;
-        String sql = "SELECT dp.idproduto, p.produto, dp.qtd, dp.preco, dp.obs, pdd.idfuncionario\n" +
-                "FROM produto p, detalhespedidos dp, pedidos pdd\n" +
+        String sql = "SELECT dp.idproduto, p.produto, dp.qtd, dp.preco, dp.obs, pdd.idfuncionario, t.idtipo\n" +
+                "FROM produto p, detalhespedidos dp, pedidos pdd, tipo t\n" +
                 "WHERE p.idproduto = dp.idproduto\n" +
+                "AND p.idtipo = t.idtipo\n" +
                 "AND dp.idpedidos = pdd.idpedidos\n" +
                 "AND dp.idpedidos ="+idPedido+";";
         try {

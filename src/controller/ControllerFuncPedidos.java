@@ -152,7 +152,7 @@ public class ControllerFuncPedidos {
 
         for(Pedidos pdd: p)
         {
-            pedido = new Pedidos(pdd.getIdProduto(),pdd.getProduto(), pdd.getValor(), pdd.getQtd(),pdd.getObs());
+            pedido = new Pedidos(pdd.getIdProduto(),pdd.getProduto(), pdd.getValor(), pdd.getQtd(),pdd.getObs(),pdd.getIdTipo());
             listaPedidos.add(pedido);
         }
         this.tblPedido.getItems().clear();
@@ -230,7 +230,8 @@ public class ControllerFuncPedidos {
                 int id = result.getInt(1);
                 String produto = result.getString(2);
                 double preco = result.getDouble(3);
-                Produtos p = new Produtos(id,produto, preco);
+
+                Produtos p = new Produtos(id,produto, preco, tipos);
                 this.listaProdutos.add(p);
             }
         }catch (SQLException throwables)
@@ -251,6 +252,7 @@ public class ControllerFuncPedidos {
             if(linhaProduto == null || this.cbQTD.getValue() == null) {
                 alert(Alert.AlertType.ERROR,"ERRO!","Selecione todos os campos! (produto e quantidade)");
             }else {
+                int ntipo = linhaProduto.getnTipo();
                 int idProduto = linhaProduto.getID();
                 String produto = linhaProduto.getProduto();
                 double preco = linhaProduto.getPreco();
@@ -270,7 +272,7 @@ public class ControllerFuncPedidos {
                     break;
                 }
 
-                pedido = new Pedidos(idProduto,produto, preco, qtd, obs);
+                pedido = new Pedidos(idProduto,produto, preco, qtd, obs,ntipo);
                 this.listaPedidos.add(pedido);
                 System.out.println(tipo);
                 linhaProduto = null;
@@ -280,7 +282,7 @@ public class ControllerFuncPedidos {
         {
             tipo=7;
             double preco = Double.parseDouble(precoR);
-            pedido= new Pedidos(7,"Retalho",preco,1,"");
+            pedido= new Pedidos(7,"Retalho",preco,1,"",8);
             this.listaPedidos.add(pedido);
             System.out.println(tipo);
             this.tfRetalho.setText("");
@@ -379,8 +381,15 @@ public class ControllerFuncPedidos {
             //adicionar na tabela de detalhes de pedido
             for (Pedidos p : listaPedidos) {
                 //tirar dados da observeblelist
-                pedidoFinal = new Pedidos(idPedido, p.getIdProduto(), p.getQtd(), p.getObs(),p.getValor());
+                pedidoFinal = new Pedidos(idPedido, p.getIdProduto(), p.getQtd(), p.getObs(),p.getValor(),p.getIdTipo());
                 connection.setPedidoDetalhes(pedidoFinal);
+                //se o idtipo for igual ao id da cozinha posta na tabela de pedidos da cozinha o pedido
+                if(p.getIdTipo()==4)
+                {
+                    connection.setPedidoCozinha(pedidoFinal);
+                }
+                //falta reduzir o stock
+
             }
 
             

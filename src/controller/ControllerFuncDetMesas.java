@@ -124,9 +124,10 @@ public class ControllerFuncDetMesas {
                     String obs = resultPedido.getString(5);
                     System.out.println(obs);
                     idfunc = resultPedido.getInt(6);
+                    int idtipo = resultPedido.getInt(7);
                     System.out.println("num func "+idfunc);
 
-                    Pedidos p = new Pedidos(id,produto,valor,qtd,obs);
+                    Pedidos p = new Pedidos(id,produto,valor,qtd,obs,idtipo);
                     detalhesPedido.add(p);
 
                 }

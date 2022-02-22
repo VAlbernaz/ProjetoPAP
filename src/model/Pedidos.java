@@ -14,33 +14,22 @@ public class Pedidos {
     private int idProduto;
     private int nMesa;
 
-    public Pedidos(String produto, double valor, int qtd) {
-        this.produto = produto;
-        this.valor = valor;
-        this.qtd = qtd;
-    }
-
-    public Pedidos(int idProduto, String produto, double valor, int qtd, String obs) {
+    //pedido inicial
+    public Pedidos(int idProduto, String produto, double valor, int qtd, String obs, int idTipo) {
         this.produto = produto;
         this.valor = valor;
         this.qtd = qtd;
         this.obs = obs;
         this.idProduto = idProduto;
+        this.idTipo = idTipo;
     }
-
-    public Pedidos(int id, int idProduto, int qtd, String obs, double valor) {
+    //pedido final
+    public Pedidos(int id, int idProduto, int qtd, String obs, double valor, int idTipo) {
         this.qtd = qtd;
         this.obs = obs;
         this.idProduto = idProduto;
         this.id = id;
         this.valor=valor;
-    }
-
-    public Pedidos(int id, double valor, int qtd, String obs, int idTipo) {
-        this.id = id;
-        this.valor = valor;
-        this.qtd = qtd;
-        this.obs = obs;
         this.idTipo = idTipo;
     }
 

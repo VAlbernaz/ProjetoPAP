@@ -21,10 +21,11 @@ public class Produtos {
         this.obs = obs;
     }
 
-    public Produtos(int ID, String produto, double preco) {
+    public Produtos(int ID, String produto, double preco, int nTipo) {
         this.ID = ID;
         this.produto = produto;
         this.preco = preco;
+        this.nTipo = nTipo;
     }
 
     public Produtos(int ID, String produto, int qtd) {

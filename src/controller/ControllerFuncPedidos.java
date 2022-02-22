@@ -59,8 +59,9 @@ public class ControllerFuncPedidos {
     @FXML
     private TextArea taOBS;
 
+
     @FXML
-    private ComboBox<Integer> cbQTD;
+    private Spinner<Integer> spnQTD;
 
     //tabela pedidos
     @FXML
@@ -124,7 +125,7 @@ public class ControllerFuncPedidos {
         Image image = new Image(file.toURI().toString());
         IVLogo.setImage(image);
 
-        this.cbQTD.getItems().addAll(1,2,3,4,5,6,7,8,9);
+        this.spnQTD.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000));
 
         listaProdutos = FXCollections.observableArrayList();
         listaPedidos = FXCollections.observableArrayList();
@@ -249,28 +250,16 @@ public class ControllerFuncPedidos {
         //fazer validaçao correta
         if(precoR.equals(""))
         {
-            if(linhaProduto == null || this.cbQTD.getValue() == null) {
-                alert(Alert.AlertType.ERROR,"ERRO!","Selecione todos os campos! (produto e quantidade)");
+            if(linhaProduto == null ) {
+                alert(Alert.AlertType.ERROR,"ERRO!","Selecione um produto e a respetiva quantidade");
             }else {
                 int ntipo = linhaProduto.getnTipo();
                 int idProduto = linhaProduto.getID();
                 String produto = linhaProduto.getProduto();
                 double preco = linhaProduto.getPreco();
-                int qtd = this.cbQTD.getValue();
+                int qtd = this.spnQTD.getValue();
                 String obs = this.taOBS.getText();
 
-/**
- * ver melhor com o prof*/
-                for(Pedidos p: listaPedidos)
-                {
-                    if(p.getIdProduto() == idProduto)
-                    {
-                       alert(Alert.AlertType.WARNING,"Introduza apenas um produto de cada tipo","sdasda");
-
-                    }
-
-                    break;
-                }
 
                 pedido = new Pedidos(idProduto,produto, preco, qtd, obs,ntipo);
                 this.listaPedidos.add(pedido);
@@ -294,7 +283,7 @@ public class ControllerFuncPedidos {
     void add(ActionEvent event) {
         getlinha();
         tblPedido.setItems(listaPedidos);
-        this.cbQTD.setValue(null);
+        this.spnQTD.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000));
     }
 
     public void refreshTabela()

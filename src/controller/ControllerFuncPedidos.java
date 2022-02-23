@@ -253,6 +253,7 @@ public class ControllerFuncPedidos {
             if(linhaProduto == null ) {
                 alert(Alert.AlertType.ERROR,"ERRO!","Selecione um produto e a respetiva quantidade");
             }else {
+
                 int ntipo = linhaProduto.getnTipo();
                 int idProduto = linhaProduto.getID();
                 String produto = linhaProduto.getProduto();
@@ -260,11 +261,38 @@ public class ControllerFuncPedidos {
                 int qtd = this.spnQTD.getValue();
                 String obs = this.taOBS.getText();
 
+                //se o produto nao for do tipo retalho nem do tipo da cozinha
+                if(ntipo != 7 && ntipo != 4)
+                {
+                    //chama metodo para ver o stock pelo id do produto
+                    connection = new MySQlConnection();
+                    ResultSet result = connection.verificaStock(idProduto);
+                    int stock=0;
+                    try{
+                        while (result.next()){
+                            stock = result.getInt(1);
+                        }
+                    }catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                    //verifica o stock: se for maior que 0, adiciona o produto ao pedido
+                    if(stock>0)
+                    {
+                        //de seguida verifica se tem stock suficiente: se o stock menos a quantidade desejada for maior ou igual a 0 adiciona o produto
+                        if((stock-qtd)>=0) {
+                            pedido = new Pedidos(idProduto, produto, preco, qtd, obs, ntipo);
+                            this.listaPedidos.add(pedido);
+                            System.out.println(tipo);
+                        }else{ // se nao tiver stock suficiente lança alerta
+                            alert(Alert.AlertType.WARNING,"Stock",produto + " não tem stock suficiente. \n Stock disponivel:  " + stock);
+                        }
+                    }else{ // se nao tiver stock lança alerta
+                        alert(Alert.AlertType.WARNING,"Stock",produto + " não está em stock. ");
+                    }
+                }
 
-                pedido = new Pedidos(idProduto,produto, preco, qtd, obs,ntipo);
-                this.listaPedidos.add(pedido);
-                System.out.println(tipo);
-                linhaProduto = null;
+                this.tblProdutos.getSelectionModel().clearSelection();
 
             }
         }else
@@ -325,8 +353,6 @@ public class ControllerFuncPedidos {
                 e.printStackTrace();
             }
         }
-
-
     }*/
 
     @FXML
@@ -377,7 +403,8 @@ public class ControllerFuncPedidos {
                 {
                     connection.setPedidoCozinha(pedidoFinal);
                 }
-                //falta reduzir o stock
+                // reduzir o stock
+                connection.atualizaStock(p.getIdProduto(),p.getQtd());
 
             }
 

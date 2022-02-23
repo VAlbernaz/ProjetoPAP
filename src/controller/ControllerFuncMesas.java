@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,11 +67,17 @@ public class ControllerFuncMesas {
 
     private  ArrayList<String> disponibilidade = new ArrayList<String>();
 
+    ObservableList<Button> botoes;
+
     public void initialize()
     {
         File file = new File("logo.png");
         Image image = new Image(file.toURI().toString());
         IVLogo.setImage(image);
+
+        botoes = FXCollections.observableArrayList();
+
+        botoes.addAll(btnMUm,btnMDois,btnMTres,btnMQuatro,btnMCinco,btnMSeis,btnMSete,btnMOito,btnMNove,btnMDez);
 
         alteraEstilo();
 
@@ -95,13 +103,15 @@ public class ControllerFuncMesas {
 
         System.out.println(disponibilidade);
 
-
-           /*if (!disponibilidade.get(0).equals("True")) {
-                this.btnMUm.setStyle("-fx-background-color: #FE2E2E");
-            } else {
-                this.btnMUm.setStyle("-fx-background-color: #70eb80");
+            for(int i =0; i<10;i++) {
+                    botoes.get(i).setStyle("");
+                if (!disponibilidade.get(i).equals("True")) {
+                    botoes.get(i).setStyle("-fx-background-color: #FE2E2E");
+                } else {
+                    botoes.get(i).setStyle("-fx-background-color: #70eb80");
+                }
             }
-            if (!disponibilidade.get(1).equals("True")) {
+            /*if (!disponibilidade.get(1).equals("True")) {
                 this.btnMDois.setStyle("-fx-background-color: #FE2E2E");
             } else {
                 this.btnMDois.setStyle("-fx-background-color: #70eb80");

@@ -285,7 +285,8 @@ public class ControllerFuncPedidos {
                             this.listaPedidos.add(pedido);
                             System.out.println(tipo);
                         }else{ // se nao tiver stock suficiente lança alerta
-                            alert(Alert.AlertType.WARNING,"Stock",produto + " não tem stock suficiente. \n Stock disponivel:  " + stock);
+                            //alert(Alert.AlertType.WARNING,"Stock",produto + " não tem stock suficiente. \n Stock disponivel:  " + stock);
+
                         }
                     }else{ // se nao tiver stock lança alerta
                         alert(Alert.AlertType.WARNING,"Stock",produto + " não está em stock. ");
@@ -415,7 +416,7 @@ public class ControllerFuncPedidos {
             connection.trocaEstadoMesa(numMesa,"False");
 
             ControllerFuncMesas controller = new ControllerFuncMesas();
-            controller.alteraEstilo();
+           // controller.alteraEstilo();
 
 
 

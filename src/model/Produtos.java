@@ -13,13 +13,6 @@ public class Produtos {
     private int qtd;
     private String obs;
 
-    public Produtos(int ID, String produto, double preco, int qtd, String obs) {
-        this.ID = ID;
-        this.produto = produto;
-        this.preco = preco;
-        this.qtd = qtd;
-        this.obs = obs;
-    }
 
     public Produtos(int ID, String produto, double preco, int nTipo) {
         this.ID = ID;

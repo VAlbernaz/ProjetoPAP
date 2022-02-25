@@ -214,6 +214,27 @@ public class MySQlConnection {
             return false;
         }
     }
+    public boolean deleteProd(int idproduto)
+    {
+        try {
+            //preprar a inserção da nova linha
+            String sql = "SET FOREIGN_KEY_CHECKS=0;";
+            String sql1= "DELETE FROM produto WHERE idproduto ="+idproduto+";";
+            Statement statement = connection.createStatement();
+
+            //executar a inserção
+            statement.executeUpdate(sql);
+            int linhas = statement.executeUpdate(sql1);
+            if (linhas == 1) {
+                return true;
+
+            } else return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     public ResultSet getProdutos()
     {
         ResultSet result = null;

@@ -120,7 +120,7 @@ public class ControlllerContribuinte {
         }
 
         ControllerFuncMesas controller = new ControllerFuncMesas();
-        controller.alteraEstilo();
+        //controller.alteraEstilo();
 
         Stage stage = (Stage) this.btnConcluir.getScene().getWindow();
         stage.close();

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paneStock" prefHeight="700.0" prefWidth="919.0" style="-fx-background-color: #cbd2da;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.adminControllers.ControllerStock">
+<AnchorPane fx:id="paneStock" prefHeight="749.0" prefWidth="938.0" style="-fx-background-color: #cbd2da;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.adminControllers.ControllerStock">
    <children>
       <Pane prefHeight="128.0" prefWidth="919.0" style="-fx-background-color: #033249;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -32,7 +32,7 @@
             </Button>
          </children>
       </Pane>
-      <TableView fx:id="tblStock" layoutX="31.0" layoutY="203.0" onDragDetected="#selecionaLinha" prefHeight="441.0" prefWidth="568.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="203.0">
+      <TableView fx:id="tblStock" layoutX="31.0" layoutY="203.0" onDragDetected="#selecionaLinha" prefHeight="443.0" prefWidth="568.0" AnchorPane.bottomAnchor="103.0" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="203.0">
          <columns>
             <TableColumn fx:id="colProduto" prefWidth="284.0" text="Produto" />
             <TableColumn fx:id="colQtd" minWidth="0.0" prefWidth="283.0" text="Quantidade Kg ou Unidades" />
@@ -61,9 +61,14 @@
       </Label>
       <TextField fx:id="tfEditProduto" editable="false" layoutX="639.0" layoutY="304.0" onContextMenuRequested="#selecionaLinha" prefHeight="25.0" prefWidth="248.0" AnchorPane.leftAnchor="639.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="304.0" />
       <TextField fx:id="tfEditQtd" layoutX="639.0" layoutY="379.0" prefHeight="25.0" prefWidth="248.0" AnchorPane.leftAnchor="639.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="379.0" />
-      <Button fx:id="btnEdit" layoutX="663.0" layoutY="441.0" mnemonicParsing="false" onAction="#editar" prefHeight="82.0" prefWidth="176.0" style="-fx-background-color: #033249;" text="Editar" textFill="#cbd2da" AnchorPane.bottomAnchor="177.0" AnchorPane.leftAnchor="663.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="441.0">
+      <Button fx:id="btnEdit" layoutX="666.0" layoutY="480.0" mnemonicParsing="false" onAction="#editar" prefHeight="76.0" prefWidth="195.0" style="-fx-background-color: #033249;" text="Editar" textFill="#cbd2da" AnchorPane.bottomAnchor="193.0" AnchorPane.leftAnchor="666.0" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="480.0">
          <font>
             <Font size="39.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnEliminar" layoutX="31.0" layoutY="665.0" mnemonicParsing="false" onAction="#eliminar" prefHeight="30.0" prefWidth="206.0" style="-fx-background-color: #033249;" text="Eliminar" textFill="#cbd2da">
+         <font>
+            <Font size="24.0" />
          </font>
       </Button>
    </children>

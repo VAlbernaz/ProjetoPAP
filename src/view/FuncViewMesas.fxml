@@ -23,42 +23,42 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button fx:id="btnMUm" layoutX="113.0" layoutY="156.0" mnemonicParsing="false" onAction="#mesaUM" prefHeight="99.0" prefWidth="245.0" style="-fx-border-color: #01DF01; -fx-background-color: #70eb80;" text="1">
+      <Button fx:id="btnMUm" layoutX="113.0" layoutY="156.0" mnemonicParsing="false" onAction="#mesaUM" prefHeight="99.0" prefWidth="245.0" text="1">
          <font>
             <Font size="49.0" />
          </font>
       </Button>
-      <Button fx:id="btnMSete" layoutX="113.0" layoutY="560.0" mnemonicParsing="false" onAction="#mesaSete" prefHeight="99.0" prefWidth="245.0" style="-fx-border-color: #01DF01; -fx-background-color: #70eb80;" text="7">
+      <Button fx:id="btnMSete" layoutX="113.0" layoutY="560.0" mnemonicParsing="false" onAction="#mesaSete" prefHeight="99.0" prefWidth="245.0" text="7">
          <font>
             <Font size="49.0" />
          </font>
       </Button>
-      <Button fx:id="btnMSeis" layoutX="393.0" layoutY="426.0" mnemonicParsing="false" onAction="#mesaSeis" prefHeight="99.0" prefWidth="245.0" style="-fx-border-color: #01DF01; -fx-background-color: #70eb80;" text="6">
+      <Button fx:id="btnMSeis" layoutX="393.0" layoutY="426.0" mnemonicParsing="false" onAction="#mesaSeis" prefHeight="99.0" prefWidth="245.0" text="6">
          <font>
             <Font size="49.0" />
          </font>
       </Button>
-      <Button fx:id="btnMCinco" layoutX="113.0" layoutY="426.0" mnemonicParsing="false" onAction="#mesaCinco" prefHeight="99.0" prefWidth="245.0" style="-fx-border-color: #01DF01; -fx-background-color: #70eb80;" text="5">
+      <Button fx:id="btnMCinco" layoutX="113.0" layoutY="426.0" mnemonicParsing="false" onAction="#mesaCinco" prefHeight="99.0" prefWidth="245.0" text="5">
          <font>
             <Font size="49.0" />
          </font>
       </Button>
-      <Button fx:id="btnMQuatro" layoutX="393.0" layoutY="295.0" mnemonicParsing="false" onAction="#mesaQuatro" prefHeight="99.0" prefWidth="245.0" style="-fx-border-color: #01DF01; -fx-background-color: #70eb80;" text="4">
+      <Button fx:id="btnMQuatro" layoutX="393.0" layoutY="295.0" mnemonicParsing="false" onAction="#mesaQuatro" prefHeight="99.0" prefWidth="245.0" text="4">
          <font>
             <Font size="49.0" />
          </font>
       </Button>
-      <Button fx:id="btnMTres" layoutX="113.0" layoutY="295.0" mnemonicParsing="false" onAction="#mesaTres" prefHeight="99.0" prefWidth="245.0" style="-fx-border-color: #01DF01; -fx-background-color: #70eb80;" text="3">
+      <Button fx:id="btnMTres" layoutX="113.0" layoutY="295.0" mnemonicParsing="false" onAction="#mesaTres" prefHeight="99.0" prefWidth="245.0" text="3">
          <font>
             <Font size="49.0" />
          </font>
       </Button>
-      <Button fx:id="btnMDois" layoutX="393.0" layoutY="156.0" mnemonicParsing="false" onAction="#mesaDois" prefHeight="99.0" prefWidth="245.0" style="-fx-border-color: #01DF01; -fx-background-color: #70eb80;" text="2">
+      <Button fx:id="btnMDois" layoutX="393.0" layoutY="156.0" mnemonicParsing="false" onAction="#mesaDois" prefHeight="99.0" prefWidth="245.0" text="2">
          <font>
             <Font size="49.0" />
          </font>
       </Button>
-      <Button fx:id="btnMOito" layoutX="393.0" layoutY="560.0" mnemonicParsing="false" onAction="#mesaOito" prefHeight="99.0" prefWidth="245.0" style="-fx-border-color: #01DF01; -fx-background-color: #70eb80;" text="8">
+      <Button fx:id="btnMOito" layoutX="393.0" layoutY="560.0" mnemonicParsing="false" onAction="#mesaOito" prefHeight="99.0" prefWidth="245.0" text="8">
          <font>
             <Font size="49.0" />
          </font>
@@ -68,12 +68,12 @@
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
-      <Button fx:id="btnMNove" layoutX="114.0" layoutY="694.0" mnemonicParsing="false" onAction="#mesaNove" prefHeight="99.0" prefWidth="245.0" style="-fx-border-color: #01DF01; -fx-background-color: #70eb80;" text="9">
+      <Button fx:id="btnMNove" layoutX="114.0" layoutY="694.0" mnemonicParsing="false" onAction="#mesaNove" prefHeight="99.0" prefWidth="245.0" text="9">
          <font>
             <Font size="49.0" />
          </font>
       </Button>
-      <Button fx:id="btnMDez" layoutX="394.0" layoutY="694.0" mnemonicParsing="false" onAction="#mesaDez" prefHeight="99.0" prefWidth="245.0" style="-fx-border-color: #01DF01; -fx-background-color: #70eb80;" text="10">
+      <Button fx:id="btnMDez" layoutX="394.0" layoutY="694.0" mnemonicParsing="false" onAction="#mesaDez" prefHeight="99.0" prefWidth="245.0" text="10">
          <font>
             <Font size="49.0" />
          </font>

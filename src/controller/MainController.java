@@ -48,8 +48,6 @@ public class MainController {
         //Mudar password e ve de acordo com a bd
         if(this.cbUser.getValue().equals("Admin") &&this.pfPassword.getText().equals("123"))
         {
-            //Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();
-            // stage1.close();
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminView.fxml"));
                 Parent root = loader.load();

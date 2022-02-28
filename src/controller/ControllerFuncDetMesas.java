@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Mesas;
 import model.MySQlConnection;
 import model.Pedidos;
 import model.Produtos;
@@ -66,6 +67,8 @@ public class ControllerFuncDetMesas {
 
     private ObservableList<Pedidos> detalhesPedido;
 
+
+
     int nPedido = 0;
     int idfunc =0;
 
@@ -75,6 +78,7 @@ public class ControllerFuncDetMesas {
         IVLogo.setImage(image);
 
         detalhesPedido = FXCollections.observableArrayList();
+
 
         this.colProduto.setCellValueFactory(new PropertyValueFactory<Pedidos,String>("produto"));
         this.colQtd.setCellValueFactory(new PropertyValueFactory<Pedidos,String>("qtd"));
@@ -147,7 +151,7 @@ public class ControllerFuncDetMesas {
         connection = new MySQlConnection();
         connection.trocaEstadoMesa(numesa,"True");
         ControllerFuncMesas controller = new ControllerFuncMesas();
-        controller.alteraEstilo();
+        //chamar funçao
     }
 
     @FXML

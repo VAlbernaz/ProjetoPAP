@@ -214,6 +214,27 @@ public class MySQlConnection {
             return false;
         }
     }
+    public boolean deleteProd(int idproduto)
+    {
+        try {
+            //preprar a inserção da nova linha
+            String sql = "SET FOREIGN_KEY_CHECKS=0;";
+            String sql1= "DELETE FROM produto WHERE idproduto ="+idproduto+";";
+            Statement statement = connection.createStatement();
+
+            //executar a inserção
+            statement.executeUpdate(sql);
+            int linhas = statement.executeUpdate(sql1);
+            if (linhas == 1) {
+                return true;
+
+            } else return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     public ResultSet getProdutos()
     {
         ResultSet result = null;
@@ -365,23 +386,16 @@ public class MySQlConnection {
         ResultSet result = null;
         try{
         String sql = "UPDATE mesas SET mesas.disponibilidade = (\""+estado+"\") WHERE mesas.idmesas ="+numMesa+";";
-
         PreparedStatement statement = connection.prepareStatement(sql);
-
-
-
             int linhas = statement.executeUpdate();
             if (linhas == 1) {
                 return true;
-
             } else return false;
-
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return false;
         }
-
     }
     public ResultSet getFaturas(String sql)
     {
@@ -548,6 +562,36 @@ public class MySQlConnection {
             s.executeUpdate(sql2);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+    }
+
+    public ResultSet verificaStock(int idProduto)
+    {
+        ResultSet result = null;
+        String sql = "SELECT qtd \n" +
+                "FROM produto\n" +
+                "WHERE idproduto ="+idProduto+";";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+    public Boolean atualizaStock(int idProduto, int qtd) {
+        ResultSet result = null;
+        try{
+            String sql = "UPDATE produto SET qtd = qtd-"+qtd+" WHERE idproduto ="+idProduto+";";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            int linhas = statement.executeUpdate();
+            if (linhas == 1) {
+                return true;
+            } else return false;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
         }
     }
 }

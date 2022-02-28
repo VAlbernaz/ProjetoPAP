@@ -1,8 +1,12 @@
 package controller;
 
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -16,14 +20,12 @@ import model.MySQlConnection;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
-public class ControllerFuncMesas {
+public class ControllerFuncMesas implements Initializable {
 
     @FXML
     private ImageView IVLogo;
@@ -65,88 +67,78 @@ public class ControllerFuncMesas {
 
     private  ArrayList<String> disponibilidade = new ArrayList<String>();
 
-    public void initialize()
-    {
+    ObservableList<Button> botoes;
+
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         File file = new File("logo.png");
         Image image = new Image(file.toURI().toString());
         IVLogo.setImage(image);
 
-        alteraEstilo();
+        botoes = FXCollections.observableArrayList();
+
+        //https://stackoverflow.com/questions/21848068/javafx-share-object-between-controllers
+
+         botoes.addAll(btnMUm,btnMDois,btnMTres,btnMQuatro,btnMCinco,btnMSeis,btnMSete,btnMOito,btnMNove,btnMDez);
+
+        alteraEstilo(botoes);
 
 
     }
 
+    public static final long TEMPO = (1000 * 1); // atualiza a cada 5 segundo
 
-
-
-    public void alteraEstilo()
+    public void alteraEstilo(ObservableList<Button> botoes)
     {
         connection = new MySQlConnection();
-        ResultSet result = connection.getDisponibilidade();
-        try {
-            while (result.next()) {
+        Timer timer = null;
+        if (timer == null) {
+            timer = new Timer();
+            TimerTask tarefa = new TimerTask() {
+                public void run() {
+                    Platform.runLater(() -> {
+                        try {
+                            connection = new MySQlConnection();
+                            ResultSet result = connection.getDisponibilidade();
+                            disponibilidade.clear();
+                            try {
+                                while (result.next()) {
 
-                disponibilidade.add(result.getString(1));
+                                    disponibilidade.add(result.getString(1));
+                                }
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
 
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+                            System.out.println(disponibilidade);
+
+                            System.out.println(Arrays.toString(botoes.toArray()));
+
+                            for(int i =0; i<10;i++) {
+
+                                botoes.get(i).setStyle(null);
+                                if (disponibilidade.get(i).equals("True")) {
+
+                                    botoes.get(i).setStyle("-fx-background-color: #70eb80");
+                                } else {
+                                    botoes.get(i).setStyle("-fx-background-color: #FE2E2E");
+                                }
+
+                            }
+
+                        } catch (Exception e) {
+
+                        }
+                    });
+                }
+            };
+            timer.scheduleAtFixedRate(tarefa, TEMPO, TEMPO);
         }
 
-        System.out.println(disponibilidade);
 
 
-           /*if (!disponibilidade.get(0).equals("True")) {
-                this.btnMUm.setStyle("-fx-background-color: #FE2E2E");
-            } else {
-                this.btnMUm.setStyle("-fx-background-color: #70eb80");
-            }
-            if (!disponibilidade.get(1).equals("True")) {
-                this.btnMDois.setStyle("-fx-background-color: #FE2E2E");
-            } else {
-                this.btnMDois.setStyle("-fx-background-color: #70eb80");
-            }
-            if (!disponibilidade.get(2).equals("True")) {
-                this.btnMTres.setStyle("-fx-background-color: #FE2E2E");
-            } else {
-                this.btnMTres.setStyle("-fx-background-color: #70eb80");
-            }
-            if (!disponibilidade.get(3).equals("True")) {
-                this.btnMQuatro.setStyle("-fx-background-color: #FE2E2E");
-            } else {
-                this.btnMQuatro.setStyle("-fx-background-color: #70eb80");
-            }
-            if (!disponibilidade.get(4).equals("True")) {
-                this.btnMCinco.setStyle("-fx-background-color: #FE2E2E");
-            } else {
-                this.btnMCinco.setStyle("-fx-background-color: #70eb80");
-            }
-            if (!disponibilidade.get(5).equals("True")) {
-                this.btnMSeis.setStyle("-fx-background-color: #FE2E2E");
-            } else {
-                this.btnMSeis.setStyle("-fx-background-color: #70eb80");
-            }
-            if (!disponibilidade.get(6).equals("True")) {
-                this.btnMSete.setStyle("-fx-background-color: #FE2E2E");
-            } else {
-                this.btnMSete.setStyle("-fx-background-color: #70eb80");
-            }
-            if (!disponibilidade.get(7).equals("True")) {
-                this.btnMOito.setStyle("-fx-background-color: #FE2E2E");
-            } else {
-                this.btnMOito.setStyle("-fx-background-color: #70eb80");
-            }
-            if (!disponibilidade.get(8).equals("True")) {
-                this.btnMNove.setStyle("-fx-background-color: #FE2E2E");
-            } else {
-                this.btnMNove.setStyle("-fx-background-color: #70eb80");
-
-            }
-            if (!disponibilidade.get(9).equals("True")) {
-                this.btnMDez.setStyle("-fx-background-color: #FE2E2E");
-            } else {
-                this.btnMDez.setStyle("-fx-background-color: #70eb80");
-            }*/
     }
 
     @FXML
@@ -181,9 +173,6 @@ public class ControllerFuncMesas {
 
     @FXML
     void mesaDois(ActionEvent event) {
-
-
-
         int numMesa = 2;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewDetMesas.fxml"));
@@ -486,4 +475,6 @@ public class ControllerFuncMesas {
         alerta.setContentText(texto);
         alerta.showAndWait();
     }
+
+
 }

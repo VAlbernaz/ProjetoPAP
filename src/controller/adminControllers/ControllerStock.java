@@ -27,6 +27,9 @@ public class ControllerStock {
     private Button btnEdit;
 
     @FXML
+    private Button btnEliminar;
+
+    @FXML
     private Button btnVoltar;
 
     @FXML
@@ -51,6 +54,7 @@ public class ControllerStock {
 
 
     private Produtos linhaProduto;
+    private Produtos linhaEliminar;
 
     private ObservableList<Produtos> listaProdutos;
 
@@ -103,6 +107,36 @@ public class ControllerStock {
 
         }
 
+    }
+    @FXML
+    void eliminar(ActionEvent event) {
+        linhaEliminar =this.tblStock.getSelectionModel().getSelectedItem();
+
+        if(linhaEliminar==null)
+        {
+            alert(Alert.AlertType.ERROR,"ERRO!","Selecione uma linha!");
+        }else {
+            int id=linhaEliminar.getID();
+            String produto= this.linhaEliminar.getProduto();
+
+            Alert alerta=new Alert(Alert.AlertType.CONFIRMATION);
+            alerta.setTitle("Atenção!");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Tem a certeza que deseja eliminar o produto: " + produto);
+            alerta.showAndWait().ifPresent(response ->{
+                if (response == ButtonType.OK) {
+                    connection=new MySQlConnection();
+                    if(connection.deleteProd(id))
+                    {
+                        alert(Alert.AlertType.INFORMATION, "Produto eliminado!","Produto eliminado com sucesso.");
+                        this.tblStock.getItems().clear();
+                        tabela();
+                    }
+                } else if (response == ButtonType.CANCEL) {
+
+                }
+            });
+        }
     }
     public void tabela()
     {

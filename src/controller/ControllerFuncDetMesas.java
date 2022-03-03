@@ -135,7 +135,7 @@ public class ControllerFuncDetMesas {
                     detalhesPedido.add(p);
 
                 }
-                //mostra o pedido na tabela
+                //mostra o  pedido na tabela
                 this.tblDetPedido.setItems(detalhesPedido);
 
             }

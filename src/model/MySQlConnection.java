@@ -18,7 +18,7 @@ public class MySQlConnection {
 
     //metodo para fazer a ligaçao
     public void setConnection() {
-        p = new Properties();
+         p = new Properties();
         try {
             InputStream input = new FileInputStream("dbConfig.properties");
             p.load(input);

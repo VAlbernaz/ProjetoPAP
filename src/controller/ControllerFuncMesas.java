@@ -81,7 +81,7 @@ public class ControllerFuncMesas implements Initializable {
 
         //https://stackoverflow.com/questions/21848068/javafx-share-object-between-controllers
 
-         botoes.addAll(btnMUm,btnMDois,btnMTres,btnMQuatro,btnMCinco,btnMSeis,btnMSete,btnMOito,btnMNove,btnMDez);
+          botoes.addAll(btnMUm,btnMDois,btnMTres,btnMQuatro,btnMCinco,btnMSeis,btnMSete,btnMOito,btnMNove,btnMDez);
 
         alteraEstilo();
         connection = new MySQlConnection();

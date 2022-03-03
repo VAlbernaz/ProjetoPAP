@@ -418,7 +418,7 @@ public class ControllerFuncPedidos {
 
             alert(Alert.AlertType.INFORMATION, "Obrigado!", "Pedido Finalizado");
 
-            connection.trocaEstadoMesa(numMesa,"False");
+             connection.trocaEstadoMesa(numMesa,"False");
 
 
 

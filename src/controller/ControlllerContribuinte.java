@@ -116,7 +116,7 @@ public class ControlllerContribuinte {
             alert(Alert.AlertType.INFORMATION, "Obrigado!", "Pedido pago com sucesso!");
             connection.trocaEstadoMesa(numMesa,"True");
         }else{
-            alert(Alert.AlertType.WARNING,"Ocorreu um erro","Tente outra vez");
+             alert(Alert.AlertType.WARNING,"Ocorreu um erro","Tente outra vez");
         }
 
 

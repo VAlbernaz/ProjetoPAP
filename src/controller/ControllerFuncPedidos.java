@@ -298,12 +298,17 @@ public class ControllerFuncPedidos {
             }
         }else
         {
-            tipo=7;
-            double preco = Double.parseDouble(precoR);
-            pedido= new Pedidos(7,"Retalho",preco,1,"",8);
-            this.listaPedidos.add(pedido);
-            System.out.println(tipo);
-            this.tfRetalho.setText("");
+            try {
+                tipo=7;
+                double preco = Double.parseDouble(precoR);
+                pedido= new Pedidos(7,"Retalho",preco,1,"",8);
+                this.listaPedidos.add(pedido);
+                System.out.println(tipo);
+                this.tfRetalho.setText("");
+            }catch (Exception e)
+            {
+                alert(Alert.AlertType.ERROR, "ATENÇÃO", "Verifique o valor!");
+            }
         }
 
 
@@ -415,8 +420,6 @@ public class ControllerFuncPedidos {
 
             connection.trocaEstadoMesa(numMesa,"False");
 
-            ControllerFuncMesas controller = new ControllerFuncMesas();
-           // controller.alteraEstilo();
 
 
 

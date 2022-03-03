@@ -150,8 +150,9 @@ public class ControllerFuncDetMesas {
     void ClearMesa(ActionEvent event) {
         connection = new MySQlConnection();
         connection.trocaEstadoMesa(numesa,"True");
-        ControllerFuncMesas controller = new ControllerFuncMesas();
-        //chamar funçao
+
+        Stage stage = (Stage) this.btnClearMesa.getScene().getWindow();
+        stage.close();
     }
 
     @FXML

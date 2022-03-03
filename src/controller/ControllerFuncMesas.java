@@ -83,16 +83,16 @@ public class ControllerFuncMesas implements Initializable {
 
          botoes.addAll(btnMUm,btnMDois,btnMTres,btnMQuatro,btnMCinco,btnMSeis,btnMSete,btnMOito,btnMNove,btnMDez);
 
-        alteraEstilo(botoes);
-
+        alteraEstilo();
+        connection = new MySQlConnection();
 
     }
 
-    public static final long TEMPO = (1000 * 1); // atualiza a cada 5 segundo
+    public static final long TEMPO = (200); // atualiza a cada 5 segundo
 
-    public void alteraEstilo(ObservableList<Button> botoes)
+    public void alteraEstilo()
     {
-        connection = new MySQlConnection();
+
         Timer timer = null;
         if (timer == null) {
             timer = new Timer();
@@ -112,9 +112,9 @@ public class ControllerFuncMesas implements Initializable {
                                 e.printStackTrace();
                             }
 
-                            System.out.println(disponibilidade);
+                            //System.out.println(disponibilidade);
 
-                            System.out.println(Arrays.toString(botoes.toArray()));
+                            //System.out.println(Arrays.toString(botoes.toArray()));
 
                             for(int i =0; i<10;i++) {
 
@@ -129,16 +129,13 @@ public class ControllerFuncMesas implements Initializable {
                             }
 
                         } catch (Exception e) {
-
+                            alert(Alert.AlertType.ERROR, "ATENÇÃO", "Verifique o valor!");
                         }
                     });
                 }
             };
             timer.scheduleAtFixedRate(tarefa, TEMPO, TEMPO);
         }
-
-
-
     }
 
     @FXML

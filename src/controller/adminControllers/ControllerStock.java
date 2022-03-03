@@ -93,17 +93,23 @@ public class ControllerStock {
         {
             alert(Alert.AlertType.ERROR,"ERRO!","Selecione uma linha!");
         }else {
-            int ID= this.linhaProduto.getID();
-            int newQtd= Integer.parseInt(tfEditQtd.getText());
-            String produto= this.tfEditProduto.getText();
-            Produtos p = new Produtos(ID,produto,newQtd);
-            if(connection.esditQtd(p)){
-                alert(Alert.AlertType.CONFIRMATION,"SUCESSO","Editado com sucesso!");
-                this.tblStock.getItems().clear();
-                tabela();
-            }else{
-                alert(Alert.AlertType.ERROR,"ATENÇÃO","Ocorreu um problema!");
+            try {
+                int ID= this.linhaProduto.getID();
+                int newQtd= Integer.parseInt(tfEditQtd.getText());
+                String produto= this.tfEditProduto.getText();
+                Produtos p = new Produtos(ID,produto,newQtd);
+                if(connection.esditQtd(p)){
+                    alert(Alert.AlertType.CONFIRMATION,"SUCESSO","Editado com sucesso!");
+                    this.tblStock.getItems().clear();
+                    tabela();
+                }else{
+                    alert(Alert.AlertType.ERROR,"ATENÇÃO","Ocorreu um problema!");
+                }
+            }catch (Exception e)
+            {
+                alert(Alert.AlertType.ERROR, "ATENÇÃO", "Verifique o quantidade!");
             }
+
 
         }
 

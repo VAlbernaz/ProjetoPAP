@@ -116,29 +116,24 @@ public class ControlllerAddProduto {
     @FXML
     void concluir(ActionEvent event) {
         try {
+            //se nenhum dos campos for igual a null recolhe os dados dos componentes
             if(!this.tfProduto.getText().isEmpty()||this.tfPreco.getText().isEmpty()||!(this.cbFornecedor.getValue()==null)||!(this.cbTipo.getValue()==null)) {
                 String produto = this.tfProduto.getText();
-                System.out.println(produto);
                 String preco = this.tfPreco.getText();
 
                     double precoD = Double.parseDouble(preco);
-                    System.out.println(precoD);
                     String fornecedor = this.cbFornecedor.getValue();
-                    System.out.println(fornecedor);
                     ResultSet result = connection.getIdFornecedor(fornecedor);
                     nFornecedor(fornecedor);
-
                     String tipo = this.cbTipo.getValue();
-                    System.out.println(tipo);
                     nTipo(tipo);
 
+
+                    //cria um objeto do tipo Produtos com os valores recolhidos
                     Produtos p = new Produtos(produto, precoD, nFornecedor, nTipo);
 
 
-                    System.out.println(nFornecedor);
-                    System.out.println(nTipo);
-
-                    // adicionar na bd
+                    // adiciona na bd
                     if (connection.inserirProduto(p)) {
                         alert(Alert.AlertType.INFORMATION, "SUCESSO", "Produto adicionado com sucesso!");
 
@@ -162,6 +157,8 @@ public class ControlllerAddProduto {
     }
 
     public  void nFornecedor(String fornecedor) {
+
+        //recolhe o id do fornecedor
         ResultSet result = connection.getIdFornecedor(fornecedor);
         try {
             while (result.next()) {
@@ -176,6 +173,7 @@ public class ControlllerAddProduto {
 
     public  void nTipo(String tipo) {
 
+        // recolhe o id do tipo do produto
         connection = new MySQlConnection();
         ResultSet result = connection.getIdTipo(tipo);
         try {

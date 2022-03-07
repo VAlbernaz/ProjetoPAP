@@ -119,7 +119,7 @@ public class ControllerAdmin {
 
     public void tabela()
     {
-
+        //preenche tabela com os funcionarios que estao adicionados na base de dados
         ResultSet result = connection.getFunc();
         try {
 
@@ -142,6 +142,7 @@ public class ControllerAdmin {
     public void atualizar(ActionEvent actionEvent) {
         linhaFuncionario=this.tvFunc.getSelectionModel().getSelectedItem();
 
+        //se a linhafuncionario nao for null atualiza na base de dados o estado do funcionario em questao
         if(linhaFuncionario==null)
         {
             alert(Alert.AlertType.ERROR,"ERRO!","Selecione uma linha!");
@@ -168,6 +169,7 @@ public class ControllerAdmin {
 
     @FXML
     void AddFunc(ActionEvent event) {
+        //se nenhum dos compos for igual a null recolhe os valores dos componentes
         if(!this.tfPrimNome.getText().isEmpty()||this.tfUltiNome.getText().isEmpty()||!(this.cbSexo.getValue()==null)||!(this.dpDataNascimento.getValue()==null)||!this.tfNumFunc.getText().isEmpty())
         {
             String primNome = this.tfPrimNome.getText();
@@ -178,6 +180,7 @@ public class ControllerAdmin {
 
             Funcionarios f = new Funcionarios(primNome,ultiNome,dataNascimento,sexo,numFunc);
 
+            //adiciona funcionario na base de dados
             if(connection.inserirFuncionario(f)) {
                 alert(Alert.AlertType.INFORMATION,"SUCESSO","Funcionário adicionada com sucesso!");
                 this.tvFunc.getItems().clear();
@@ -297,25 +300,6 @@ public class ControllerAdmin {
             e.printStackTrace();
         }
     }
-
-    /*@FXML
-    void showReceitas(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AdminViews/ReceitaAdminView.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("GESRES 1.0");
-            //nao permitir maximizar tela
-            stage.resizableProperty().setValue(Boolean.FALSE);
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.setScene(scene);
-            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }*/
 
     public void addProduto(ActionEvent actionEvent) {
         try {

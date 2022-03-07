@@ -33,6 +33,7 @@ public class ControllerCodigoFunc {
     }
 
     public String numFunc(){
+        //recolhe o numero de funcionario retornando o mesmo
         String num =this.tfCodigoFunc.getText();
         return num;
     }

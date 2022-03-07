@@ -187,12 +187,13 @@ public class ControllerFuncPedidos {
 
 
     void numPedido()  {
+
         connection = new MySQlConnection();
         ResultSet result = connection.getNumPedido();
 
+        //recolhe o numero do ultimo pedido e adiciona 1 ao seu valor originando o numero do novo pedido
         try {
             while(result.next()) {
-
 
                 numPdd = result.getInt(1) + 1;
             }
@@ -205,11 +206,12 @@ public class ControllerFuncPedidos {
     }
 
     void setNumFunc(int numFunc) {
-        System.out.println(numFunc);
+        //recolhe o numero do funcionario
         connection = new MySQlConnection();
         numFuncio = numFunc;
         ResultSet result = connection.nomeFunc(numFunc);
         String nomeFunc="";
+        //pesquisa o nome do funcionario e mostra na label
         try {
             while (result.next()) {
                 nomeFunc = result.getString(1);
@@ -224,6 +226,7 @@ public class ControllerFuncPedidos {
 
     public void tabelaProdutos(int tipos)
     {
+        //preenche a tabela dos produtos correspondente ao tipo do produto
         connection = new MySQlConnection();
         ResultSet result = connection.getProduto(tipos);
         try {
@@ -283,7 +286,6 @@ public class ControllerFuncPedidos {
                         if((stock-qtd)>=0) {
                             pedido = new Pedidos(idProduto, produto, preco, qtd, obs, ntipo);
                             this.listaPedidos.add(pedido);
-                            System.out.println(tipo);
                         }else{ // se nao tiver stock suficiente lança alerta
                             //alert(Alert.AlertType.WARNING,"Stock",produto + " não tem stock suficiente. \n Stock disponivel:  " + stock);
 
@@ -300,12 +302,12 @@ public class ControllerFuncPedidos {
         {
             try {
                 tipo=7;
+                //passa o valor da textfield para double
                 double preco = Double.parseDouble(precoR);
                 pedido= new Pedidos(7,"Retalho",preco,1,"",8);
                 this.listaPedidos.add(pedido);
-                System.out.println(tipo);
                 this.tfRetalho.setText("");
-            }catch (Exception e)
+            }catch (Exception e)//se ocorrer uma excessao lança o alerta
             {
                 alert(Alert.AlertType.ERROR, "ATENÇÃO", "Verifique o valor!");
             }
@@ -315,51 +317,11 @@ public class ControllerFuncPedidos {
     }
     @FXML
     void add(ActionEvent event) {
+        //chama a funçao get linha e adiciona na tabela de pedidos a observableList listaPedidos
         getlinha();
         tblPedido.setItems(listaPedidos);
         this.spnQTD.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10000));
     }
-
-    public void refreshTabela()
-    {
-        this.tblPedido.getItems().clear();
-        this.tblPedido.setItems(listaPedidos);
-    }
-
-
-   /* @FXML
-    void editar(ActionEvent event) {
-        linhaPedido = this.tblPedido.getSelectionModel().getSelectedItem();
-        if(linhaPedido==null)
-        {
-            alert(Alert.AlertType.ERROR,"ERRO!","Selecione uma linha do pedido!");
-        }else {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../../vistas e controllers nao usados/EditProdutoPedidoView.fxml"));
-                Parent root = loader.load();
-
-                ControlllerEditProdutoPedido controller = loader.getController();
-                pedidos novoEditado = controller.getProduto(linhaPedido);
-
-
-                Scene scene = new Scene(root);
-                Stage stage = new Stage();
-                stage.setTitle("GESRES 1.0");
-                //nao permitir maximizar tela
-                stage.resizableProperty().setValue(Boolean.FALSE);
-                stage.initModality(Modality.WINDOW_MODAL);
-                stage.setScene(scene);
-                stage.showAndWait();
-
-                this.listaPedidos.remove(linhaPedido);
-                this.listaPedidos.add(novoEditado);
-                this.tblPedido.setItems(listaPedidos);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
 
     @FXML
     void eliminar(ActionEvent event) {
@@ -380,7 +342,6 @@ public class ControllerFuncPedidos {
         if(this.listaPedidos.size() != 0) {
             //por segurança elimina os pedidos da base de dados caso existem com o mesmo id que o numPdd
             connection.deletePedidoEdetalhes(numPdd);
-            System.out.println(numPdd);
             //e cria um novo pedido
             connection.createPedido(numMesa, idFunc);
 
@@ -435,6 +396,7 @@ public class ControllerFuncPedidos {
         return this.listaPedidos.size();
     }
 
+    //fazer da mesma forma que o pedido
     @FXML
     void preencheBebidasAlcool(ActionEvent event) {
         tipo=3;

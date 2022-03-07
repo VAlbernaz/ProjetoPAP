@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -29,6 +30,9 @@ public class ControllerFuncMesas implements Initializable {
 
     @FXML
     private ImageView IVLogo;
+
+    @FXML
+    private Button btnFechar;
 
     @FXML
     private Button btnMCinco;
@@ -79,9 +83,7 @@ public class ControllerFuncMesas implements Initializable {
 
         botoes = FXCollections.observableArrayList();
 
-        //https://stackoverflow.com/questions/21848068/javafx-share-object-between-controllers
-
-          botoes.addAll(btnMUm,btnMDois,btnMTres,btnMQuatro,btnMCinco,btnMSeis,btnMSete,btnMOito,btnMNove,btnMDez);
+        botoes.addAll(btnMUm,btnMDois,btnMTres,btnMQuatro,btnMCinco,btnMSeis,btnMSete,btnMOito,btnMNove,btnMDez);
 
         alteraEstilo();
         connection = new MySQlConnection();
@@ -92,7 +94,7 @@ public class ControllerFuncMesas implements Initializable {
 
     public void alteraEstilo()
     {
-
+        //executa a funçao de 200 em 200 milesimas de segundo
         Timer timer = null;
         if (timer == null) {
             timer = new Timer();
@@ -112,17 +114,17 @@ public class ControllerFuncMesas implements Initializable {
                                 e.printStackTrace();
                             }
 
-                            //System.out.println(disponibilidade);
 
-                            //System.out.println(Arrays.toString(botoes.toArray()));
 
                             for(int i =0; i<10;i++) {
 
                                 botoes.get(i).setStyle(null);
+
+                                //se a disponibilidade do butao foir igual a "True" o botao fica verde
                                 if (disponibilidade.get(i).equals("True")) {
 
                                     botoes.get(i).setStyle("-fx-background-color: #70eb80");
-                                } else {
+                                } else {//caso contrário fica vermelho
                                     botoes.get(i).setStyle("-fx-background-color: #FE2E2E");
                                 }
 
@@ -139,38 +141,19 @@ public class ControllerFuncMesas implements Initializable {
     }
 
     @FXML
-    void mesaUM(ActionEvent event) {
-
-        int numMesa = 1;
-        // true= verde   false = vermelho
-
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewDetMesas.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("GESRES 1.0");
-
-            stage.resizableProperty().setValue(Boolean.FALSE);
-
-            ControllerFuncDetMesas controller = loader.getController();
-            controller.getNmMesa(numMesa);
-
-
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+    void mesas(ActionEvent event) {
+        //recolhe o id do botao selecionado
+        Node source = (Node) event.getSource();
+        String id = source.getId();
+        //a descobre o numero da mesa correspondente ao botao
+        int numMesa=0;
+        for(int i =0; i< botoes.size();i++) {
+            if(botoes.get(i).getId().equals(id))
+            {
+                numMesa = i+1;
+            }
         }
-    }
-
-
-    @FXML
-    void mesaDois(ActionEvent event) {
-        int numMesa = 2;
+        //abre a vista de detalhes das mesas passando o numero da mesa
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewDetMesas.fxml"));
             Parent root = loader.load();
@@ -192,189 +175,7 @@ public class ControllerFuncMesas implements Initializable {
     }
 
     @FXML
-    void mesaTres(ActionEvent event) {
-        int numMesa = 3;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewDetMesas.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("GESRES 1.0");
-            stage.resizableProperty().setValue(Boolean.FALSE);
-
-            ControllerFuncDetMesas controller = loader.getController();
-            controller.getNmMesa(numMesa);
-
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void mesaQuatro(ActionEvent event) {
-        int numMesa = 4;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewDetMesas.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("GESRES 1.0");
-            stage.resizableProperty().setValue(Boolean.FALSE);
-
-            ControllerFuncDetMesas controller = loader.getController();
-            controller.getNmMesa(numMesa);
-
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void mesaCinco(ActionEvent event) {
-        int numMesa = 5;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewDetMesas.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("GESRES 1.0");
-            stage.resizableProperty().setValue(Boolean.FALSE);
-
-            ControllerFuncDetMesas controller = loader.getController();
-            controller.getNmMesa(numMesa);
-
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void mesaSeis(ActionEvent event) {
-        int numMesa = 6;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewDetMesas.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("GESRES 1.0");
-            stage.resizableProperty().setValue(Boolean.FALSE);
-
-            ControllerFuncDetMesas controller = loader.getController();
-            controller.getNmMesa(numMesa);
-
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    @FXML
-    void mesaSete(ActionEvent event) {
-        int numMesa = 7;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewDetMesas.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("GESRES 1.0");
-            stage.resizableProperty().setValue(Boolean.FALSE);
-
-            ControllerFuncDetMesas controller = loader.getController();
-            controller.getNmMesa(numMesa);
-
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void mesaOito(ActionEvent event) {
-        int numMesa = 8;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewDetMesas.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("GESRES 1.0");
-            stage.resizableProperty().setValue(Boolean.FALSE);
-
-            ControllerFuncDetMesas controller = loader.getController();
-            controller.getNmMesa(numMesa);
-
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void mesaNove(ActionEvent event) {
-        int numMesa = 9;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewDetMesas.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("GESRES 1.0");
-            stage.resizableProperty().setValue(Boolean.FALSE);
-
-            ControllerFuncDetMesas controller = loader.getController();
-            controller.getNmMesa(numMesa);
-
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void mesaDez(ActionEvent event) {
-        int numMesa = 10;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewDetMesas.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setTitle("GESRES 1.0");
-            stage.resizableProperty().setValue(Boolean.FALSE);
-
-            ControllerFuncDetMesas controller = loader.getController();
-            controller.getNmMesa(numMesa);
-
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    @FXML
-    void balcao(ActionEvent event) throws SQLException {
+    void balcao(ActionEvent event) {
         int numMesa =11;
         String numFunc = "";
         //abre a vista de pedir o numero de funcionario
@@ -394,7 +195,7 @@ public class ControllerFuncMesas implements Initializable {
             ControllerCodigoFunc controller = loader.getController();
             numFunc = controller.numFunc();
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
 
         //procura na base de dados um numero de funcionario igual ao numero introduzido
@@ -464,6 +265,27 @@ public class ControllerFuncMesas implements Initializable {
 
         }
     }
+
+    @FXML
+    void fechar(ActionEvent event) {
+        ResultSet result = connection.getTotalPedidosDia(1);
+        double total = 0.0;
+
+        try {
+            while (result.next())
+            {
+                total = result.getDouble(1);
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        //ao fechar a aplicação mostra o total de receita do dia
+        alert(Alert.AlertType.INFORMATION, "Fechou a cozinha!", "Receita total diária: " + total +" €");
+        System.exit(1);
+    }
+
+
     public void alert(Alert.AlertType type, String tit, String texto)
     {
         Alert alerta=new Alert(type);

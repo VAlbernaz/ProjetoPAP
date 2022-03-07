@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,7 +46,6 @@ public class MainController {
     }
     @FXML
     void login(ActionEvent event) {
-        //Mudar password e ve de acordo com a bd
         if(this.cbUser.getValue().equals("Admin") &&this.pfPassword.getText().equals("123"))
         {
             try {
@@ -72,10 +72,11 @@ public class MainController {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewMesas.fxml"));
                 Parent root = loader.load();
-                Scene scene = new Scene(root,750, 900);
+                Scene scene = new Scene(root,850, 900);
                 Stage stage = new Stage();
                 stage.setTitle("GESRES 1.0");
-                stage.resizableProperty().setValue(Boolean.FALSE);
+                stage.initStyle(StageStyle.UNDECORATED);
+                //stage.resizableProperty().setValue(Boolean.FALSE);
 
                 //fecha vista de login ao entrar
                 Stage stage1 = (Stage) this.btnEntrar.getScene().getWindow();

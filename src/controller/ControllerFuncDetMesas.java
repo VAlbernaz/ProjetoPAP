@@ -121,15 +121,12 @@ public class ControllerFuncDetMesas {
                 while (resultPedido.next())
                 {
                     int id = resultPedido.getInt(1);
-                    System.out.println(id);
                     String produto = resultPedido.getString(2);
                     int qtd = resultPedido.getInt(3);
                     double valor = resultPedido.getDouble(4);
                     String obs = resultPedido.getString(5);
-                    System.out.println(obs);
                     idfunc = resultPedido.getInt(6);
                     int idtipo = resultPedido.getInt(7);
-                    System.out.println("num func "+idfunc);
 
                     Pedidos p = new Pedidos(id,produto,valor,qtd,obs,idtipo);
                     detalhesPedido.add(p);
@@ -148,6 +145,7 @@ public class ControllerFuncDetMesas {
 
     @FXML
     void ClearMesa(ActionEvent event) {
+        //troca o estado da mesa em questao
         connection = new MySQlConnection();
         connection.trocaEstadoMesa(numesa,"True");
 
@@ -157,9 +155,10 @@ public class ControllerFuncDetMesas {
 
     @FXML
     void editPedido(ActionEvent event) {
+        //fecha a vista de detalhes das mesas
         Stage stageFechar = (Stage) this.btnEditPedido.getScene().getWindow();
         stageFechar.close();
-
+        //abre a vista de realizar pedidos
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/FuncViewPedidos.fxml"));
             Parent root = loader.load();
@@ -167,6 +166,7 @@ public class ControllerFuncDetMesas {
             Stage stage = new Stage();
             stage.setTitle("GESRES 1.0");
 
+            //passa o numero da mesa, a observableList de detalhes do pedido, o numero do pedido e o id do funcionario
             ControllerFuncPedidos controller = loader.getController();
             controller.getNmMesa(numesa);
             controller.getDetPedido(detalhesPedido, nPedido,idfunc);

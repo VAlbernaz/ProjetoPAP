@@ -53,8 +53,8 @@ public class ControlllerContribuinte {
     }
 
     public void getnMesa(int nmesa) throws SQLException {
+        // recolhe o numero da mesa
         numMesa = nmesa;
-
         connection = new MySQlConnection();
         ResultSet result =  connection.getNumPedidoMesa(numMesa);
         while (result.next())
@@ -65,7 +65,7 @@ public class ControlllerContribuinte {
 
         String str =this.lbPedido.getText();
         this.lbPedido.setText( str + numPedido);
-
+        //mostra o valor do ultimo pedido mesa na textfield
         ResultSet result1 = connection.getValorPedido(numPedido,numMesa);
         double valor = 0.0;
         while (result1.next()) {
@@ -75,6 +75,7 @@ public class ControlllerContribuinte {
     }
 
     public void preencheCB() throws SQLException {
+        //preenche a combobox com as formas de pagamento existentes na base de dados
         connection = new MySQlConnection();
         ResultSet result = connection.getFormasPagamento();
 
@@ -105,24 +106,34 @@ public class ControlllerContribuinte {
         //guarda o valor do contribuinte
         String contribuinte = this.tfContribuinte.getText();
 
-        if(!contribuinte.equals(""))
+        if(contribuinte.equals(""))
         {
             contribuinte=null;
         }
-        //cria objeto com todos os valores necessarios para adicionar na bd
-        Pagamento p = new Pagamento(numPedido,contribuinte,idForma);
-        //se a inserçao correr bem lança alerta e muda o estado da mesa
-        if(connection.setFatura(p)){
-            alert(Alert.AlertType.INFORMATION, "Obrigado!", "Pedido pago com sucesso!");
-            connection.trocaEstadoMesa(numMesa,"True");
-        }else{
-             alert(Alert.AlertType.WARNING,"Ocorreu um erro","Tente outra vez");
+
+        //verifica de o contribuinte é constituido apenas por numeros
+        boolean isNumeric = true;
+        for (int i = 0; i < contribuinte.length(); i++) {
+            if (!Character.isDigit(contribuinte.charAt(i))) {
+                isNumeric = false;
+            }
         }
 
-
-        Stage stage = (Stage) this.btnConcluir.getScene().getWindow();
-        stage.close();
-
+        if(contribuinte.length() == 9 && isNumeric) {
+            //cria objeto com todos os valores necessarios para adicionar na bd
+            Pagamento p = new Pagamento(numPedido, contribuinte, idForma);
+            //se a inserçao correr bem lança alerta e muda o estado da mesa
+            if (connection.setFatura(p)) {
+                alert(Alert.AlertType.INFORMATION, "Obrigado!", "Pedido pago com sucesso!");
+                connection.trocaEstadoMesa(numMesa, "True");
+            } else {
+                alert(Alert.AlertType.WARNING, "Ocorreu um erro", "Tente outra vez");
+            }
+            Stage stage = (Stage) this.btnConcluir.getScene().getWindow();
+            stage.close();
+        }else {
+            alert(Alert.AlertType.WARNING, "Atenção!", "O contribuinte tem que ter nove numeros.");
+        }
     }
     public void alert(Alert.AlertType type, String tit, String texto)
     {

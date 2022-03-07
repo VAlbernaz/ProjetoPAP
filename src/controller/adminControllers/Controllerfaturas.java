@@ -96,11 +96,12 @@ public class Controllerfaturas {
     }
     public void getStringSql(String sqlDate)
     {
+        //recebe o querry correspondennte à pesquise selecionada (dia, semana, mes)
         sql=sqlDate;
     }
     public void getFaturas()  {
+        // vai buscar as faturas correspondentes à pesquisa utilizando a string recebida anteriormente
         connection = new MySQlConnection();
-
         ResultSet result = connection.getFaturas(sql);
         try {
             while (result.next()){
@@ -114,7 +115,7 @@ public class Controllerfaturas {
         }catch (SQLException throwables) {
         throwables.printStackTrace();
         }
-
+        //preenche a tabela com o numero dos pedidos e respetiva data e valor total
         this.tblPedidos.setItems(listaFaturas);
     }
 
@@ -125,7 +126,7 @@ public class Controllerfaturas {
         this.tfContribuinte.setText("");
 
 
-
+        // o utilizador após sekecionar a linha o programa recolhe o num do pedido e vai buscar os detalhes à base de dados
         linhaFaturas = this.tblPedidos.getSelectionModel().getSelectedItem();
 
         if(linhaFaturas != null) {
@@ -136,13 +137,14 @@ public class Controllerfaturas {
                 String qtd = result.getString(2);
                 String preco = result.getString(3);
                 String func = result.getString(4);
-                //String contribuinte = result.getString(5);
+                String contribuinte = result.getString(5);
 
                 Faturas f = new Faturas(produto, qtd, preco, func);
                 this.listaDetalhes.add(f);
+                //preenche a tabela
                 this.tblDetalhes.setItems(listaDetalhes);
                 this.tfNomeFunc.setText(func);
-                //this.tfContribuinte.setText(contribuinte);
+                this.tfContribuinte.setText(contribuinte);
 
             }
         }else{

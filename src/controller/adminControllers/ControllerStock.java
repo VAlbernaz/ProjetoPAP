@@ -80,8 +80,8 @@ public class ControllerStock {
 
     @FXML
     void selecionaLinha(MouseEvent event) {
+        //da valor à observableList apenas selecionando a linha
         linhaProduto=this.tblStock.getSelectionModel().getSelectedItem();
-        System.out.println(linhaProduto.getProduto());
         this.tfEditProduto.setText(linhaProduto.getProduto());
 
     }
@@ -94,10 +94,12 @@ public class ControllerStock {
             alert(Alert.AlertType.ERROR,"ERRO!","Selecione uma linha!");
         }else {
             try {
+                //recolhe o id do produto
                 int ID= this.linhaProduto.getID();
                 int newQtd= Integer.parseInt(tfEditQtd.getText());
                 String produto= this.tfEditProduto.getText();
                 Produtos p = new Produtos(ID,produto,newQtd);
+                //faz o update na base de dados
                 if(connection.esditQtd(p)){
                     alert(Alert.AlertType.CONFIRMATION,"SUCESSO","Editado com sucesso!");
                     this.tblStock.getItems().clear();
@@ -105,9 +107,9 @@ public class ControllerStock {
                 }else{
                     alert(Alert.AlertType.ERROR,"ATENÇÃO","Ocorreu um problema!");
                 }
-            }catch (Exception e)
+            }catch (Exception e) // caso ocrorra alguma excessao lança o alerta
             {
-                alert(Alert.AlertType.ERROR, "ATENÇÃO", "Verifique o quantidade!");
+                alert(Alert.AlertType.ERROR, "ATENÇÃO", "Verifique a quantidade!");
             }
 
 
@@ -125,6 +127,11 @@ public class ControllerStock {
             int id=linhaEliminar.getID();
             String produto= this.linhaEliminar.getProduto();
 
+            /**
+             * lança alerta para confirmação
+             * se o utilizador preswsionar o botão cancel o produto nao é eliminado
+             * apenas é eçiminado apos pressionar o botão OK
+             * */
             Alert alerta=new Alert(Alert.AlertType.CONFIRMATION);
             alerta.setTitle("Atenção!");
             alerta.setHeaderText(null);
@@ -146,6 +153,7 @@ public class ControllerStock {
     }
     public void tabela()
     {
+        //mostra na tabela todos os produtos existentes na base de dados
         ResultSet result = connection.getProdutos();
         try {
 
@@ -166,6 +174,7 @@ public class ControllerStock {
 
     @FXML
     void voltar(ActionEvent event) {
+        //fecha a vista
         Stage stage = (Stage) this.btnVoltar.getScene().getWindow();
         stage.close();
     }

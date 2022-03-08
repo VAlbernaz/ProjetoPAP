@@ -287,12 +287,15 @@ public class ControllerFuncPedidos {
                             pedido = new Pedidos(idProduto, produto, preco, qtd, obs, ntipo);
                             this.listaPedidos.add(pedido);
                         }else{ // se nao tiver stock suficiente lança alerta
-                            //alert(Alert.AlertType.WARNING,"Stock",produto + " não tem stock suficiente. \n Stock disponivel:  " + stock);
+                            alert(Alert.AlertType.WARNING,"Stock",produto + " não tem stock suficiente. \n Stock disponivel:  " + stock);
 
                         }
                     }else{ // se nao tiver stock lança alerta
                         alert(Alert.AlertType.WARNING,"Stock",produto + " não está em stock. ");
                     }
+                }else if(ntipo == 7 || ntipo == 4) {
+                    pedido = new Pedidos(idProduto, produto, preco, qtd, obs, ntipo);
+                    this.listaPedidos.add(pedido);
                 }
 
                 this.tblProdutos.getSelectionModel().clearSelection();

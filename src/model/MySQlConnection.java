@@ -287,11 +287,11 @@ public class MySQlConnection {
     {
         try {
             //preprar a inserção da nova linha
-            String sql = "INSERT INTO pedidos(mesa,dataHora,idfuncionario)\n" + //mudar para idmesas quando refizer a base de dados
-                    "VALUES(?,CURRENT_TIMESTAMP,?);\n";
+            String sql = "INSERT INTO pedidos(dataHora,idfuncionario,idmesas)\n" +
+                    "VALUES(CURRENT_TIMESTAMP,?,?);\n";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, mesa);
-            statement.setInt(2, func);
+            statement.setInt(2, mesa);
+            statement.setInt(1, func);
 
             //executar a inserção
             int linhas = statement.executeUpdate();
@@ -372,7 +372,7 @@ public class MySQlConnection {
 
     public ResultSet getNumPedidoMesa(int nMesa) {
         ResultSet result=null;
-        String sql = "SELECT IF((SELECT mesas.disponibilidade FROM mesas WHERE idmesas="+nMesa+") = 'False', (SELECT MAX(idPedidos) FROM pedidos p WHERE p.mesa="+nMesa+"), (SELECT null));";//mudar para idmesas quando refizer a base de dados
+        String sql = "SELECT IF((SELECT mesas.disponibilidade FROM mesas WHERE idmesas="+nMesa+") = 'False', (SELECT MAX(idPedidos) FROM pedidos p WHERE p.idmesas="+nMesa+"), (SELECT null));";
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);
@@ -522,7 +522,7 @@ public class MySQlConnection {
         ResultSet result = null;
         String sql = "SELECT MAX(idpedidos)\n" +
                 "FROM pedidos" +
-                " WHERE mesa="+numMesa+";";//mudar para idmesas quando refizer a base de dados
+                " WHERE idmesas="+numMesa+";";
         try {
             Statement s = connection.createStatement();
             result = s.executeQuery(sql);

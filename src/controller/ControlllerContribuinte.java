@@ -91,39 +91,47 @@ public class ControlllerContribuinte {
          * buscar id da forma de pagamento
          * adicionar a tabela de faturas com os valores do id do pedido, contribuinte, id da forma de pagamento
          */
-        connection = new MySQlConnection();
-        //vai buscar id correspondente à forma de pagamento escolhida
-        ResultSet result= connection.getIdFormaPagamento(this.cbForma.getValue());
-        int idForma=0;
-        try {
-            while (result.next())
-            {
-                idForma = result.getInt(1);
-            }
-        } catch (SQLException e) {
-        e.printStackTrace();
-        }
-        //guarda o valor do contribuinte
-        String contribuinte = this.tfContribuinte.getText();
-
-        if(contribuinte.equals(""))
-        {
-            contribuinte=null;
-        }
-
-        /**
-         * ver isso para se o contribuinte for null
-         * */
-        if(contribuinte.length() >= 0) {
-            //verifica de o contribuinte é constituido apenas por numeros
-            boolean isNumeric = true;
-            for (int i = 0; i < contribuinte.length(); i++) {
-                if (!Character.isDigit(contribuinte.charAt(i))) {
-                    isNumeric = false;
+        if(this.cbForma.getValue() != null) {
+            connection = new MySQlConnection();
+            //vai buscar id correspondente à forma de pagamento escolhida
+            ResultSet result = connection.getIdFormaPagamento(this.cbForma.getValue());
+            int idForma = 0;
+            try {
+                while (result.next()) {
+                    idForma = result.getInt(1);
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+            //guarda o valor do contribuinte
+            String contribuinte = this.tfContribuinte.getText();
 
-            if (contribuinte.length() == 9 && isNumeric) {
+            if (contribuinte.length() > 0) {
+                //verifica de o contribuinte é constituido apenas por numeros
+                boolean isNumeric = true;
+                for (int i = 0; i < contribuinte.length(); i++) {
+                    if (!Character.isDigit(contribuinte.charAt(i))) {
+                        isNumeric = false;
+                    }
+                }
+
+                if (contribuinte.length() == 9 && isNumeric) {
+                    //cria objeto com todos os valores necessarios para adicionar na bd
+                    Pagamento p = new Pagamento(numPedido, contribuinte, idForma);
+                    //se a inserçao correr bem lança alerta e muda o estado da mesa
+                    if (connection.setFatura(p)) {
+                        alert(Alert.AlertType.INFORMATION, "Obrigado!", "Pedido pago com sucesso!");
+                        connection.trocaEstadoMesa(numMesa, "True");
+                    } else {
+                        alert(Alert.AlertType.WARNING, "Ocorreu um erro", "Tente outra vez");
+                    }
+                    Stage stage = (Stage) this.btnConcluir.getScene().getWindow();
+                    stage.close();
+                } else {
+                    alert(Alert.AlertType.WARNING, "Atenção!", "O contribuinte tem que ter nove numeros.");
+
+                }
+            } else {
                 //cria objeto com todos os valores necessarios para adicionar na bd
                 Pagamento p = new Pagamento(numPedido, contribuinte, idForma);
                 //se a inserçao correr bem lança alerta e muda o estado da mesa
@@ -135,23 +143,10 @@ public class ControlllerContribuinte {
                 }
                 Stage stage = (Stage) this.btnConcluir.getScene().getWindow();
                 stage.close();
-            } else {
-                alert(Alert.AlertType.WARNING, "Atenção!", "O contribuinte tem que ter nove numeros.");
 
             }
         }else {
-            //cria objeto com todos os valores necessarios para adicionar na bd
-            Pagamento p = new Pagamento(numPedido, contribuinte, idForma);
-            //se a inserçao correr bem lança alerta e muda o estado da mesa
-            if (connection.setFatura(p)) {
-                alert(Alert.AlertType.INFORMATION, "Obrigado!", "Pedido pago com sucesso!");
-                connection.trocaEstadoMesa(numMesa, "True");
-            } else {
-                alert(Alert.AlertType.WARNING, "Ocorreu um erro", "Tente outra vez");
-            }
-            Stage stage = (Stage) this.btnConcluir.getScene().getWindow();
-            stage.close();
-
+            alert(Alert.AlertType.WARNING, "Atenção!", "Selecione uma forma de pagamento.");
         }
 
     }

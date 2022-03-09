@@ -198,7 +198,7 @@ public class ControllerFuncPedidos {
                 numPdd = result.getInt(1) + 1;
             }
         } catch (SQLException e) {
-        e.printStackTrace();
+            e.printStackTrace();
         }
 
         str = this.lbPedido.getText();
@@ -378,11 +378,11 @@ public class ControllerFuncPedidos {
 
             }
 
-            
+
 
             alert(Alert.AlertType.INFORMATION, "Obrigado!", "Pedido Finalizado");
 
-             connection.trocaEstadoMesa(numMesa,"False");
+            connection.trocaEstadoMesa(numMesa,"False");
 
 
 
@@ -457,4 +457,3 @@ public class ControllerFuncPedidos {
 
 
 }
-

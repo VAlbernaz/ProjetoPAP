@@ -254,7 +254,7 @@ public class ControllerFuncMesas implements Initializable {
                     }
 
                 } catch (IOException e) {
-                    e.printStackTrace();
+
                 }
 
             } else {  //se nao existar lança alerta

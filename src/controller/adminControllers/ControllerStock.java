@@ -104,6 +104,9 @@ public class ControllerStock {
                     alert(Alert.AlertType.CONFIRMATION,"SUCESSO","Editado com sucesso!");
                     this.tblStock.getItems().clear();
                     tabela();
+
+                    this.tfEditProduto.setText("");
+                    this.tfEditQtd.setText("");
                 }else{
                     alert(Alert.AlertType.ERROR,"ATENÇÃO","Ocorreu um problema!");
                 }

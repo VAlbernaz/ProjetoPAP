@@ -218,7 +218,7 @@ public class ControllerFuncDetMesas {
 
 
             } catch (IOException e) {
-                e.printStackTrace();
+
             }
 
             Stage stage1 = (Stage) this.btnNovoPedido.getScene().getWindow();
@@ -273,7 +273,7 @@ public class ControllerFuncDetMesas {
                     }
 
                 } catch (IOException e) {
-                    e.printStackTrace();
+
                 }
 
 

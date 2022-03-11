@@ -51,6 +51,9 @@ public class ControllerAdmin {
     private Button btnAdd;
 
     @FXML
+    private Button btnLogout;
+
+    @FXML
     private ComboBox<String> cbSexo;
 
     @FXML
@@ -99,8 +102,8 @@ public class ControllerAdmin {
         Image image = new Image(file.toURI().toString());
         IVLogo.setImage(image);
 
-        this.cbAtividade.getItems().addAll("PRESENTE","AUSENTE");
-        this.cbSexo.getItems().addAll("F","M");
+        this.cbAtividade.getItems().addAll("Ativo", "De férias", "Em atestado", "Baixa Médica");
+        this.cbSexo.getItems().addAll("Masculino","Feminino","Outro");
         this.cbAtividade.setValue("AUSENTE");
 
         listaFuncionarios = FXCollections.observableArrayList();
@@ -192,6 +195,27 @@ public class ControllerAdmin {
             alert(Alert.AlertType.WARNING,"ATENÇÃO","Preencha todos os campos");
         }
 
+    }
+
+
+    @FXML
+    void logout(ActionEvent event) {
+        Stage stage = (Stage) this.btnLogout.getScene().getWindow();
+        stage.close();
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/MainView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage1 = new Stage();
+            stage.setTitle("GESRES 1.0");
+            //nao permitir maximizar tela
+            stage1.resizableProperty().setValue(Boolean.FALSE);
+            stage1.setScene(scene);
+            stage1.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 //menubar

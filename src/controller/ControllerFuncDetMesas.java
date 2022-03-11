@@ -171,7 +171,6 @@ public class ControllerFuncDetMesas {
             controller.getNmMesa(numesa);
             controller.getDetPedido(detalhesPedido, nPedido,idfunc);
 
-
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setScene(scene);
             stage.show();

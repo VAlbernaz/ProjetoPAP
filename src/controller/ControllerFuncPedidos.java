@@ -344,7 +344,7 @@ public class ControllerFuncPedidos {
 
         if(this.listaPedidos.size() != 0) {
             //por segurança elimina os pedidos da base de dados caso existem com o mesmo id que o numPdd
-            connection.deletePedidoEdetalhes(numPdd);
+            connection.deletePedidoDetalhesEcozinha(numPdd);
             //e cria um novo pedido
             connection.createPedido(numMesa, idFunc);
 
@@ -373,9 +373,13 @@ public class ControllerFuncPedidos {
                 {
                     connection.setPedidoCozinha(pedidoFinal);
                 }
-                // reduzir o stock
-                connection.atualizaStock(p.getIdProduto(),p.getQtd());
 
+                if(p.getIdTipo() !=4 || p.getIdTipo() !=7) {
+                    // reduzir o stock
+                    connection.atualizaStock(p.getIdProduto(), p.getQtd());
+                }else {
+
+                }
             }
 
 

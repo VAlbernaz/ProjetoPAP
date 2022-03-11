@@ -550,17 +550,20 @@ public class MySQlConnection {
         return result;
     }
 
-    public void deletePedidoEdetalhes(int numPedido)
+    public void deletePedidoDetalhesEcozinha(int numPedido)
     {
         String sql = "SET FOREIGN_KEY_CHECKS=0;";
         String sql1= "DELETE FROM detalhespedidos WHERE idpedidos ="+numPedido+";";
         String sql2 = "DELETE FROM pedidos\n" +
+                "WHERE idpedidos ="+numPedido+";";
+        String sql3 = "DELETE FROM pedidoscozinha\n" +
                 "WHERE idpedidos ="+numPedido+";";
         try {
             Statement s = connection.createStatement();
             s.executeUpdate(sql);
             s.executeUpdate(sql1);
             s.executeUpdate(sql2);
+            s.executeUpdate(sql3);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

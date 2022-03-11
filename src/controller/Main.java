@@ -21,10 +21,8 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("../view/MainView.fxml"));
         primaryStage.setTitle("GESRES 1.0");
         primaryStage.resizableProperty().setValue(Boolean.FALSE);
-        //primaryStage.setMaximized(true);
+
         primaryStage.setScene(new Scene(root));
-
-
         primaryStage.show();
 
     }

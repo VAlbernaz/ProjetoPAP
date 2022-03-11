@@ -43,7 +43,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnClearMesa" layoutX="566.0" layoutY="287.0" mnemonicParsing="false" onAction="#ClearMesa" prefHeight="80.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Despachar Mesa" textFill="#cbd2da">
+      <Button fx:id="btnClearMesa" layoutX="566.0" layoutY="287.0" mnemonicParsing="false" onAction="#ClearMesa" prefHeight="80.0" prefWidth="272.0" style="-fx-background-color: #035d86;" text="Disponibilizar Mesa" textFill="#cbd2da">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

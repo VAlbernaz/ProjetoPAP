@@ -56,7 +56,7 @@
             <Font size="22.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="411.0" text="Sexo:">
+      <Label layoutX="14.0" layoutY="414.0" text="Género:">
          <font>
             <Font size="22.0" />
          </font>
@@ -86,6 +86,11 @@
                   <Font name="System Bold" size="41.0" />
                </font>
             </Label>
+            <Button fx:id="btnLogout" layoutX="864.0" layoutY="83.0" mnemonicParsing="false" onAction="#logout" prefHeight="28.0" prefWidth="81.0" style="-fx-background-color: #FE2E2E;" text="Logout">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <Label layoutX="15.0" layoutY="468.0" text="Numero de Funcionário:">
@@ -95,15 +100,10 @@
       </Label>
       <TextField fx:id="tfNumFunc" layoutX="18.0" layoutY="500.0" prefHeight="25.0" prefWidth="320.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="581.0" />
       <DatePicker fx:id="dpDataNascimento" layoutX="14.0" layoutY="386.0" prefHeight="25.0" prefWidth="367.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="585.0" />
-      <ComboBox fx:id="cbAtividade" layoutX="408.0" layoutY="666.0" prefHeight="38.0" prefWidth="235.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="323.0" />
+      <ComboBox fx:id="cbAtividade" layoutX="408.0" layoutY="625.0" prefHeight="38.0" prefWidth="235.0" AnchorPane.bottomAnchor="71.0" AnchorPane.rightAnchor="323.0" />
       <Button fx:id="btnAtualizar" layoutX="751.0" layoutY="658.0" mnemonicParsing="false" onAction="#atualizar" prefHeight="55.0" prefWidth="201.0" style="-fx-background-color: #035d86;" text="Atualizar" textFill="#cbd2da" AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="14.0">
          <font>
             <Font name="System Bold" size="21.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnRefresh" layoutX="408.0" layoutY="622.0" mnemonicParsing="false" onAction="#refresh" prefHeight="27.0" prefWidth="73.0" style="-fx-background-color: #035d86;" text="Refresh" textFill="#cbd2da" AnchorPane.bottomAnchor="85.0" AnchorPane.rightAnchor="485.0">
-         <font>
-            <Font name="System Bold" size="13.0" />
          </font>
       </Button>
    </children>

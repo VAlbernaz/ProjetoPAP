@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class ControllerAdmin {
 
@@ -104,7 +105,7 @@ public class ControllerAdmin {
 
         this.cbAtividade.getItems().addAll("Ativo", "De férias", "Em atestado", "Baixa Médica");
         this.cbSexo.getItems().addAll("Masculino","Feminino","Outro");
-        this.cbAtividade.setValue("AUSENTE");
+        this.cbAtividade.setValue("Ativo");
 
         listaFuncionarios = FXCollections.observableArrayList();
 
@@ -179,17 +180,52 @@ public class ControllerAdmin {
             String ultiNome= this.tfUltiNome.getText();
             Date dataNascimento= Date.valueOf(this.dpDataNascimento.getValue());
             String sexo = this.cbSexo.getValue();
-            int numFunc = Integer.parseInt(this.tfNumFunc.getText());
+            String num = this.tfNumFunc.getText();
+            try{
+            int numFunc = Integer.parseInt(num);
 
-            Funcionarios f = new Funcionarios(primNome,ultiNome,dataNascimento,sexo,numFunc);
+            //verifica se o numero ja existe na base de dados
+                //se existir retorna true, se nao existir retorna false
+            ResultSet result = connection.verificaCodFunc(numFunc);
+            String linhas = null;
+            try {
+                while (result.next())
+                {
+                    linhas = result.getString(1);
+                }
+            }catch (Exception e) {
 
-            //adiciona funcionario na base de dados
-            if(connection.inserirFuncionario(f)) {
-                alert(Alert.AlertType.INFORMATION,"SUCESSO","Funcionário adicionada com sucesso!");
-                this.tvFunc.getItems().clear();
-                tabela();
-            } else {
-                alert(Alert.AlertType.ERROR,"ATENÇÃO","Ocorreu um problema!");
+            }
+            //verifica se o tamanho do numero do funcionario for igual a 4
+            if(num.length() == 4) {
+                //se linhas for igual a false cria o objeto funcionario
+                if(Objects.equals(linhas, "false")) {
+                    Funcionarios f = new Funcionarios(primNome, ultiNome, dataNascimento, sexo, numFunc);
+
+                    //adiciona funcionario na base de dados
+                    if (connection.inserirFuncionario(f)) {
+                        alert(Alert.AlertType.INFORMATION, "SUCESSO", "Funcionário adicionada com sucesso!");
+
+                        this.tfPrimNome.clear();
+                        this.tfUltiNome.clear();
+                        this.dpDataNascimento.setValue(null);
+                        this.cbSexo.setValue(null);
+                        this.tfNumFunc.clear();
+
+                        this.tvFunc.getItems().clear();
+                        tabela();
+                    } else {
+                        alert(Alert.AlertType.ERROR, "ATENÇÃO", "Ocorreu um problema!");
+                    }
+                }else {
+                    alert(Alert.AlertType.ERROR,"ATENÇÃO","O numero de funcionário já existe.");
+                }
+            }else {
+                alert(Alert.AlertType.ERROR,"ATENÇÃO","O numero de funcionário só pode ser constituido por 4 numeros.");
+            }
+            }catch (Exception e)
+            {
+                alert(Alert.AlertType.ERROR,"ATENÇÃO","O numero de funcionário só pode ser constituido por 4 numeros.");
             }
         }else {
             alert(Alert.AlertType.WARNING,"ATENÇÃO","Preencha todos os campos");

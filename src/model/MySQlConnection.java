@@ -58,7 +58,6 @@ public class MySQlConnection {
     }
 
     public boolean editarPessoa(Funcionarios f) {
-        ResultSet result = null;
         try {
             String sql = "UPDATE funcionario SET funcionario.atividade = (?) WHERE funcionario.idfuncionario = " + f.getID();
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -68,8 +67,6 @@ public class MySQlConnection {
             if (linhas == 1) {
                 return true;
             } else return false;
-
-
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -101,6 +98,20 @@ public class MySQlConnection {
         }
 
     }
+    public ResultSet verificaCodFunc(int condFunc)
+    {
+        ResultSet result = null;
+
+        String sql = "SELECT IF((SELECT numFunc FROM gesres.funcionario WHERE numFunc = "+condFunc+") = "+condFunc+", (SELECT \"true\"), (SELECT \"false\"));";
+        try {
+            Statement s = connection.createStatement();
+            result = s.executeQuery(sql);
+        } catch (SQLException e) {
+
+        }
+        return  result;
+    }
+
     public ResultSet verificaNumFunc(String numFunc){
         ResultSet result = null;
         String sql = "SELECT numFunc\n" +
@@ -383,7 +394,6 @@ public class MySQlConnection {
     }
 
     public Boolean trocaEstadoMesa(int numMesa, String estado) {
-        ResultSet result = null;
         try{
         String sql = "UPDATE mesas SET mesas.disponibilidade = (\""+estado+"\") WHERE mesas.idmesas ="+numMesa+";";
         PreparedStatement statement = connection.prepareStatement(sql);

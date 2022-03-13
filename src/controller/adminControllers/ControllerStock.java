@@ -96,7 +96,7 @@ public class ControllerStock {
             try {
                 //recolhe o id do produto
                 int ID= this.linhaProduto.getID();
-                int newQtd= Integer.parseInt(tfEditQtd.getText());
+                int newQtd= Integer.parseInt(tfEditQtd.getText()) + linhaProduto.getQtd();
                 String produto= this.tfEditProduto.getText();
                 Produtos p = new Produtos(ID,produto,newQtd);
                 //faz o update na base de dados
